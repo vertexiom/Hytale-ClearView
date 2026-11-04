@@ -10,13 +10,11 @@ The project is intended for visual customization, not as a cheating tool or a wa
 
 > **Multiplayer disclaimer:** Before using ClearView on any multiplayer server, consult its admin team and confirm that the mod is allowed. If it is not allowed, do not use it on that server.
 
-**Hytale ClearView is in early development — v0.1.1.** Testing and compatibility validation are ongoing, and Hytale updates may require changes to the mod.
+**Hytale ClearView is in early development — v0.1.1.** Hytale updates may require changes to the mod.
 
 [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) was used as a reference to understand how shaders work and develop ClearView, which has its own independent code.
 
 I'm developing this mod because my friend Lazan is Hytale fog's number one enemy.
-
-Tested on the maintainer's Windows machine and by **Lazan, a MUP member**, on his **Windows 11** machine. Compatibility testing is ongoing.
 
 ## Download
 

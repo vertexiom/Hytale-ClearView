@@ -10,13 +10,11 @@ O projeto tem como finalidade a personalização visual, sem o intuito de servir
 
 > **Aviso sobre multiplayer:** Antes de usar o ClearView em qualquer servidor multiplayer, consulte a equipe de administradores e confirme se o mod é permitido. Se não for permitido, não o utilize nesse servidor.
 
-**O Hytale ClearView está em desenvolvimento inicial — v0.1.1.** Os testes e a validação de compatibilidade ainda estão em andamento, e atualizações do Hytale podem exigir ajustes no mod.
+**O Hytale ClearView está em desenvolvimento inicial — v0.1.1.** Atualizações do Hytale podem exigir ajustes no mod.
 
 O [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) foi usado como referência para entender o funcionamento dos shaders e desenvolver o ClearView, que tem código independente.
 
 Estou desenvolvendo esse mod porque meu amigo Lazan é o inimigo número 1 das névoas do Hytale.
-
-Testado em uma máquina Windows do mantenedor e por **Lazan, membro do MUP**, na máquina dele com **Windows 11**. A validação de compatibilidade continua em andamento.
 
 ## Download
 
