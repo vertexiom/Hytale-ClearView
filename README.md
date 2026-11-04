@@ -21,6 +21,8 @@ Mod experimental para o cliente nativo Linux do Hytale, com um painel para contr
 
 O jogo combina esses fatores; remover um não elimina necessariamente os outros. O mod não aumenta a distância de renderização e não remove partículas, nuvens ou toda a coloração subaquática.
 
+[Histórico de mudanças](CHANGELOG.md) · [Controles de neblina](docs/fog-controls.md) · [Validação e diagnóstico](docs/validation.md)
+
 ## Estado
 
 A versão anterior, que removia a neblina de distância sem HUD, foi confirmada em uso no Hytale 0.7.5. A versão com HUD passou por testes locais de renderização OpenGL, preservação dos parâmetros dos shaders, intensidade independente, entrada de teclado e persistência. **O HUD ainda aguarda validação integrada dentro do jogo.**
@@ -38,7 +40,7 @@ Instalações nativas e Flatpak são detectadas. Se ambas existirem, informe `--
 Feche o Hytale completamente e, nesta pasta, execute:
 
 ```bash
-python3 install.py
+./install.sh
 ```
 
 Abra o jogo pelo launcher normal. A instalação preserva os ajustes já salvos. Na primeira instalação, o padrão é distância 0%, atmosfera 100%, profundidade 100%.
@@ -46,7 +48,7 @@ Abra o jogo pelo launcher normal. A instalação preserva os ajustes já salvos.
 Para escolher explicitamente um preset inicial:
 
 ```bash
-python3 install.py --mode distance
+./install.sh --mode distance
 ```
 
 | Preset | Distância | Atmosfera | Profundidade |
@@ -61,7 +63,7 @@ python3 install.py --mode distance
 Cliente em outro caminho:
 
 ```bash
-python3 install.py --client-dir "/caminho/Client"
+./install.sh --client-dir "/caminho/Client"
 ```
 
 ## Remover
@@ -69,7 +71,7 @@ python3 install.py --client-dir "/caminho/Client"
 Com o jogo fechado:
 
 ```bash
-python3 install.py --uninstall
+./install.sh --uninstall
 ```
 
 O instalador restaura `libSDL3.clearview-original.so` para `libSDL3.so` após verificar o hash do backup. Configurações e log permanecem em `Client/.clearview/`.
