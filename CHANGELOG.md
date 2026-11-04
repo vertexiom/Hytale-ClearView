@@ -2,9 +2,15 @@
 
 ## v0.1.2 — em desenvolvimento (staging)
 
-- Estudo no Pencil do novo instalador: boas-vindas, destino, progresso, conclusão e estados de recuperação, com referência no assistente da Steam.
-- Estudo local de chuva ASCII com o texto Clear View; ainda não integrado ao executável.
+- V2 do instalador aprovada como referência visual: 17 telas estáticas no Pencil, com tema escuro, cantos arredondados e assinatura ClearView / Vertexiom.
+- Prévia interativa offline com chuva ASCII animada, pausa e respeito à preferência de movimento reduzido.
+- Simulações de instalação, atualização, seleção de destino, duas instalações, jogo aberto, falhas com relatório fictício e remoção.
+- Fluxos da prévia verificados no navegador do Pencil; isso não valida instalação real nem compatibilidade Windows.
+- Prévia V1 preservada para comparação; exportações da V2 e contexto de retomada salvos no projeto.
+- **A interface V2 ainda não está integrada ao EXE.** Os metadados de compilação estão em 0.1.2, mas não há nova release pública nesta etapa.
 - A release pública v0.1.1 permanece disponível e inalterada.
+
+Veja [o contexto para retomar](CONTEXTO-v0.1.2.md) e [a prévia interativa](design/installer/interactive.html).
 
 ## v0.1.1 — testes no Windows e melhorias no instalador
 

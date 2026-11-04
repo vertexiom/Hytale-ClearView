@@ -17,3 +17,8 @@ Nada integrado ao instalador Windows. Estudo visual v0.1.2 no Pencil:
 RnD_ClearView_exec_v001. Exportacoes em ../../design/installer.
 Publicacao deste estudo na staging autorizada pelo mantenedor.
 Novas publicacoes em staging/main exigem confirmacao previa.
+
+ATUALIZACAO v0.1.2: a referencia aprovada agora e a serie Opus V2 no Pencil.
+A previa interativa atual esta em ../../design/installer/interactive.html.
+O estudo Python permanece preservado; ainda sem integracao ao EXE.
+Contexto de retomada: ../../CONTEXTO-v0.1.2.md.

@@ -6,6 +6,8 @@
 
 **O Hytale ClearView está em desenvolvimento inicial — v0.1.1.** Os testes e a validação de compatibilidade ainda estão em andamento, e atualizações do Hytale podem exigir ajustes no mod.
 
+**Na staging:** a v0.1.2 está em desenvolvimento. O novo instalador está na fase de [prévia interativa](design/installer/interactive.html), ainda sem integração ao executável Windows. O download público continua sendo a v0.1.1.
+
 O [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) foi usado como referência para entender o funcionamento dos shaders e desenvolver o ClearView, que tem código independente.
 
 A proposta é controlar a neblina do Hytale sem mudar a iluminação original do jogo. Abra o painel com **F9** e ajuste a visibilidade do seu jeito.

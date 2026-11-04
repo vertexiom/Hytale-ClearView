@@ -1,5 +1,8 @@
 # Windows: P0 e P1
 
+> **v0.1.2 em desenvolvimento:** a V2 aprovada existe no Pencil e na [prévia HTML](../../design/installer/interactive.html), ainda não no EXE. Os metadados de build já usam 0.1.2; isso não significa que a nova interface foi implementada. As seções abaixo descrevem o instalador existente. Veja [o contexto e as pendências](../../CONTEXTO-v0.1.2.md).
+
+
 ## Prioridades e estado
 
 | Plataforma | Prioridade | Estado |

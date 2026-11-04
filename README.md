@@ -6,6 +6,8 @@
 
 **Hytale ClearView is in early development — v0.1.1.** Testing and compatibility validation are ongoing, and Hytale updates may require changes to the mod.
 
+**On staging:** v0.1.2 is in development. The new installer is currently an [interactive prototype](design/installer/interactive.html), not yet integrated into the Windows executable. The public download remains v0.1.1.
+
 [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) was used as a reference to understand how shaders work and develop ClearView, which has its own independent code.
 
 The goal is to control Hytale's fog while keeping the game's original lighting. Open the panel with **F9** and adjust visibility to your liking.

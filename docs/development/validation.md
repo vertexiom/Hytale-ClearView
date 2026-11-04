@@ -2,6 +2,12 @@
 
 Hardware, sistema, driver, Hytale e ferramentas estão registrados no [ambiente de testes](test-environment.md).
 
+## Prévia do instalador V2 — v0.1.2
+
+O Claude Opus 5.5 verificou a prévia HTML no navegador integrado do Pencil: instalação, atualização, seleção de destino, duas instalações, jogo aberto, falhas/relatório/recuperação, remoção e cancelamento dos temporizadores ao reiniciar. Também conferiu layout em 390 px, desktop, movimento reduzido, foco ao fechar diálogos e ausência de recursos externos. Parte das interações foi acionada por script; Esc foi verificado com eventos sintéticos.
+
+Esses resultados se aplicam à **simulação HTML**. Não houve implementação da UI V2 no EXE nem validação Windows da V2. Os resultados históricos abaixo não certificam esta interface. Veja o [contexto atual](../../CONTEXTO-v0.1.2.md).
+
 ## O que foi verificado
 
 - v0.1.1: testes relatados com sucesso pelo mantenedor em sua máquina Windows 11 e por Lazan, membro do MUP, em Windows 10; veja o [registro](test-environment.md#testes-windows--v011).
