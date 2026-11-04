@@ -4,15 +4,15 @@
 
 | Plataforma | Prioridade | Estado |
 | --- | --- | --- |
-| Windows 10 x64 1809+ | **P0** | Compilado; aguarda teste nativo e gameplay. |
-| Windows 11 x64 | **P1** | Usa o mesmo pacote; aguarda validação após P0. |
+| Windows 10 x64 1809+ | **P0** | Compilado; versão do Windows do mantenedor não informada, validação específica do Windows 10 pendente. |
+| Windows 11 x64 | **P1** | Teste relatado por Lazan, membro do MUP, na v0.1.1; roteiro completo ainda em andamento. |
 | Linux x86_64 | Regressão | Testes existentes passam após compartilhar o núcleo GLSL. |
 
-O projeto está em sua versão inicial, **v0.1.0**, com validação em andamento. Compilar uma DLL para Windows a partir do Linux não comprova funcionamento no Hytale/Windows.
+O projeto está em sua versão inicial, **v0.1.1**, com validação em andamento. Compilar uma DLL para Windows a partir do Linux não comprova funcionamento no Hytale/Windows.
 
 ## Para quem vai testar
 
-1. Abra `ClearView-0.1.0-Setup.exe` com o Hytale fechado.
+1. Abra `ClearView-0.1.1-Setup.exe` com o Hytale fechado.
 2. Confirme a pasta detectada ou use **Localizar** para selecionar `HytaleClient.exe`.
 3. Clique em **Instalar / Atualizar**. Acompanhe a barra por etapas: validação do destino, teste gráfico isolado e instalação. O teste gráfico tem limite de 60 segundos e ocorre antes de alterar o jogo.
 4. Aguarde **Instalação concluída**, clique em **Concluir** e abra o jogo pelo launcher normal. Entre num mundo e pressione **F9**.

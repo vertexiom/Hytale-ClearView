@@ -51,9 +51,15 @@ As versões dos carregadores EGL/OpenGL acima são versões de pacotes, não ver
 - O primeiro protótipo foi confirmado em execução no Hytale Linux.
 - Os testes locais validaram transformação GLSL, interfaces dos shaders, controles, persistência, desenho do HUD e restauração do estado OpenGL.
 - Os testes de instalação usam um cliente simulado e verificam atualização, integridade e recuperação, sem modificar a instalação real.
-- O instalador e o proxy Windows foram compilados neste ambiente. A interface Windows e o gameplay nessa plataforma ainda precisam de teste nativo.
+- O instalador e o proxy Windows foram compilados neste ambiente. Os testes nativos posteriores estão registrados abaixo.
 - O HUD integrado no jogo, diferentes GPUs e multiplayer exigem registro próprio de validação; a presença do hardware nesta tabela não significa aprovação desses cenários.
 
 O roteiro e os resultados estão em [Validação e diagnóstico](validation.md). Ao testar outra máquina, registrar data, commit do ClearView, sistema/kernel, GPU/driver, versão do Hytale, ambiente nativo ou Flatpak, cenário executado e resultado. Atualizar este registro quando o ambiente mudar, preservando em resultados específicos as versões usadas em cada teste.
 
 Não incluir nome de usuário, hostname, números de série, endereços de rede, credenciais ou logs completos neste documento público.
+
+## Testes Windows — v0.1.1
+
+Em 4 de novembro de 2026, o mantenedor confirmou o funcionamento da versão após teste em uma de suas máquinas Windows. Lazan, membro do MUP, também testou a versão na própria máquina com Windows 11. As especificações dessas máquinas não são publicadas neste registro.
+
+Registro baseado no retorno dos participantes; não representa aprovação de toda a matriz de hardware nem de todos os cenários do roteiro de testes.

@@ -4,7 +4,7 @@
   <a href="README.md">English</a> | <a href="README.pt-BR.md">Português (Brasil)</a>
 </p>
 
-**O Hytale ClearView está em desenvolvimento inicial — v0.1.0.** Os testes e a validação de compatibilidade ainda estão em andamento, e atualizações do Hytale podem exigir ajustes no mod.
+**O Hytale ClearView está em desenvolvimento inicial — v0.1.1.** Os testes e a validação de compatibilidade ainda estão em andamento, e atualizações do Hytale podem exigir ajustes no mod.
 
 O [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) foi usado como referência para entender o funcionamento dos shaders e desenvolver o ClearView, que tem código independente.
 
@@ -12,12 +12,14 @@ A proposta é controlar a neblina do Hytale sem mudar a iluminação original do
 
 Estou desenvolvendo esse mod porque meu amigo Lazan é o inimigo número 1 das névoas do Hytale.
 
+Testado em uma máquina Windows do mantenedor e por **Lazan, membro do MUP**, na máquina dele com **Windows 11**. A validação de compatibilidade continua em andamento.
+
 ## Download
 
-**[Baixar o ClearView v0.1.0](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.0)**
+**[Baixar o ClearView v0.1.1](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.1)**
 
-- **Windows:** baixe `ClearView-0.1.0-Setup.exe`.
-- **Linux:** baixe `ClearView-0.1.0-linux-source.tar.gz` e siga as instruções abaixo.
+- **Windows:** baixe `ClearView-0.1.1-Setup.exe`.
+- **Linux:** baixe `ClearView-0.1.1-linux-source.tar.gz` e siga as instruções abaixo.
 
 ## O que você pode ajustar
 
@@ -37,7 +39,7 @@ O ClearView não substitui os [requisitos do Hytale](https://hytale.com/news/202
 
 ## Instalar no Windows
 
-1. Baixe e abra **ClearView-0.1.0-Setup.exe**.
+1. Baixe e abra **ClearView-0.1.1-Setup.exe**.
 2. Feche o Hytale. O instalador procura a pasta do jogo automaticamente; se necessário, clique em **Localizar** e selecione `HytaleClient.exe`.
 3. Clique em **Instalar / Atualizar** e aguarde a confirmação.
 4. Abra o jogo pelo launcher, entre num mundo e pressione **F9**.

@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.1.1 — testes no Windows e melhorias no instalador
+
+- Instalação com indicação de progresso, confirmação de conclusão e botão para finalizar.
+- Verificação da presença do Hytale antes da instalação e recuperação da janela do instalador já aberto.
+- Correção da leitura do resultado do teste gráfico, evitando informar falha quando o teste terminou com sucesso.
+- Versão testada com sucesso em uma máquina Windows do mantenedor.
+- Testada também por **Lazan, membro do MUP**, na máquina dele com **Windows 11**.
+
+Esses testes foram relatados pelos participantes. O projeto continua em desenvolvimento inicial e a validação de compatibilidade permanece em andamento.
+
 ## v0.1.0 — primeira versão pública
 
 ### Instalação gráfica no Windows

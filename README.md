@@ -4,7 +4,7 @@
   <a href="README.md">English</a> | <a href="README.pt-BR.md">Português (Brasil)</a>
 </p>
 
-**Hytale ClearView is in early development — v0.1.0.** Testing and compatibility validation are ongoing, and Hytale updates may require changes to the mod.
+**Hytale ClearView is in early development — v0.1.1.** Testing and compatibility validation are ongoing, and Hytale updates may require changes to the mod.
 
 [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) was used as a reference to understand how shaders work and develop ClearView, which has its own independent code.
 
@@ -12,12 +12,14 @@ The goal is to control Hytale's fog while keeping the game's original lighting. 
 
 I'm developing this mod because my friend Lazan is Hytale fog's number one enemy.
 
+Tested on the maintainer's Windows machine and by **Lazan, a MUP member**, on his **Windows 11** machine. Compatibility testing is ongoing.
+
 ## Download
 
-**[Download ClearView v0.1.0](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.0)**
+**[Download ClearView v0.1.1](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.1)**
 
-- **Windows:** download `ClearView-0.1.0-Setup.exe`.
-- **Linux:** download `ClearView-0.1.0-linux-source.tar.gz` and follow the instructions below.
+- **Windows:** download `ClearView-0.1.1-Setup.exe`.
+- **Linux:** download `ClearView-0.1.1-linux-source.tar.gz` and follow the instructions below.
 
 ## What you can adjust
 
@@ -39,7 +41,7 @@ ClearView does not replace [Hytale's system requirements](https://hytale.com/new
 
 The installer currently uses Portuguese labels. The instructions below include the exact button names.
 
-1. Download and open **ClearView-0.1.0-Setup.exe**.
+1. Download and open **ClearView-0.1.1-Setup.exe**.
 2. Close Hytale. The installer finds the game folder automatically; if needed, click **Localizar** (Browse) and select `HytaleClient.exe`.
 3. Click **Instalar / Atualizar** (Install / Update) and wait for confirmation.
 4. Open the game through its launcher, enter a world, and press **F9**.
