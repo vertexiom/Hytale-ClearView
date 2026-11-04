@@ -1,0 +1,15 @@
+# Generated binaries, previews and local recovery archives
+/build/
+/releases/
+__pycache__/
+*.pyc
+.venv/
+
+# Personal Obsidian notes and local installation status
+/Hytale ClearView.md
+/LEIA-ME.txt
+
+# Never commit client libraries, extracted game shaders or runtime settings
+libSDL3*.so
+.clearview/
+/game-shaders/
