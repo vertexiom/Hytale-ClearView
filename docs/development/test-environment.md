@@ -60,6 +60,6 @@ Não incluir nome de usuário, hostname, números de série, endereços de rede,
 
 ## Testes Windows — v0.1.1
 
-Em 4 de novembro de 2026, o mantenedor confirmou o funcionamento da versão após teste em uma de suas máquinas Windows. Lazan, membro do MUP, também testou a versão na própria máquina com Windows 11. As especificações dessas máquinas não são publicadas neste registro.
+Em 4 de novembro de 2026, o mantenedor confirmou o funcionamento da versão após teste em uma de suas máquinas Windows 11. Lazan, membro do MUP, também testou a versão na própria máquina com Windows 10. As especificações dessas máquinas não são publicadas neste registro.
 
 Registro baseado no retorno dos participantes; não representa aprovação de toda a matriz de hardware nem de todos os cenários do roteiro de testes.

@@ -4,8 +4,8 @@
 
 | Plataforma | Prioridade | Estado |
 | --- | --- | --- |
-| Windows 10 x64 1809+ | **P0** | Compilado; versão do Windows do mantenedor não informada, validação específica do Windows 10 pendente. |
-| Windows 11 x64 | **P1** | Teste relatado por Lazan, membro do MUP, na v0.1.1; roteiro completo ainda em andamento. |
+| Windows 10 x64 1809+ | **P0** | Teste relatado por Lazan, membro do MUP, na v0.1.1; roteiro completo ainda em andamento. |
+| Windows 11 x64 | **P1** | Teste relatado pelo mantenedor na v0.1.1; roteiro completo ainda em andamento. |
 | Linux x86_64 | Regressão | Testes existentes passam após compartilhar o núcleo GLSL. |
 
 O projeto está em sua versão inicial, **v0.1.1**, com validação em andamento. Compilar uma DLL para Windows a partir do Linux não comprova funcionamento no Hytale/Windows.

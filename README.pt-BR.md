@@ -12,8 +12,6 @@ A proposta é controlar a neblina do Hytale sem mudar a iluminação original do
 
 Estou desenvolvendo esse mod porque meu amigo Lazan é o inimigo número 1 das névoas do Hytale.
 
-Testado em uma máquina Windows do mantenedor e por **Lazan, membro do MUP**, na máquina dele com **Windows 11**. A validação de compatibilidade continua em andamento.
-
 ## Download
 
 **[Baixar o ClearView v0.1.1](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.1)**

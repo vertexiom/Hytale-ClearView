@@ -4,7 +4,7 @@ Hardware, sistema, driver, Hytale e ferramentas estão registrados no [ambiente 
 
 ## O que foi verificado
 
-- v0.1.1: testes relatados com sucesso pelo mantenedor em sua máquina Windows e por Lazan, membro do MUP, em Windows 11; veja o [registro](test-environment.md#testes-windows--v011).
+- v0.1.1: testes relatados com sucesso pelo mantenedor em sua máquina Windows 11 e por Lazan, membro do MUP, em Windows 10; veja o [registro](test-environment.md#testes-windows--v011).
 
 - A versão 0.1 iniciou e foi confirmada pelo usuário no Hytale 0.7.5.
 - O HUD 0.2 foi renderizado em contexto EGL/OpenGL na NVIDIA RTX 5070.

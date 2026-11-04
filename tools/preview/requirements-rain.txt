@@ -1,0 +1,2 @@
+terminaltexteffects==0.15.0
+pyfiglet==1.0.4

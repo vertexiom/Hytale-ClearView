@@ -12,8 +12,6 @@ The goal is to control Hytale's fog while keeping the game's original lighting. 
 
 I'm developing this mod because my friend Lazan is Hytale fog's number one enemy.
 
-Tested on the maintainer's Windows machine and by **Lazan, a MUP member**, on his **Windows 11** machine. Compatibility testing is ongoing.
-
 ## Download
 
 **[Download ClearView v0.1.1](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.1)**

@@ -1,0 +1,62 @@
+CLEARVIEW — INSTALADOR v0.1.2 / ESTUDO NO PENCIL
+
+Referência: assistente de instalação da Steam fornecido pelo mantenedor.
+Estado: sete telas desenhadas e revisadas no Pencil; não representa uma
+nova interface já compilada.
+Documento editável no Pencil: RnD_ClearView_exec_v001.
+Exportações: preview.html (estática), export.pdf e screens/*.png.
+A animação permanece no estudo Python; os layouts mostram um quadro estático.
+Publicação autorizada: staging. Não alterar main, tag ou release v0.1.1.
+
+DIREÇÃO VISUAL
+Janela 880 x 580, barra de título nativa, lateral escura com chuva ASCII e
+Clear View centralizado. Conteúdo claro, tipografia legível, destaque azul.
+Rodapé persistente com Voltar, ação principal e Cancelar/Concluir.
+A chuva deve respeitar a preferência de movimento reduzido e nunca bloquear
+interações nem atrasar a instalação. O estudo animado está em tools/preview.
+
+01 — BOAS-VINDAS
+Título: Bem-vindo ao ClearView
+Texto: Controle a neblina do Hytale e mantenha a iluminação original.
+Feche o jogo antes de continuar. O Hytale precisa estar instalado.
+Ações: Continuar; Cancelar. Link secundário: Remover ClearView.
+Versão: v0.1.2 • em desenvolvimento.
+
+02 — LOCAL DO HYTALE
+Título: Onde está o Hytale?
+Pasta detectada apresentada em campo legível; botão Procurar.
+Exibir o caminho completo sem truncar permanentemente (rolagem/seleção).
+Explicar: O ClearView será instalado nesta pasta do jogo.
+Validar presença de HytaleClient.exe e arquivos necessários.
+Ações: Voltar; Instalar (ou Atualizar, se reconhecido); Cancelar.
+Sem jogo: informar que é necessário instalar o Hytale pelo launcher;
+manter Instalar indisponível. Permitir Procurar e Verificar novamente.
+Não sugerir uma pasta genérica em Program Files.
+
+03 — INSTALAÇÃO
+Título: Instalando o ClearView
+Etapas reais: Verificar arquivos; Testar compatibilidade; Instalar arquivos.
+Mostrar etapa atual e barra indeterminada durante trabalho sem progresso
+mensurável. Não apresentar porcentagem inventada nem simular download.
+Durante alteração de arquivos, bloquear fechamento com explicação curta.
+O pacote já está no EXE; só concluir após sucesso confirmado do worker.
+
+04 — CONCLUSÃO
+Título: Tudo pronto!
+Texto: ClearView instalado. Abra o Hytale pelo launcher e pressione F9
+para ajustar a neblina.
+Ação: Concluir. Não prometer iniciar o jogo automaticamente.
+
+ESTADOS ADICIONAIS
+Falha: explicar a etapa e ação de recuperação; Tentar novamente, Voltar,
+Fechar e detalhes locais quando existirem. Discord: tallmannzera.
+Remover: confirmação explícita, preservar o fluxo de backup/restauração;
+mostrar progresso e conclusão própria. Nunca remover por clicar no link.
+Jogo aberto: solicitar fechamento e oferecer Verificar novamente.
+Janela já aberta: trazer a existente à frente.
+
+IMPLEMENTAÇÃO POSTERIOR
+Preservar verificações e rollback atuais. Compatibilidade Windows 10 P0,
+Windows 11 P1. Teclado: Tab, Shift+Tab, Enter; foco visível; suporte a DPI.
+Textos em português e inglês. Sem dados privados nos exemplos de caminho.
+Validar interface em Windows real antes de promover uma release.

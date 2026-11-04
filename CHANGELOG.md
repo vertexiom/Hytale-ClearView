@@ -1,12 +1,18 @@
 # Changelog
 
+## v0.1.2 — em desenvolvimento (staging)
+
+- Estudo no Pencil do novo instalador: boas-vindas, destino, progresso, conclusão e estados de recuperação, com referência no assistente da Steam.
+- Estudo local de chuva ASCII com o texto Clear View; ainda não integrado ao executável.
+- A release pública v0.1.1 permanece disponível e inalterada.
+
 ## v0.1.1 — testes no Windows e melhorias no instalador
 
 - Instalação com indicação de progresso, confirmação de conclusão e botão para finalizar.
 - Verificação da presença do Hytale antes da instalação e recuperação da janela do instalador já aberto.
 - Correção da leitura do resultado do teste gráfico, evitando informar falha quando o teste terminou com sucesso.
-- Versão testada com sucesso em uma máquina Windows do mantenedor.
-- Testada também por **Lazan, membro do MUP**, na máquina dele com **Windows 11**.
+- Versão testada com sucesso em uma máquina Windows 11 do mantenedor.
+- Testada também por **Lazan, membro do MUP**, na máquina dele com **Windows 10**.
 
 Esses testes foram relatados pelos participantes. O projeto continua em desenvolvimento inicial e a validação de compatibilidade permanece em andamento.
 
