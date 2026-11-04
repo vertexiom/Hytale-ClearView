@@ -1,5 +1,8 @@
 #ifndef CLEARVIEW_PANEL_H
 #define CLEARVIEW_PANEL_H
+#ifdef _WIN32
+#include "windows/panel_win.h"
+#else
 #include <cairo/cairo.h>
 #include <math.h>
 #include <stdio.h>
@@ -55,4 +58,9 @@ static cairo_surface_t *cv_panel(const float fog[3], int selected, int saved)
     cairo_destroy(cr); cairo_surface_flush(surface);
     return surface;
 }
+typedef cairo_surface_t cv_panel_surface;
+static int cv_panel_ok(cv_panel_surface *p) {return cairo_surface_status(p)==CAIRO_STATUS_SUCCESS;}
+static unsigned char *cv_panel_data(cv_panel_surface *p) {return cairo_image_surface_get_data(p);}
+static void cv_panel_free(cv_panel_surface *p) {cairo_surface_destroy(p);}
+#endif /* platform */
 #endif

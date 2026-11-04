@@ -1,115 +1,85 @@
 # Hytale ClearView
 
-Mod experimental para o cliente nativo Linux do Hytale, com um painel para controlar separadamente a intensidade de três tipos de neblina. Mantém a iluminação original do jogo.
+Controle a neblina do Hytale sem mudar a iluminação original do jogo. Abra o painel com **F9** e ajuste a visibilidade do seu jeito.
+
+**v0.1.0 — versão inicial.** O projeto está em desenvolvimento, com validação e compatibilidade em andamento. Atualizações do Hytale podem exigir ajustes no mod.
+
+## Download
+
+**[Baixar o ClearView v0.1.0](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.0)**
+
+- **Windows:** baixe `ClearView-0.1.0-x64.zip`.
+- **Linux:** baixe `ClearView-0.1.0-linux-source.tar.gz` e siga as instruções abaixo.
+
+## O que você pode ajustar
+
+- **Distância:** neblina que esconde o horizonte e terrenos distantes.
+- **Atmosfera:** névoa de clima, altura e ambiente.
+- **Profundidade:** neblina relacionada à distância no ambiente, incluindo água.
+
+Cada controle vai de **0%** (remove aquele efeito) a **100%** (intensidade original). Os ajustes são salvos automaticamente. O mod não aumenta a distância de renderização nem garante mais FPS.
+
+## Compatibilidade
+
+- Windows 10 x64 1809 ou superior e Windows 11.
+- Linux x86_64, incluindo o launcher Flatpak.
+- Hytale instalado e funcionando, com driver gráfico compatível com OpenGL 4.1.
+
+O ClearView não substitui os [requisitos do Hytale](https://hytale.com/news/2025/12/hytale-hardware-requirements). A compatibilidade com diferentes computadores e multiplayer ainda está em avaliação.
+
+## Instalar no Windows
+
+1. Extraia o ZIP completo para uma pasta sua.
+2. Execute `Smoke Test.bat` para verificar o carregamento e os controles. Se falhar, guarde a pasta de resultado e relate o problema antes de instalar.
+3. Feche o Hytale e execute `Install.bat`.
+4. Abra o jogo pelo launcher, entre num mundo e pressione **F9**.
+
+Não precisa de compilador ou Python. Para remover, feche o jogo e execute `Uninstall.bat`.
+
+## Instalar no Linux
+
+Extraia o pacote. A instalação compila o mod e precisa de Python 3, compilador C, pkg-config e Cairo. No Ubuntu, instale as dependências:
+
+```bash
+sudo apt install python3 build-essential pkg-config libcairo2-dev
+```
+
+Com o Hytale fechado, abra um terminal na pasta extraída:
+
+```bash
+bash install.sh
+```
+
+Depois abra pelo launcher normal. Para remover, com o jogo fechado:
+
+```bash
+bash install.sh --uninstall
+```
 
 ## Controles
 
 | Tecla | Ação |
 | --- | --- |
 | **F9** | Abrir/fechar o painel |
-| ↑ / ↓ | Selecionar o tipo de neblina |
-| ← / → | Ajustar em passos de 5% |
-| V | Visão limpa: distância 0%, atmosfera 20%, profundidade 100% |
-| R | Restaurar os três controles a 100% |
-| Escape | Fechar o painel |
+| ↑ / ↓ | Selecionar a neblina |
+| ← / → | Diminuir/aumentar em 5% |
+| V | Distância 0%, atmosfera 20%, profundidade 100% |
+| R | Restaurar todas as neblinas para 100% |
+| Esc | Fechar o painel |
 
-0% remove aquele efeito; 100% preserva a intensidade original definida pelo jogo. Os controles funcionam ao vivo e são salvos automaticamente. O painel é independente das configurações gráficas nativas e usa teclado.
+O painel usa teclado e é separado das configurações gráficas do jogo.
 
-- **Distância:** neblina no horizonte e em terrenos distantes.
-- **Atmosfera:** névoa de clima, altura e ambiente.
-- **Profundidade:** atenuação pela distância 3D, conforme o ambiente, incluindo água.
+## Se algo não funcionar
 
-O jogo combina esses fatores; remover um não elimina necessariamente os outros. O mod não aumenta a distância de renderização e não remove partículas, nuvens ou toda a coloração subaquática.
+- **F9 não abre:** confirme que instalou esta versão com o jogo fechado e reinicie o Hytale.
+- **Outro mod de shaders instalado:** remova-o antes de instalar o ClearView; não instale por cima do Aurora ou de outro mod que use a mesma biblioteca.
+- **Problema ao iniciar:** desinstale o ClearView com o jogo fechado. No Windows, execute `Diagnostics.bat` para gerar um diagnóstico local; nada é enviado automaticamente.
+- **Ainda precisa de ajuda?** [Abra um relato](https://github.com/vertexiom/Hytale-ClearView/issues) com sistema, GPU e descrição do problema.
 
-[Histórico de mudanças](CHANGELOG.md) · [Controles de neblina](docs/fog-controls.md) · [Validação e diagnóstico](docs/validation.md)
+## Sobre o projeto
 
-## Estado
+Código independente, com Aurora Shaders como referência de arquitetura. Não inclui código/shaders de Aurora/Complementary nem arquivos originais do Hytale.
 
-A versão anterior, que removia a neblina de distância sem HUD, foi confirmada em uso no Hytale 0.7.5. A versão com HUD passou por testes locais de renderização OpenGL, preservação dos parâmetros dos shaders, intensidade independente, entrada de teclado e persistência. **O HUD ainda aguarda validação integrada dentro do jogo.**
+Quer contribuir ou entender o código? Veja o **[guia de desenvolvimento](docs/development/README.md)** e as [orientações para contribuir](CONTRIBUTING.md).
 
-## Requisitos
-
-- Linux x86_64 e cliente nativo Hytale com SDL3/OpenGL.
-- Python 3, compilador C (`cc`), `pkg-config` e desenvolvimento Cairo.
-- No Ubuntu, as dependências de compilação incluem `build-essential`, `pkg-config` e `libcairo2-dev`.
-
-Instalações nativas e Flatpak são detectadas. Se ambas existirem, informe `--client-dir`. Não instalar sobre outro proxy SDL, como Aurora.
-
-## Instalar ou atualizar
-
-Feche o Hytale completamente e, nesta pasta, execute:
-
-```bash
-./install.sh
-```
-
-Abra o jogo pelo launcher normal. A instalação preserva os ajustes já salvos. Na primeira instalação, o padrão é distância 0%, atmosfera 100%, profundidade 100%.
-
-Para escolher explicitamente um preset inicial:
-
-```bash
-./install.sh --mode distance
-```
-
-| Preset | Distância | Atmosfera | Profundidade |
-| --- | --- | --- | --- |
-| `distance` | 0% | 100% | 100% |
-| `atmosphere` | 0% | 0% | 100% |
-| `all` | 0% | 0% | 0% |
-| `off` | 100% | 100% | 100% |
-
-`off` mantém o painel disponível. Usar `--mode` redefine os três sliders para o preset escolhido.
-
-Cliente em outro caminho:
-
-```bash
-./install.sh --client-dir "/caminho/Client"
-```
-
-## Remover
-
-Com o jogo fechado:
-
-```bash
-./install.sh --uninstall
-```
-
-O instalador restaura `libSDL3.clearview-original.so` para `libSDL3.so` após verificar o hash do backup. Configurações e log permanecem em `Client/.clearview/`.
-
-Se uma atualização substituir a SDL e deixar o backup antigo, o instalador interrompe a reinstalação para permitir revisão dos arquivos. Não descarta o backup automaticamente.
-
-## Funcionamento
-
-Um proxy SDL encaminha as chamadas para a biblioteca original e intercepta o envio dos shaders ao OpenGL. O código transforma funções reconhecidas de neblina, adicionando multiplicadores controlados por uniforms. Isso mantém os parâmetros exigidos pelo cliente ativos durante a otimização do GLSL.
-
-O HUD é desenhado com Cairo/OpenGL antes da apresentação do quadro. O estado gráfico alterado pelo painel é restaurado. O executável `HytaleClient` permanece intacto.
-
-O código é independente. Aurora Shaders foi estudado como referência de arquitetura; este repositório não inclui código/shaders de Aurora/Complementary nem distribui shaders ou bibliotecas originais do Hytale.
-
-## Diagnóstico
-
-- `Client/.clearview/hook.log`: carregamento e transformação dos shaders.
-- `Client/.clearview/settings`: intensidades de distância, atmosfera e profundidade, entre 0 e 1.
-- `Client/.clearview/receipt.json`: hash de integridade do backup da SDL.
-
-Atualizações do jogo podem alterar as assinaturas dos shaders. Fontes não reconhecidas passam sem modificação. Multiplayer ainda não foi validado.
-
-## Desenvolvimento e testes
-
-```bash
-bash build.sh
-python3 tests/check.py
-python3 tests/check_hud.py
-python3 tests/check_gl.py /caminho/dos/shaders-extraidos-localmente
-```
-
-`check.py` usa um cliente simulado em uma pasta temporária; não modifica a instalação real. Verifica encaminhamento SDL, segmentos GLSL, uniforms, teclas, persistência e restauração exata da biblioteca original.
-
-`check_hud.py` requer Pillow e EGL/OpenGL. Renderiza o painel, verifica restauração do estado gráfico e gera `build/hud-preview.png`.
-
-`check_gl.py` requer EGL/OpenGL e shaders extraídos localmente da sua própria instalação. Testa a interface dos programas Text/BasicFog e renderiza os fatores de neblina para conferir valores intermediários. Esses shaders não são distribuídos neste repositório.
-
-## Branches
-
-- `main`: base principal do projeto.
-- `staging`: desenvolvimento e validação antes de integrar à `main`.
+[Histórico de mudanças](CHANGELOG.md)

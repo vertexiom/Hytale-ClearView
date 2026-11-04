@@ -94,14 +94,14 @@ static void overlay_draw(int width,int height,const float fog[3],int selected,in
     cvglPixelStorei(0x0CF3,0);cvglPixelStorei(0x0CF4,0);
     cvglBindTexture(0x0DE1,overlay_texture);cvglBindSampler(0,0);
     if(overlay_dirty) {
-        cairo_surface_t *surface=cv_panel(fog,selected,saved);
-        if(cairo_surface_status(surface)==CAIRO_STATUS_SUCCESS) {
-            cvglTexImage2D(0x0DE1,0,0x8058,CV_PANEL_W,CV_PANEL_H,0,0x80E1,0x1401,cairo_image_surface_get_data(surface));
+        cv_panel_surface *surface=cv_panel(fog,selected,saved);
+        if(cv_panel_ok(surface)) {
+            cvglTexImage2D(0x0DE1,0,0x8058,CV_PANEL_W,CV_PANEL_H,0,0x80E1,0x1401,cv_panel_data(surface));
             cvglTexParameteri(0x0DE1,0x2801,0x2601);cvglTexParameteri(0x0DE1,0x2800,0x2601);
             cvglTexParameteri(0x0DE1,0x2802,0x812F);cvglTexParameteri(0x0DE1,0x2803,0x812F);
             overlay_dirty=0;
         }
-        cairo_surface_destroy(surface);
+        cv_panel_free(surface);
     }
     float scale=fminf(1.5f,fmaxf(1.0f,height/1080.0f));
     scale=fminf(scale,fminf((width-32.0f)/CV_PANEL_W,(height-32.0f)/CV_PANEL_H));

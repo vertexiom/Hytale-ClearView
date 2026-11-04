@@ -13,3 +13,12 @@ __pycache__/
 libSDL3*.so
 .clearview/
 /game-shaders/
+
+# Windows build/package outputs and local diagnostic bundles
+/dist/
+/bin/
+*.dll
+*.exe
+*.pdb
+/diagnostics-*/
+/smoke-*/
