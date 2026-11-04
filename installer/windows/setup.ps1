@@ -141,13 +141,8 @@ try {
                 $close.Text='Concluir';$form.AcceptButton=$close;$close.Focus() | Out-Null
                 $status.Text=if($script:operation -eq 'install'){'Pronto! Abra o Hytale pelo launcher e pressione F9 dentro do jogo.'}else{'ClearView removido. Você pode abrir o Hytale normalmente.'}
             }else{
-                $reason='Não foi possível concluir. Clique em Ver relatório para obter ajuda.'
                 $report=if(Test-Path -LiteralPath $script:logFile){Get-Content -LiteralPath $script:logFile -Raw}else{''}
-                if($report -match 'Feche o Hytale'){$reason='Feche o Hytale e tente novamente.'}
-                elseif($report -match 'Outra opengl32|Aurora/ReShade'){$reason='Remova o outro mod de shaders antes de instalar o ClearView.'}
-                elseif($report -match 'nao respondeu'){$reason='O teste gráfico não respondeu. A instalação foi interrompida antes de alterar o jogo. Envie o relatório ao suporte.'}
-                elseif($report -match 'OpenGL|Smoke test falhou'){$reason='A verificação gráfica falhou. Confira o driver de vídeo e envie o relatório para obter ajuda.'}
-                elseif($report -match '1809|64 bits|64 bit'){$reason='Este instalador requer Windows 10 1809 ou superior, de 64 bits.'}
+                $reason=Get-ClearViewFailureReason -Report $report -Stage $finished
                 $stageLabel.Text='Operação não concluída. Você pode tentar novamente ou fechar.'
                 Refresh-Selection
                 $status.Text=$reason

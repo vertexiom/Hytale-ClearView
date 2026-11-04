@@ -112,8 +112,15 @@ python3 tools/build/build_windows.py --zig /caminho/zig
 python3 tests/check_windows.py --pwsh /caminho/pwsh
 python3 tools/build/package_windows.py --zig /caminho/zig
 python3 tests/check_setup.py --pwsh /caminho/pwsh
+python3 tests/check_smoke_runner.py --pwsh /caminho/pwsh
 ```
 
 Os testes do instalador usam PowerShell oficial com detecção de Windows/processo simulada. Eles validam a lógica e operações de arquivo, mas não substituem Windows PowerShell 5.1 nem uma máquina Windows real.
 
 O executável `clearview-smoke.exe` é compilado aqui e é executado automaticamente pelo instalador no Windows. O teste usa uma pasta temporária e um shader sintético próprio, sem distribuir fontes do Hytale.
+
+## Resultado gráfico e falhas do instalador
+
+Uma linha informativa `OpenGL: ...` não indica falha. A classificação usa a etapa interrompida e os resultados explícitos do teste. O runner registra o código de saída de cada etapa e captura erros antes de parar. O teste gráfico usa `System.Diagnostics.Process` com captura assíncrona de stdout/stderr e código de saída explícito, sem depender do objeto retornado por `Start-Process -PassThru`.
+
+`check_smoke_runner.py` cobre sucesso e falha de processos rápidos e a classificação de um relatório com OpenGL e PASS. Executa no Linux com processos substitutos; não comprova a execução no Windows PowerShell 5.1 nem dentro do Hytale.

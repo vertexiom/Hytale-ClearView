@@ -14,8 +14,28 @@ function New-ClearViewOperation([string]$Engine,[string]$Payload,[string]$Client
     foreach($command in $commands) {
         $stage++
         $body+='Set-Content -LiteralPath '+(Quote-PS ($Log+'.stage'))+' -Value '+$stage+"`r`n"
-        $body+=$command+' >> '+(Quote-PS $Log)+' 2>&1'+"`r`n"+'if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }'+"`r`n"
+        $body+='try { $LASTEXITCODE = $null; $ErrorActionPreference = ''Continue'''+"`r`n"
+        $body+=$command+' >> '+(Quote-PS $Log)+' 2>&1'+"`r`n"
+        $body+='$stageExit = $LASTEXITCODE } finally { $ErrorActionPreference = ''Stop'' }'+"`r`n"
+        $body+='if ($null -eq $stageExit) { $stageExit = 1 }'+"`r`n"
+        $body+='Add-Content -LiteralPath '+(Quote-PS $Log)+' -Value (''Etapa '+$stage+' - codigo de saida: '' + $stageExit)'+"`r`n"
+        $body+='if ($stageExit -ne 0) { exit $stageExit }'+"`r`n"
     }
     $body+='Set-Content -LiteralPath '+(Quote-PS ($Log+'.stage'))+' -Value complete'+"`r`n"
     return $body+'exit 0'
+}
+
+function Get-ClearViewFailureReason([string]$Report,[string]$Stage) {
+    if ($Report -match 'Feche o Hytale') { return 'Feche o Hytale e tente novamente.' }
+    if ($Report -match 'Outra opengl32|Aurora/ReShade') { return 'Remova o outro mod de shaders antes de instalar o ClearView.' }
+    if ($Report -match 'nao respondeu') { return 'O teste gráfico não respondeu. A instalação foi interrompida antes de alterar o jogo. Envie o relatório ao suporte.' }
+    if ($Report -match '(?m)^(FAIL:|Smoke test falhou)' -and $Report -notmatch 'PASS: WGL forwarding') {
+        return 'O teste gráfico não passou. Envie o relatório para identificar a falha antes de instalar.'
+    }
+    if ($Stage -eq '2' -and $Report -match 'PASS: WGL forwarding') {
+        return 'O teste gráfico passou, mas o instalador não conseguiu concluir essa etapa. Envie o relatório ao suporte.'
+    }
+    if ($Report -match '1809|64 bits|64 bit') { return 'Este instalador requer Windows 10 1809 ou superior, de 64 bits.' }
+    if ($Stage -eq '3') { return 'A verificação gráfica passou, mas não foi possível instalar os arquivos. Consulte o relatório.' }
+    return 'Não foi possível concluir. Clique em Ver relatório para obter ajuda.'
 }
