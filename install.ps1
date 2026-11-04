@@ -99,7 +99,7 @@ try {
     $source = Join-Path $PSScriptRoot 'bin\opengl32.dll'
     $manifestPath = Join-Path $PSScriptRoot 'manifest.json'
     if (-not (Test-Path -LiteralPath $source) -or -not (Test-Path -LiteralPath $manifestPath)) {
-        throw 'Pacote incompleto. Extraia o ZIP completo antes de executar Install.bat.'
+        throw 'Pacote incompleto. Baixe novamente o instalador oficial do ClearView.'
     }
     $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
     if ($manifest.product -ne 'Hytale ClearView' -or $manifest.architecture -ne 'x64') { throw 'Manifesto de pacote invalido.' }
@@ -148,7 +148,7 @@ try {
     }
     Write-Host "ClearView $($manifest.version) instalado em: $ClientDir"
     Write-Host 'Abra pelo launcher normal. F9 abre o painel; setas ajustam; V visao limpa; R original.'
-    Write-Host 'Esta e uma previa para validacao no Windows 10, ainda nao uma versao estavel.'
+    Write-Host 'Projeto em versao inicial, com validacao em andamento.'
 } catch {
     Write-Error $_ -ErrorAction Continue
     exit 1

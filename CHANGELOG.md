@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.1.1 — instalador gráfico
+
+- Um único executável Windows com Instalar/Atualizar, Localizar e Remover.
+- Detecção da pasta do Hytale e verificações de instalação e gráficos automáticas.
+- Operações em segundo plano, sem terminal; mensagens de erro e relatório local.
+- Pacote para jogadores sem BAT, ZIP ou arquivos de checksum separados.
+- Compilação e fluxo automatizado verificados no Linux; teste da interface em Windows real ainda pendente.
+
 ## v0.1.0 — primeira versão pública
 
 - Requisito mínimo alinhado ao Hytale: Windows 10 1809; diagnóstico inclui CPU/RAM/discos.

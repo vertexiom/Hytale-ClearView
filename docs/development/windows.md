@@ -8,22 +8,29 @@
 | Windows 11 x64 | **P1** | Usa o mesmo pacote; aguarda validação após P0. |
 | Linux x86_64 | Regressão | Testes existentes passam após compartilhar o núcleo GLSL. |
 
-O projeto está em sua versão inicial, **v0.1.0**, com validação em andamento. Compilar uma DLL para Windows a partir do Linux não comprova funcionamento no Hytale/Windows.
+O projeto está em sua versão inicial, **v0.1.1**, com validação em andamento. Compilar uma DLL para Windows a partir do Linux não comprova funcionamento no Hytale/Windows.
 
 ## Para quem vai testar
 
-1. Extraia o ZIP completo para uma pasta sua, com permissão de escrita. Não execute de dentro do ZIP.
-2. Execute `Smoke Test.bat`. Ele abre um contexto gráfico isolado, verifica a DLL e os controles e salva o resultado em uma pasta `smoke-*`. Não altera o Hytale.
-3. Se o teste falhar, envie essa pasta ao desenvolvedor antes de instalar no jogo.
-4. Feche o Hytale completamente. O launcher pode continuar aberto.
-5. Execute `Install.bat`. O instalador tenta localizar o cliente; se necessário, selecione `HytaleClient.exe`.
-6. Abra pelo launcher normal. Entre num mundo e pressione **F9**.
-7. Ajuste cada controle com as setas. Feche/reabra o jogo para verificar que os valores persistem.
-8. Para remover, feche o jogo e execute `Uninstall.bat`.
+1. Abra `ClearView-0.1.1-Setup.exe` com o Hytale fechado.
+2. Confirme a pasta detectada ou use **Localizar** para selecionar `HytaleClient.exe`.
+3. Clique em **Instalar / Atualizar**. O aplicativo valida o destino, executa o teste gráfico isolado e só então instala.
+4. Abra pelo launcher normal, entre num mundo e pressione **F9**.
+5. Para remover, abra o mesmo executável e clique em **Remover**.
 
-O jogador não precisa de Python, Zig, Visual Studio, Cairo ou privilégios de administrador. O pacote usa APIs e runtime C do Windows 10+. O driver gráfico precisa oferecer o OpenGL usado pelo Hytale.
+Requisitos: Windows 10 x64 1809+ e OpenGL 4.1. O usuário não instala compiladores ou runtimes adicionais. O instalador usa Windows PowerShell 5.1 e Windows Forms presentes no sistema. A execução não muda a política global de scripts nem exige administrador automaticamente.
 
-Requisitos: Windows 10 x64 1809 (build 17763) ou superior e OpenGL 4.1. O log registra GPU, fornecedor e versões reais de OpenGL/GLSL. Sem OpenGL 4.1, o proxy encaminha os shaders originais e desativa o HUD; isso não torna o próprio Hytale compatível com essa máquina. Consulte a [análise de hardware e limites](hardware-compatibility.md).
+## Implementação do instalador
+
+`installer/bootstrap.c` é um executável GUI x64 com manifesto `asInvoker`. Extrai a interface e um payload próprio para uma pasta temporária exclusiva, executa o PowerShell do diretório do sistema sem console e limpa os arquivos ao sair normalmente.
+
+`installer/setup.ps1` fornece a interface. O trabalho ocorre em processo separado para manter a janela responsiva. O fechamento é bloqueado durante a operação para evitar interromper uma gravação. `installer/workflow.ps1` monta a sequência validação → teste gráfico → instalação e interrompe na primeira falha. A remoção usa as verificações do backend, sem exigir aprovação no teste gráfico.
+
+`install.ps1` continua como backend de arquivos, com verificação de integridade, conflitos e recuperação. A UI passa caminhos por argumentos devidamente escapados. O teste gráfico usa fontes sintéticas próprias; fontes do jogo não são distribuídas.
+
+Os relatórios persistem em `%LOCALAPPDATA%/ClearView/Logs` e podem ser abertos em **Ver relatório**. Nada é transmitido. O executável ainda não tem assinatura Authenticode; a reputação/avisos do Windows dependem do ambiente. Não instruir o jogador a desativar proteções do sistema.
+
+A interface foi compilada e analisada sintaticamente no Linux. Sua apresentação, DPI e comportamento nativo ainda precisam ser verificados em Windows real. Consulte a [análise de hardware](hardware-compatibility.md).
 
 ## Controles
 
@@ -48,11 +55,11 @@ No PowerShell, dentro da pasta do pacote:
 
 `-Mode distance`, `atmosphere`, `all` ou `off` aplica os mesmos presets iniciais do Linux. Sem `-Mode`, os ajustes existentes são preservados.
 
-O instalador não altera `HytaleClient.exe`, não grava em System32 e não sobrescreve uma `opengl32.dll` de outro mod. Se houver Aurora, ReShade ou outra DLL nesse local, desinstale o outro mod primeiro. A execução do BAT aplica a política de scripts somente àquele processo de PowerShell.
+O instalador não altera `HytaleClient.exe`, não grava em System32 e não sobrescreve uma `opengl32.dll` de outro mod. Se houver Aurora, ReShade ou outra DLL nesse local, desinstale o outro mod primeiro. O instalador aplica a política de scripts somente aos seus processos de PowerShell.
 
 ## Diagnóstico
 
-Execute `Diagnostics.bat`. Ele reúne versão do Windows, CPU, RAM, GPU, driver, espaço em discos, versão do PowerShell, hash da DLL, configuração e log do ClearView em uma pasta local. Não transmite dados.
+Para diagnóstico técnico adicional, execute `diagnostics.ps1` do código-fonte. Ele reúne versão do Windows, CPU, RAM, GPU, driver, espaço em discos, versão do PowerShell, hash da DLL, configuração e log do ClearView em uma pasta local. Não transmite dados.
 
 Para caminho personalizado:
 
@@ -66,7 +73,7 @@ No log do ClearView, procure:
 - `patched fog functions`: transformação GLSL reconhecida.
 - `presentation hook and F9 input active`: integração de apresentação e teclado ativa.
 
-Se o Hytale não abrir, use `Uninstall.bat` e envie o diagnóstico. O log de cliente em `UserData/Logs` pode ser necessário depois; ele não é coletado automaticamente.
+Se o Hytale não abrir, use **Remover** no instalador e envie o diagnóstico. O log de cliente em `UserData/Logs` pode ser necessário depois; ele não é coletado automaticamente.
 
 ## Critérios P0: Windows 10
 
@@ -101,9 +108,10 @@ Requer Python 3 e Zig (verificado com 0.15.2):
 ```bash
 python3 tools/build_windows.py --zig /caminho/zig
 python3 tests/check_windows.py --pwsh /caminho/pwsh
-python3 tools/package_windows.py
+python3 tools/package_windows.py --zig /caminho/zig
+python3 tests/check_setup.py --pwsh /caminho/pwsh
 ```
 
 Os testes do instalador usam PowerShell oficial com detecção de Windows/processo simulada. Eles validam a lógica e operações de arquivo, mas não substituem Windows PowerShell 5.1 nem uma máquina Windows real.
 
-O executável `clearview-smoke.exe` é compilado aqui e deve ser executado no Windows via `Smoke Test.bat`. O teste usa uma pasta temporária e um shader sintético próprio, sem distribuir fontes do Hytale.
+O executável `clearview-smoke.exe` é compilado aqui e é executado automaticamente pelo instalador no Windows. O teste usa uma pasta temporária e um shader sintético próprio, sem distribuir fontes do Hytale.

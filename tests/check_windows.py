@@ -27,6 +27,8 @@ def main():
     with tempfile.TemporaryDirectory(prefix='clearview-installer-') as td:
         temp=Path(td);package=temp/'package';package.mkdir();(package/'bin').mkdir()
         for name in ['install.ps1','diagnostics.ps1','smoke-test.ps1']:shutil.copy2(ROOT/name,package/name)
+        shutil.copy2(ROOT/'installer/setup.ps1',package/'setup.ps1')
+        shutil.copy2(ROOT/'installer/workflow.ps1',package/'workflow.ps1')
         for name in ['opengl32.dll','clearview-smoke.exe']:shutil.copy2(ROOT/'build/windows'/name,package/'bin'/name)
         shutil.copy2(ROOT/'build/windows/manifest.json',package/'manifest.json')
         # Parse every PowerShell file using the official parser before executing I/O tests.

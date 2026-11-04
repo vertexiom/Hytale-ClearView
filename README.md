@@ -2,14 +2,14 @@
 
 Controle a neblina do Hytale sem mudar a iluminação original do jogo. Abra o painel com **F9** e ajuste a visibilidade do seu jeito.
 
-**v0.1.0 — versão inicial.** O projeto está em desenvolvimento, com validação e compatibilidade em andamento. Atualizações do Hytale podem exigir ajustes no mod.
+**v0.1.1 — versão inicial.** O projeto está em desenvolvimento, com validação e compatibilidade em andamento. Atualizações do Hytale podem exigir ajustes no mod.
 
 ## Download
 
-**[Baixar o ClearView v0.1.0](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.0)**
+**[Baixar o ClearView v0.1.1](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.1)**
 
-- **Windows:** baixe `ClearView-0.1.0-x64.zip`.
-- **Linux:** baixe `ClearView-0.1.0-linux-source.tar.gz` e siga as instruções abaixo.
+- **Windows:** baixe `ClearView-0.1.1-Setup.exe`.
+- **Linux:** baixe `ClearView-0.1.1-linux-source.tar.gz` e siga as instruções abaixo.
 
 ## O que você pode ajustar
 
@@ -29,12 +29,12 @@ O ClearView não substitui os [requisitos do Hytale](https://hytale.com/news/202
 
 ## Instalar no Windows
 
-1. Extraia o ZIP completo para uma pasta sua.
-2. Execute `Smoke Test.bat` para verificar o carregamento e os controles. Se falhar, guarde a pasta de resultado e relate o problema antes de instalar.
-3. Feche o Hytale e execute `Install.bat`.
+1. Baixe e abra **ClearView-0.1.1-Setup.exe**.
+2. Feche o Hytale. O instalador procura a pasta do jogo automaticamente; se necessário, clique em **Localizar** e selecione `HytaleClient.exe`.
+3. Clique em **Instalar / Atualizar** e aguarde a confirmação.
 4. Abra o jogo pelo launcher, entre num mundo e pressione **F9**.
 
-Não precisa de compilador ou Python. Para remover, feche o jogo e execute `Uninstall.bat`.
+As verificações são automáticas. Não precisa extrair arquivos, usar terminal, instalar Python ou executar scripts. Para remover, abra o mesmo instalador e clique em **Remover**. Os ajustes existentes são preservados ao atualizar.
 
 ## Instalar no Linux
 
@@ -73,7 +73,7 @@ O painel usa teclado e é separado das configurações gráficas do jogo.
 
 - **F9 não abre:** confirme que instalou esta versão com o jogo fechado e reinicie o Hytale.
 - **Outro mod de shaders instalado:** remova-o antes de instalar o ClearView; não instale por cima do Aurora ou de outro mod que use a mesma biblioteca.
-- **Problema ao iniciar:** desinstale o ClearView com o jogo fechado. No Windows, execute `Diagnostics.bat` para gerar um diagnóstico local; nada é enviado automaticamente.
+- **Problema ao iniciar:** desinstale o ClearView com o jogo fechado. No Windows, abra o instalador e clique em **Remover**. Se uma operação falhar, **Ver relatório** mostra os detalhes para pedir ajuda; nada é enviado automaticamente.
 - **Ainda precisa de ajuda?** [Abra um relato](https://github.com/vertexiom/Hytale-ClearView/issues) com sistema, GPU e descrição do problema.
 
 ## Sobre o projeto
