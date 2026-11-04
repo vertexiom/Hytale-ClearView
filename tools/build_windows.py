@@ -8,7 +8,7 @@ import shutil
 import subprocess
 from gen_windows_exports import generate
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='0.1.1'
+VERSION='0.1.0'
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--zig',default=os.environ.get('ZIG','zig'));args=parser.parse_args()

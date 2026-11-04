@@ -8,11 +8,11 @@
 | Windows 11 x64 | **P1** | Usa o mesmo pacote; aguarda validação após P0. |
 | Linux x86_64 | Regressão | Testes existentes passam após compartilhar o núcleo GLSL. |
 
-O projeto está em sua versão inicial, **v0.1.1**, com validação em andamento. Compilar uma DLL para Windows a partir do Linux não comprova funcionamento no Hytale/Windows.
+O projeto está em sua versão inicial, **v0.1.0**, com validação em andamento. Compilar uma DLL para Windows a partir do Linux não comprova funcionamento no Hytale/Windows.
 
 ## Para quem vai testar
 
-1. Abra `ClearView-0.1.1-Setup.exe` com o Hytale fechado.
+1. Abra `ClearView-0.1.0-Setup.exe` com o Hytale fechado.
 2. Confirme a pasta detectada ou use **Localizar** para selecionar `HytaleClient.exe`.
 3. Clique em **Instalar / Atualizar**. O aplicativo valida o destino, executa o teste gráfico isolado e só então instala.
 4. Abra pelo launcher normal, entre num mundo e pressione **F9**.
