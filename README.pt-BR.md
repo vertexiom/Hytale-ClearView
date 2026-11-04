@@ -4,11 +4,15 @@
   <a href="README.md">English</a> | <a href="README.pt-BR.md">Português (Brasil)</a>
 </p>
 
+**O ClearView é um mod para controlar a neblina do Hytale, preservando a iluminação original do jogo.** Abra o painel com **F9** e ajuste a intensidade da neblina do seu jeito.
+
+O projeto tem como finalidade a personalização visual, sem o intuito de servir como ferramenta de trapaça ou de contornar as regras do jogo ou dos servidores.
+
+> **Aviso sobre multiplayer:** Antes de usar o ClearView em qualquer servidor multiplayer, consulte a equipe de administradores e confirme se o mod é permitido. Se não for permitido, não o utilize nesse servidor.
+
 **O Hytale ClearView está em desenvolvimento inicial — v0.1.1.** Os testes e a validação de compatibilidade ainda estão em andamento, e atualizações do Hytale podem exigir ajustes no mod.
 
 O [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) foi usado como referência para entender o funcionamento dos shaders e desenvolver o ClearView, que tem código independente.
-
-A proposta é controlar a neblina do Hytale sem mudar a iluminação original do jogo. Abra o painel com **F9** e ajuste a visibilidade do seu jeito.
 
 Estou desenvolvendo esse mod porque meu amigo Lazan é o inimigo número 1 das névoas do Hytale.
 
