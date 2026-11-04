@@ -1,5 +1,7 @@
 # Validação e diagnóstico
 
+Hardware, sistema, driver, Hytale e ferramentas estão registrados no [ambiente de testes](test-environment.md).
+
 ## O que foi verificado
 
 - A versão 0.1 iniciou e foi confirmada pelo usuário no Hytale 0.7.5.

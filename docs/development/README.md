@@ -4,6 +4,7 @@ Documentação para quem deseja estudar ou contribuir com o ClearView.
 
 - [Arquitetura e diagnóstico](architecture.md)
 - [Validação e testes](validation.md)
+- [Ambiente de testes: hardware, sistema e ferramentas](test-environment.md)
 - [Implementação Windows e critérios P0/P1](windows.md)
 
 ## Compilação Linux
