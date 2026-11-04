@@ -10,6 +10,8 @@
 
 The goal is to control Hytale's fog while keeping the game's original lighting. Open the panel with **F9** and adjust visibility to your liking.
 
+I'm developing this mod because my friend Lazan is Hytale fog's number one enemy.
+
 ## Download
 
 **[Download ClearView v0.1.0](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.0)**

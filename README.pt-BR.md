@@ -10,6 +10,8 @@ O [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) foi u
 
 A proposta é controlar a neblina do Hytale sem mudar a iluminação original do jogo. Abra o painel com **F9** e ajuste a visibilidade do seu jeito.
 
+Estou desenvolvendo esse mod porque meu amigo Lazan é o inimigo número 1 das névoas do Hytale.
+
 ## Download
 
 **[Baixar o ClearView v0.1.0](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.0)**
