@@ -1,8 +1,10 @@
 # Hytale ClearView
 
-Controle a neblina do Hytale sem mudar a iluminação original do jogo. Abra o painel com **F9** e ajuste a visibilidade do seu jeito.
+**O Hytale ClearView está em desenvolvimento inicial — v0.1.0.** Os testes e a validação de compatibilidade ainda estão em andamento, e atualizações do Hytale podem exigir ajustes no mod.
 
-**v0.1.0 — versão inicial.** O projeto está em desenvolvimento, com validação e compatibilidade em andamento. Atualizações do Hytale podem exigir ajustes no mod.
+O [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) foi usado como referência para entender o funcionamento dos shaders e desenvolver o ClearView, que tem código independente.
+
+A proposta é controlar a neblina do Hytale sem mudar a iluminação original do jogo. Abra o painel com **F9** e ajuste a visibilidade do seu jeito.
 
 ## Download
 
@@ -78,7 +80,7 @@ O painel usa teclado e é separado das configurações gráficas do jogo.
 
 ## Sobre o projeto
 
-Código independente, com Aurora Shaders como referência de arquitetura. Não inclui código/shaders de Aurora/Complementary nem arquivos originais do Hytale.
+O repositório não inclui código/shaders de Aurora/Complementary nem arquivos originais do Hytale.
 
 Quer contribuir ou entender o código? Veja o **[guia de desenvolvimento](docs/development/README.md)** e as [orientações para contribuir](CONTRIBUTING.md).
 
