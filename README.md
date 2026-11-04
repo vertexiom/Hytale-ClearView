@@ -73,8 +73,8 @@ O painel usa teclado e é separado das configurações gráficas do jogo.
 
 - **F9 não abre:** confirme que instalou esta versão com o jogo fechado e reinicie o Hytale.
 - **Outro mod de shaders instalado:** remova-o antes de instalar o ClearView; não instale por cima do Aurora ou de outro mod que use a mesma biblioteca.
-- **Problema ao iniciar:** desinstale o ClearView com o jogo fechado. No Windows, abra o instalador e clique em **Remover**. Se uma operação falhar, **Ver relatório** mostra os detalhes para pedir ajuda; nada é enviado automaticamente.
-- **Ainda precisa de ajuda?** [Abra um relato](https://github.com/vertexiom/Hytale-ClearView/issues) com sistema, GPU e descrição do problema.
+- **Problema ao iniciar:** desinstale o ClearView com o jogo fechado. No Windows, abra o instalador e clique em **Remover**.
+- **Se algo não funcionar, me mande uma mensagem no Discord: `tallmannzera`.**
 
 ## Sobre o projeto
 
