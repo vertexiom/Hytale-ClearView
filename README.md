@@ -1,5 +1,7 @@
 # Hytale ClearView
 
+**Português (Brasil)** | [English](README.en.md)
+
 **O Hytale ClearView está em desenvolvimento inicial — v0.1.0.** Os testes e a validação de compatibilidade ainda estão em andamento, e atualizações do Hytale podem exigir ajustes no mod.
 
 O [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) foi usado como referência para entender o funcionamento dos shaders e desenvolver o ClearView, que tem código independente.
