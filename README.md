@@ -1,89 +1,93 @@
-# Hytale ClearView
+<h1 align="center">Hytale ClearView</h1>
 
-**Português (Brasil)** | [English](README.en.md)
+<p align="center">
+  <a href="README.md">English</a> | <a href="README.pt-BR.md">Português (Brasil)</a>
+</p>
 
-**O Hytale ClearView está em desenvolvimento inicial — v0.1.0.** Os testes e a validação de compatibilidade ainda estão em andamento, e atualizações do Hytale podem exigir ajustes no mod.
+**Hytale ClearView is in early development — v0.1.0.** Testing and compatibility validation are ongoing, and Hytale updates may require changes to the mod.
 
-O [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) foi usado como referência para entender o funcionamento dos shaders e desenvolver o ClearView, que tem código independente.
+[Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) was used as a reference to understand how shaders work and develop ClearView, which has its own independent code.
 
-A proposta é controlar a neblina do Hytale sem mudar a iluminação original do jogo. Abra o painel com **F9** e ajuste a visibilidade do seu jeito.
+The goal is to control Hytale's fog while keeping the game's original lighting. Open the panel with **F9** and adjust visibility to your liking.
 
 ## Download
 
-**[Baixar o ClearView v0.1.0](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.0)**
+**[Download ClearView v0.1.0](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.0)**
 
-- **Windows:** baixe `ClearView-0.1.0-Setup.exe`.
-- **Linux:** baixe `ClearView-0.1.0-linux-source.tar.gz` e siga as instruções abaixo.
+- **Windows:** download `ClearView-0.1.0-Setup.exe`.
+- **Linux:** download `ClearView-0.1.0-linux-source.tar.gz` and follow the instructions below.
 
-## O que você pode ajustar
+## What you can adjust
 
-- **Distância:** neblina que esconde o horizonte e terrenos distantes.
-- **Atmosfera:** névoa de clima, altura e ambiente.
-- **Profundidade:** neblina relacionada à distância no ambiente, incluindo água.
+- **Distance:** fog that obscures the horizon and distant terrain.
+- **Atmosphere:** fog related to weather, height, and the environment.
+- **Depth:** fog related to distance within the environment, including water.
 
-Cada controle vai de **0%** (remove aquele efeito) a **100%** (intensidade original). Os ajustes são salvos automaticamente. O mod não aumenta a distância de renderização nem garante mais FPS.
+Each control ranges from **0%** (removes that effect) to **100%** (original intensity). Settings are saved automatically. The mod does not increase render distance or guarantee higher FPS.
 
-## Compatibilidade
+## Compatibility
 
-- Windows 10 x64 1809 ou superior e Windows 11.
-- Linux x86_64, incluindo o launcher Flatpak.
-- Hytale instalado e funcionando, com driver gráfico compatível com OpenGL 4.1.
+- Windows 10 x64 version 1809 or later, and Windows 11.
+- Linux x86_64, including the Flatpak launcher.
+- A working Hytale installation and a graphics driver supporting OpenGL 4.1.
 
-O ClearView não substitui os [requisitos do Hytale](https://hytale.com/news/2025/12/hytale-hardware-requirements). A compatibilidade com diferentes computadores e multiplayer ainda está em avaliação.
+ClearView does not replace [Hytale's system requirements](https://hytale.com/news/2025/12/hytale-hardware-requirements). Compatibility across computers and multiplayer is still being evaluated.
 
-## Instalar no Windows
+## Install on Windows
 
-1. Baixe e abra **ClearView-0.1.0-Setup.exe**.
-2. Feche o Hytale. O instalador procura a pasta do jogo automaticamente; se necessário, clique em **Localizar** e selecione `HytaleClient.exe`.
-3. Clique em **Instalar / Atualizar** e aguarde a confirmação.
-4. Abra o jogo pelo launcher, entre num mundo e pressione **F9**.
+The installer currently uses Portuguese labels. The instructions below include the exact button names.
 
-As verificações são automáticas. Não precisa extrair arquivos, usar terminal, instalar Python ou executar scripts. Para remover, abra o mesmo instalador e clique em **Remover**. Os ajustes existentes são preservados ao atualizar.
+1. Download and open **ClearView-0.1.0-Setup.exe**.
+2. Close Hytale. The installer finds the game folder automatically; if needed, click **Localizar** (Browse) and select `HytaleClient.exe`.
+3. Click **Instalar / Atualizar** (Install / Update) and wait for confirmation.
+4. Open the game through its launcher, enter a world, and press **F9**.
 
-## Instalar no Linux
+Checks run automatically. You do not need to extract files, use a terminal, install Python, or run scripts. To uninstall, open the same installer and click **Remover** (Remove). Updating preserves existing settings.
 
-Extraia o pacote. A instalação compila o mod e precisa de Python 3, compilador C, pkg-config e Cairo. No Ubuntu, instale as dependências:
+## Install on Linux
+
+Extract the package. Installation builds the mod and requires Python 3, a C compiler, pkg-config, and Cairo. On Ubuntu, install the dependencies:
 
 ```bash
 sudo apt install python3 build-essential pkg-config libcairo2-dev
 ```
 
-Com o Hytale fechado, abra um terminal na pasta extraída:
+With Hytale closed, open a terminal in the extracted folder:
 
 ```bash
 bash install.sh
 ```
 
-Depois abra pelo launcher normal. Para remover, com o jogo fechado:
+Then open the game through its usual launcher. To uninstall, close the game and run:
 
 ```bash
 bash install.sh --uninstall
 ```
 
-## Controles
+## Controls
 
-| Tecla | Ação |
+| Key | Action |
 | --- | --- |
-| **F9** | Abrir/fechar o painel |
-| ↑ / ↓ | Selecionar a neblina |
-| ← / → | Diminuir/aumentar em 5% |
-| V | Distância 0%, atmosfera 20%, profundidade 100% |
-| R | Restaurar todas as neblinas para 100% |
-| Esc | Fechar o painel |
+| **F9** | Open/close the panel |
+| ↑ / ↓ | Select a fog control |
+| ← / → | Decrease/increase by 5% |
+| V | Distance 0%, atmosphere 20%, depth 100% |
+| R | Restore all fog controls to 100% |
+| Esc | Close the panel |
 
-O painel usa teclado e é separado das configurações gráficas do jogo.
+The panel uses keyboard controls and is separate from the game's graphics settings.
 
-## Se algo não funcionar
+## If something goes wrong
 
-- **F9 não abre:** confirme que instalou esta versão com o jogo fechado e reinicie o Hytale.
-- **Outro mod de shaders instalado:** remova-o antes de instalar o ClearView; não instale por cima do Aurora ou de outro mod que use a mesma biblioteca.
-- **Problema ao iniciar:** desinstale o ClearView com o jogo fechado. No Windows, abra o instalador e clique em **Remover**.
-- **Se algo não funcionar, me mande uma mensagem no Discord: `tallmannzera`.**
+- **F9 does not open the panel:** make sure you installed this version with the game closed, then restart Hytale.
+- **Another shader mod is installed:** remove it before installing ClearView; do not install over Aurora or another mod using the same library.
+- **The game fails to start:** uninstall ClearView with the game closed. On Windows, open the installer and click **Remover** (Remove).
+- **If something does not work, message me on Discord: `tallmannzera`.**
 
-## Sobre o projeto
+## About the project
 
-O repositório não inclui código/shaders de Aurora/Complementary nem arquivos originais do Hytale.
+This repository does not include Aurora/Complementary code or shaders, or original Hytale files.
 
-Quer contribuir ou entender o código? Veja o **[guia de desenvolvimento](docs/development/README.md)** e as [orientações para contribuir](CONTRIBUTING.md).
+Want to contribute or understand the code? See the **[development guide](docs/development/README.md)** (Portuguese) and the [contribution guidelines](CONTRIBUTING.en.md).
 
-[Histórico de mudanças](CHANGELOG.md)
+[Changelog](CHANGELOG.md) (Portuguese)

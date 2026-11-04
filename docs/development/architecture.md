@@ -27,4 +27,4 @@ O ClearView mantém os cálculos originais do Hytale e multiplica os fatores fin
 0% zera o fator selecionado. 100% preserva seu valor original. Os fatores de distância e profundidade podem ser combinados pelo máximo, enquanto a atmosfera participa de outra etapa. Portanto, reduzir um controle nem sempre remove a névoa resultante dos outros.
 
 
-As intensidades ficam em `Client/.clearview/settings`, na ordem distância, atmosfera e profundidade. Os instaladores preservam esses valores, salvo quando um preset é solicitado explicitamente. Remover neblina não aumenta a distância de renderização; as bordas dos chunks podem ficar mais visíveis. Os controles de teclado estão no [README](../../README.md#controles).
+As intensidades ficam em `Client/.clearview/settings`, na ordem distância, atmosfera e profundidade. Os instaladores preservam esses valores, salvo quando um preset é solicitado explicitamente. Remover neblina não aumenta a distância de renderização; as bordas dos chunks podem ficar mais visíveis. Os controles de teclado estão no [README](../../README.pt-BR.md#controles).
