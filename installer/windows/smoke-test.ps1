@@ -16,8 +16,19 @@ try {
     [IO.Directory]::CreateDirectory($out) | Out-Null
     $exe = Join-Path $temp 'clearview-smoke.exe'
     $dll = Join-Path $temp 'opengl32.dll'
-    & $exe $dll 2>&1 | Tee-Object -FilePath (Join-Path $out 'result.txt')
-    $code = $LASTEXITCODE
+    $stdout = Join-Path $out 'result.txt'
+    $stderr = Join-Path $out 'error.txt'
+    $process = Start-Process -FilePath $exe -ArgumentList ('"'+$dll+'"') -PassThru -NoNewWindow -RedirectStandardOutput $stdout -RedirectStandardError $stderr
+    try {
+        if (-not $process.WaitForExit(60000)) {
+            $process.Kill(); $process.WaitForExit()
+            throw 'O teste grafico nao respondeu em 60 segundos. Nenhum arquivo do jogo foi alterado. Atualize o driver ou envie o relatorio ao suporte.'
+        }
+        $process.WaitForExit()
+        $code = $process.ExitCode
+        if (Test-Path -LiteralPath $stdout) { Get-Content -LiteralPath $stdout | Write-Output }
+        if (Test-Path -LiteralPath $stderr) { Get-Content -LiteralPath $stderr | Write-Output }
+    } finally { $process.Dispose() }
     $log = Join-Path $temp '.clearview\hook.log'
     if (Test-Path -LiteralPath $log) { Copy-Item -LiteralPath $log -Destination $out }
     Write-Host "Resultado salvo em: $out"

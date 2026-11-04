@@ -10,8 +10,12 @@ function New-ClearViewOperation([string]$Engine,[string]$Payload,[string]$Client
     } elseif($Operation -eq 'remove') { $commands+=$backend+' -Uninstall' }
     else { throw 'Operacao invalida.' }
     $body='$ErrorActionPreference = ''Stop'''+"`r`n"
+    $stage=0
     foreach($command in $commands) {
+        $stage++
+        $body+='Set-Content -LiteralPath '+(Quote-PS ($Log+'.stage'))+' -Value '+$stage+"`r`n"
         $body+=$command+' >> '+(Quote-PS $Log)+' 2>&1'+"`r`n"+'if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }'+"`r`n"
     }
+    $body+='Set-Content -LiteralPath '+(Quote-PS ($Log+'.stage'))+' -Value complete'+"`r`n"
     return $body+'exit 0'
 }

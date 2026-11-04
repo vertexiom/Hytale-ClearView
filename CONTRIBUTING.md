@@ -7,3 +7,5 @@ Comece pelo [guia de desenvolvimento](docs/development/README.md). Ele reúne ar
 Envie alterações para `staging`, descrevendo o problema, a solução e como testou. Informe sistema operacional, GPU, driver e versão do Hytale em relatos de falha. Não envie credenciais, mundos pessoais, bibliotecas ou shaders originais do jogo.
 
 Ao alterar instruções para jogadores, atualize os dois idiomas do README. Mantenha comandos, nomes dos downloads, controles e compatibilidade consistentes. Use os nomes reais dos botões do instalador para que o jogador consiga seguir as instruções.
+
+Publicações na `staging`, na `main` ou nas Releases exigem confirmação prévia do mantenedor. Prepare e valide as alterações localmente antes de solicitar essa confirmação.

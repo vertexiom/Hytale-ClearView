@@ -61,6 +61,12 @@ exit $LASTEXITCODE
             if ok and result.returncode:raise AssertionError(result.stdout+result.stderr)
             if not ok and not result.returncode:raise AssertionError('Expected refusal: '+result.stdout)
         run('validate');assert not (client/'.clearview').exists()
+        (client/'HytaleClient.exe').rename(client/'client-backup.exe')
+        try:
+            run(ok=False)
+            assert not (client/'opengl32.dll').exists() and not (client/'.clearview').exists()
+        finally:
+            (client/'client-backup.exe').rename(client/'HytaleClient.exe')
         run(running='old-os',ok=False);assert not (client/'opengl32.dll').exists()
         run(running='yes',ok=False);assert not (client/'opengl32.dll').exists()
         # Unknown mod must never be overwritten.

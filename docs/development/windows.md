@@ -14,11 +14,13 @@ O projeto está em sua versão inicial, **v0.1.0**, com validação em andamento
 
 1. Abra `ClearView-0.1.0-Setup.exe` com o Hytale fechado.
 2. Confirme a pasta detectada ou use **Localizar** para selecionar `HytaleClient.exe`.
-3. Clique em **Instalar / Atualizar**. O aplicativo valida o destino, executa o teste gráfico isolado e só então instala.
-4. Abra pelo launcher normal, entre num mundo e pressione **F9**.
+3. Clique em **Instalar / Atualizar**. Acompanhe a barra por etapas: validação do destino, teste gráfico isolado e instalação. O teste gráfico tem limite de 60 segundos e ocorre antes de alterar o jogo.
+4. Aguarde **Instalação concluída**, clique em **Concluir** e abra o jogo pelo launcher normal. Entre num mundo e pressione **F9**.
 5. Para remover, abra o mesmo executável e clique em **Remover**.
 
 Requisitos: Windows 10 x64 1809+ e OpenGL 4.1. O usuário não instala compiladores ou runtimes adicionais. O instalador usa Windows PowerShell 5.1 e Windows Forms presentes no sistema. A execução não muda a política global de scripts nem exige administrador automaticamente.
+
+Sem o Hytale instalado, a instalação fica desabilitada e a interface orienta a instalar o jogo pelo launcher. **Verificar novamente** repete a detecção. O ClearView não baixa o jogo. Abrir novamente o executável tenta restaurar a janela existente. A conclusão exige sucesso do processo e uma marca final gravada após todas as etapas; a barra representa etapas, não porcentagem de bytes copiados.
 
 ## Implementação do instalador
 

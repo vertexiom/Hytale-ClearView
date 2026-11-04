@@ -22,7 +22,15 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,PWSTR arguments,int sh
     HANDLE mutex=CreateMutexW(NULL,FALSE,L"Local\\HytaleClearViewInstaller");
     if(!mutex)goto failure;
     if(GetLastError()==ERROR_ALREADY_EXISTS){
-        MessageBoxW(NULL,L"O instalador do ClearView ja esta aberto. Volte para a janela existente.",L"ClearView",MB_OK|MB_ICONINFORMATION);
+        HWND window=NULL;
+        for(int attempt=0;attempt<20 && !window;++attempt){
+            window=FindWindowW(NULL,L"Hytale ClearView");
+            if(!window)Sleep(100);
+        }
+        if(window){ShowWindow(window,SW_RESTORE);SetForegroundWindow(window);}
+        HANDLE activate=OpenEventW(EVENT_MODIFY_STATE,FALSE,L"Local\\HytaleClearViewInstallerActivate");
+        if(activate){SetEvent(activate);CloseHandle(activate);}
+        if(!window && !activate)MessageBoxW(NULL,L"O instalador ainda esta iniciando. Aguarde alguns segundos e abra novamente para trazer a janela para frente.",L"ClearView",MB_OK|MB_ICONINFORMATION);
         CloseHandle(mutex);return 0;
     }
     wchar_t temp[MAX_PATH],folder[MAX_PATH],guid_text[40],gui[MAX_PATH],zip[MAX_PATH];
@@ -37,12 +45,13 @@ int WINAPI wWinMain(HINSTANCE instance,HINSTANCE previous,PWSTR arguments,int sh
     wcscat(engine,L"\\WindowsPowerShell\\v1.0\\powershell.exe");
     if(swprintf(command,MAX_PATH*3,L"\"%ls\" -NoLogo -NoProfile -STA -ExecutionPolicy Bypass -File \"%ls\"",engine,gui)<0)goto cleanup_failure;
     STARTUPINFOW startup={0};PROCESS_INFORMATION process={0};startup.cb=sizeof startup;
-    startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_HIDE;
+    startup.dwFlags=STARTF_USESHOWWINDOW;startup.wShowWindow=SW_SHOWNORMAL;
     if(!CreateProcessW(engine,command,NULL,NULL,FALSE,CREATE_NO_WINDOW,NULL,folder,&startup,&process))goto cleanup_failure;
     WaitForSingleObject(process.hProcess,INFINITE);
     DWORD code=1;GetExitCodeProcess(process.hProcess,&code);CloseHandle(process.hThread);CloseHandle(process.hProcess);
     DeleteFileW(gui);DeleteFileW(zip);RemoveDirectoryW(folder);
-    if(code){MessageBoxW(NULL,L"Nao foi possivel concluir o instalador. Tente abrir novamente. Se persistir, relate o problema no GitHub do ClearView.",L"ClearView",MB_OK|MB_ICONERROR);}
+    CloseHandle(mutex);
+    if(code){MessageBoxW(NULL,L"Nao foi possivel concluir o instalador. Tente abrir novamente. Se persistir, envie uma mensagem no Discord: tallmannzera.",L"ClearView",MB_OK|MB_ICONERROR);}
     return (int)code;
 cleanup_failure:
     DeleteFileW(gui);DeleteFileW(zip);RemoveDirectoryW(folder);
