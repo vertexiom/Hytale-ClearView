@@ -12,7 +12,7 @@ def main():
     data=exe.read_bytes()
     assert 'asInvoker'.encode() in data
     assert (ROOT/'build/windows/payload.zip').read_bytes() in data
-    assert (ROOT/'installer/setup.ps1').read_text().encode('utf-8-sig') in data
+    assert (ROOT/'installer/windows/setup.ps1').read_text().encode('utf-8-sig') in data
     with zipfile.ZipFile(ROOT/'build/windows/payload.zip') as z:
         assert z.testzip() is None and not any(n.endswith('.bat') for n in z.namelist())
     with tempfile.TemporaryDirectory(prefix="ClearView espaço 'test' ") as td:
@@ -27,7 +27,7 @@ def main():
         client=str(t/"Client 'ç' $literal")
         for operation,fail,count,code in [('install','',3,0),('install','validate',1,7),('install','smoke',2,8),('remove','',1,0)]:
             trace.unlink(missing_ok=True)
-            subprocess.run([args.pwsh,'-NoProfile','-File',str(generator),str(ROOT/'installer/workflow.ps1'),str(engine),str(t),client,str(log),str(runner),operation],check=True)
+            subprocess.run([args.pwsh,'-NoProfile','-File',str(generator),str(ROOT/'installer/windows/workflow.ps1'),str(engine),str(t),client,str(log),str(runner),operation],check=True)
             result=subprocess.run([args.pwsh,'-NoProfile','-File',str(runner)],env={**os.environ,'CV_TRACE':str(trace),'CV_FAIL':fail},capture_output=True,text=True)
             assert result.returncode==code,(result.returncode,result.stderr)
             calls=[json.loads(line) for line in trace.read_text().splitlines()]

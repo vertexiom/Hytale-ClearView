@@ -69,7 +69,7 @@ with tempfile.TemporaryDirectory(prefix='clearview-test-') as directory:
     original = client / 'libSDL3.so'
     subprocess.run(['cc', '-shared', '-fPIC', str(client/'mock.c'), '-o', str(original)], check=True)
     original_data = original.read_bytes()
-    args = ['python3', str(ROOT/'install.py'), '--client-dir', str(client)]
+    args = ['bash', str(ROOT/'install.sh'), '--client-dir', str(client)]
     subprocess.run(args + ['--mode', 'distance'], check=True)
     proxy = C.CDLL(str(original), mode=C.RTLD_LOCAL)
     proxy.SDL_GetVersion.restype = C.c_int

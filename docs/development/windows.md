@@ -22,15 +22,15 @@ Requisitos: Windows 10 x64 1809+ e OpenGL 4.1. O usuário não instala compilado
 
 ## Implementação do instalador
 
-`installer/bootstrap.c` é um executável GUI x64 com manifesto `asInvoker`. Extrai a interface e um payload próprio para uma pasta temporária exclusiva, executa o PowerShell do diretório do sistema sem console e limpa os arquivos ao sair normalmente.
+`installer/windows/bootstrap.c` é um executável GUI x64 com manifesto `asInvoker`. Extrai a interface e um payload próprio para uma pasta temporária exclusiva, executa o PowerShell do diretório do sistema sem console e limpa os arquivos ao sair normalmente.
 
-`installer/setup.ps1` fornece a interface. O trabalho ocorre em processo separado para manter a janela responsiva. O fechamento é bloqueado durante a operação para evitar interromper uma gravação. `installer/workflow.ps1` monta a sequência validação → teste gráfico → instalação e interrompe na primeira falha. A remoção usa as verificações do backend, sem exigir aprovação no teste gráfico.
+`installer/windows/setup.ps1` fornece a interface. O trabalho ocorre em processo separado para manter a janela responsiva. O fechamento é bloqueado durante a operação para evitar interromper uma gravação. `installer/windows/workflow.ps1` monta a sequência validação → teste gráfico → instalação e interrompe na primeira falha. A remoção usa as verificações do backend, sem exigir aprovação no teste gráfico.
 
-`install.ps1` continua como backend de arquivos, com verificação de integridade, conflitos e recuperação. A UI passa caminhos por argumentos devidamente escapados. O teste gráfico usa fontes sintéticas próprias; fontes do jogo não são distribuídas.
+`installer/windows/install.ps1` continua como backend de arquivos, com verificação de integridade, conflitos e recuperação. A UI passa caminhos por argumentos devidamente escapados. O teste gráfico usa fontes sintéticas próprias; fontes do jogo não são distribuídas.
 
 Os relatórios persistem em `%LOCALAPPDATA%/ClearView/Logs` e podem ser abertos em **Ver relatório**. Nada é transmitido. O executável ainda não tem assinatura Authenticode; a reputação/avisos do Windows dependem do ambiente. Não instruir o jogador a desativar proteções do sistema.
 
-A interface foi compilada e analisada sintaticamente no Linux. Sua apresentação, DPI e comportamento nativo ainda precisam ser verificados em Windows real. Consulte a [análise de hardware](hardware-compatibility.md).
+A interface foi compilada e analisada sintaticamente no Linux. Sua apresentação, DPI e comportamento nativo ainda precisam ser verificados em Windows real. Consulte a [análise de hardware](validation.md#hardware-e-compatibilidade).
 
 ## Controles
 
@@ -45,7 +45,7 @@ Os valores são salvos em `Client/.clearview/settings`. O painel funciona pelo t
 
 ## Instalação personalizada
 
-No PowerShell, dentro da pasta do pacote:
+Para desenvolvimento, estes comandos se aplicam ao payload já extraído em `build/windows/payload.zip`, que reúne o backend, o manifesto e a DLL. Extraia esse arquivo e abra o PowerShell na pasta resultante:
 
 ```powershell
 .\install.ps1 -ClientDir 'D:\Jogos\Hytale\Client'
@@ -59,12 +59,12 @@ O instalador não altera `HytaleClient.exe`, não grava em System32 e não sobre
 
 ## Diagnóstico
 
-Para diagnóstico técnico adicional, execute `diagnostics.ps1` do código-fonte. Ele reúne versão do Windows, CPU, RAM, GPU, driver, espaço em discos, versão do PowerShell, hash da DLL, configuração e log do ClearView em uma pasta local. Não transmite dados.
+Para diagnóstico técnico adicional, execute `tools/support/diagnostics.ps1` do código-fonte. Ele reúne versão do Windows, CPU, RAM, GPU, driver, espaço em discos, versão do PowerShell, hash da DLL, configuração e log do ClearView em uma pasta local. Não transmite dados.
 
 Para caminho personalizado:
 
 ```powershell
-.\diagnostics.ps1 -ClientDir 'D:\Jogos\Hytale\Client'
+.\tools\support\diagnostics.ps1 -ClientDir 'D:\Jogos\Hytale\Client'
 ```
 
 No log do ClearView, procure:
@@ -106,9 +106,9 @@ O instalador verifica arquitetura x64, propriedade/hash da DLL, existência de c
 Requer Python 3 e Zig (verificado com 0.15.2):
 
 ```bash
-python3 tools/build_windows.py --zig /caminho/zig
+python3 tools/build/build_windows.py --zig /caminho/zig
 python3 tests/check_windows.py --pwsh /caminho/pwsh
-python3 tools/package_windows.py --zig /caminho/zig
+python3 tools/build/package_windows.py --zig /caminho/zig
 python3 tests/check_setup.py --pwsh /caminho/pwsh
 ```
 

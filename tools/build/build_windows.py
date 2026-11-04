@@ -7,7 +7,7 @@ import os
 import shutil
 import subprocess
 from gen_windows_exports import generate
-ROOT=Path(__file__).resolve().parents[1]
+ROOT=Path(__file__).resolve().parents[2]
 VERSION='0.1.0'
 
 def main():

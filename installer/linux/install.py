@@ -9,7 +9,7 @@ import shutil
 import subprocess
 import tempfile
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 MARKER = b"HYTALE_CLEARVIEW_PROXY_V1"
 
 
@@ -85,7 +85,7 @@ def main():
             raise RuntimeError('Backup alterado; instalação interrompida.')
     elif backup.exists():
         raise RuntimeError('SDL mudou desde a instalação. Preserve o backup e revise antes de reinstalar.')
-    subprocess.run(['bash', str(ROOT / 'build.sh')], check=True)
+    subprocess.run(['bash', str(ROOT / 'tools/build/build_linux.sh')], check=True)
     state.mkdir(exist_ok=True)
     mode_path = state / 'mode'
     mode = args.mode or (mode_path.read_text().strip() if mode_path.exists() else 'distance')

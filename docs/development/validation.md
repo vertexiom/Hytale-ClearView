@@ -40,3 +40,25 @@ Para restaurar a biblioteca original, feche o jogo e execute:
 ```
 
 Se o jogo atualizar a SDL e deixar um backup antigo, o instalador interrompe a reinstalação para revisão. Não exclua o backup nem restaure uma versão antiga sobre uma biblioteca nova sem verificar os arquivos.
+
+## Hardware e compatibilidade
+
+Referência consultada em 4 de novembro de 2026. Windows 10 x64 1809+ é P0; Windows 11 é P1. A matriz de GPUs no Windows ainda precisa de validação nativa.
+
+O [Hytale](https://hytale.com/news/2025/12/hytale-hardware-requirements) lista i5-7500/Ryzen 3 1200, 8 GB de RAM com GPU dedicada, GTX série 900 e OpenGL 4.1, visando 1080p/30 FPS no preset baixo. O mod não reduz esses requisitos nem garante ganho de FPS.
+
+GPUs anteriores à referência oficial, como a GTX 660, devem ser tratadas como experimentais. A [ficha NVIDIA](https://www.nvidia.com/en-us/geforce/graphics-cards/geforce-gtx-660/specifications/) informa OpenGL 4.3 e 2 GB na placa de referência, mas é necessário verificar o driver real. O [suporte Kepler](https://nvidia.custhelp.com/app/answers/detail/a_id/5202) é legado. Não bloquear por nome de GPU nem usar a estimativa WMI de VRAM como aprovação de compatibilidade.
+
+O proxy Windows registra GPU/OpenGL/GLSL. Sem OpenGL 4.1, encaminha os shaders originais e não ativa o HUD. Funções GLSL desconhecidas também passam sem transformação. Isso não substitui recuperação após falha de compilação/linkedição, ainda pendente.
+
+O ClearView não acrescenta os efeitos pesados de iluminação, reflexos e nuvens do [Aurora](https://github.com/Kristijan1001/Hytale-Aurora-Shaders#performance). O HUD só desenha quando aberto e só atualiza a textura quando necessário; o custo de interceptação e atualização de uniforms precisa ser medido.
+
+## Pendências e medição
+
+- Implementar recuperação para shaders alterados que falhem na compilação/linkedição, preservando a fonte original e o erro.
+- Validar instalação, remoção, F9, persistência, Alt+Tab, janela/fullscreen e pelo menos 30 minutos de jogo em Windows 10; repetir no Windows 11.
+- Comparar a mesma cena/resolução/distância no jogo original, com neblinas em 100%, com preset de visibilidade e com HUD aberto/fechado. Registrar FPS e tempos de quadro, incluindo picos. Custo abaixo de 5% com HUD fechado é uma meta proposta, não um resultado medido.
+- Otimizar uniforms/locks apenas com base no perfil medido; avaliar opção de desativar o HUD para diagnóstico.
+- Registrar versão do Hytale, GPU, driver e resultados; repetir após atualizações. Uma máquina aprovada não certifica toda a família de GPUs.
+
+Confirme que o Hytale original funciona antes de investigar o mod. O roteiro Windows detalhado está em [windows.md](windows.md).

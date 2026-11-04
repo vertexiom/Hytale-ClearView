@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-cd -- "$(dirname -- "$0")"
+cd -- "$(dirname -- "$0")/../.."
 mkdir -p build
 stage=$(mktemp -d build/stage.XXXXXX)
 trap 'rm -rf -- "$stage"' EXIT

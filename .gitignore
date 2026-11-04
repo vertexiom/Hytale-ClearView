@@ -20,5 +20,5 @@ libSDL3*.so
 *.dll
 *.exe
 *.pdb
-/diagnostics-*/
-/smoke-*/
+diagnostics-*/
+smoke-*/
