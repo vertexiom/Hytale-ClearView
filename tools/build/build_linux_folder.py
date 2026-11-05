@@ -22,7 +22,7 @@ def main():
             copy('installer/linux/gui/'+name,'installer/linux/gui/'+name)
         for name in ('libSDL3.so','linux-manifest.json'):
             copy('build/'+name,'build/'+name)
-        copy('assets/concepts/clearview-h-v4.png','assets/icons/io.github.vertexiom.ClearView.png')
+        copy('assets/icons/io.github.vertexiom.ClearView.png','assets/icons/io.github.vertexiom.ClearView.png')
         copy('installer/linux/package/FOLDER-README.txt','LEIA-ME.txt')
         archive=dist/(NAME+'.tar.gz')
         with tarfile.open(archive,'w:gz') as out:out.add(folder,arcname=NAME)

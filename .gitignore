@@ -22,3 +22,9 @@ libSDL3*.so
 *.pdb
 diagnostics-*/
 smoke-*/
+
+# Local design experiments and session notes (never publish)
+/design/
+/tools/preview/
+/assets/concepts/
+/CONTEXTO-*.md

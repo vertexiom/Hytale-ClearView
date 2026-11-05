@@ -9,3 +9,5 @@ Submit changes to `staging`, describing the problem, your solution, and how you 
 When changing player instructions, update both README languages. Keep commands, download filenames, controls, and compatibility information consistent. Use the actual installer button labels so players can follow the instructions.
 
 Publishing to `staging`, `main`, or Releases requires prior confirmation from the maintainer. Prepare and validate changes locally before requesting that confirmation.
+
+Keep visual prototypes, preview HTML, ASCII experiments, experimental screenshots and session notes local. Commit only product code and assets, build tools, automated tests and maintenance documentation. Application icons belong in `assets/icons/`.

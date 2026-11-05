@@ -3,8 +3,6 @@
 Documentação para quem deseja estudar ou contribuir com o ClearView.
 
 - [GUI Linux GTK 4: execução e dependências](../../installer/linux/gui/LEIA-ME.txt)
-- [Contexto da v0.1.2 e próxima sessão](../../CONTEXTO-v0.1.2.md)
-- [Prévia interativa do instalador V2](../../design/installer/interactive.html)
 - [Arquitetura e diagnóstico](architecture.md)
 - [Validação e testes](validation.md)
 - [Ambiente de testes: hardware, sistema e ferramentas](test-environment.md)
@@ -31,8 +29,7 @@ Os testes gráficos requerem EGL/OpenGL; o teste do HUD também usa Pillow. Nunc
 
 | Caminho | Responsabilidade |
 | --- | --- |
-| `design/installer/` | Estudos visuais, exportações Pencil e prévia HTML V2 |
-| `tools/preview/` | Estudos ASCII de terminal |
+| `assets/icons/` | Ícones usados pelo aplicativo e pelos pacotes |
 | `src/` | Código do shader, proxies e painel |
 | `tests/` | Testes de instalação, gráficos e integração |
 | `docs/development/` | Arquitetura, validação e instruções para contribuir |
@@ -43,3 +40,5 @@ Os testes gráficos requerem EGL/OpenGL; o teste do HUD também usa Pillow. Nunc
 | `install.sh` | Entrada simples para instalar no Linux |
 
 `build/` e `dist/` são saídas locais geradas, ignoradas pelo Git. Os downloads para jogadores ficam na Release; não versionar binários no código-fonte.
+
+Protótipos HTML/Pencil, capturas de experimentos, estudos ASCII e notas de sessão ficam apenas na máquina de desenvolvimento, fora do versionamento. O repositório mantém código, recursos usados pelo produto, ferramentas de build, testes automatizados e documentação necessária para manutenção.

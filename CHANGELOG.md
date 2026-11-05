@@ -17,11 +17,11 @@
 - Prévia interativa offline com chuva ASCII animada, pausa e respeito à preferência de movimento reduzido.
 - Simulações de instalação, atualização, seleção de destino, duas instalações, jogo aberto, falhas com relatório fictício e remoção.
 - Fluxos da prévia verificados no navegador do Pencil; isso não valida instalação real nem compatibilidade Windows.
-- Prévia V1 preservada para comparação; exportações da V2 e contexto de retomada salvos no projeto.
+- Prévia V1, exportações da V2 e contexto de retomada preservados localmente para desenvolvimento.
 - **A interface V2 ainda não está integrada ao EXE.** Esta release publica apenas o pacote Linux; o download Windows permanece na v0.1.1.
 - A release pública v0.1.1 permanece disponível e inalterada.
 
-Veja [o contexto para retomar](CONTEXTO-v0.1.2.md) e [a prévia interativa](design/installer/interactive.html).
+Os protótipos e estudos de design são mantidos localmente; não são necessários para executar o instalador.
 
 ## v0.1.1 — testes no Windows e melhorias no instalador
 

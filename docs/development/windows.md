@@ -1,6 +1,6 @@
 # Windows: P0 e P1
 
-> **v0.1.2 em desenvolvimento:** a V2 aprovada existe no Pencil e na [prévia HTML](../../design/installer/interactive.html), ainda não no EXE. Os metadados de build já usam 0.1.2; isso não significa que a nova interface foi implementada. As seções abaixo descrevem o instalador existente. Veja [o contexto e as pendências](../../CONTEXTO-v0.1.2.md).
+> **Interface Windows V2 pendente:** o design foi aprovado em protótipos locais, mas ainda não foi integrado ao EXE. Os metadados de build usam 0.1.2; o download público Windows permanece na v0.1.1. As seções abaixo descrevem o instalador existente. Acompanhe a integração na [issue P1](https://github.com/vertexiom/Hytale-ClearView/issues/2).
 
 
 ## Prioridades e estado

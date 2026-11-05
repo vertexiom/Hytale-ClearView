@@ -32,7 +32,7 @@ def main():
         manifest=json.loads((app/'build/linux-manifest.json').read_text())
         assert manifest['version']==VERSION
         assert manifest['sha256']==hashlib.sha256((app/'build/libSDL3.so').read_bytes()).hexdigest()
-        copy(ROOT/'assets/concepts/clearview-h-v4.png',package/'usr/share/pixmaps/io.github.vertexiom.ClearView.png')
+        copy(ROOT/'assets/icons/io.github.vertexiom.ClearView.png',package/'usr/share/pixmaps/io.github.vertexiom.ClearView.png')
         desktop='io.github.vertexiom.ClearView.desktop'
         copy(ROOT/'installer/linux/package'/desktop,package/'usr/share/applications'/desktop)
         run('desktop-file-validate',str(package/'usr/share/applications'/desktop))
