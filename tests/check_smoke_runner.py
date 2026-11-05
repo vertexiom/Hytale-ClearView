@@ -1,3 +1,11 @@
+# Copyright (C) 2026 vertexiom
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# This file is part of Hytale ClearView.
+# Hytale ClearView is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the
+# Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version. See LICENSE for details.
 """Exercise smoke-process exit handling with tiny native stand-ins, not a real GPU."""
 from pathlib import Path
 import argparse,hashlib,json,os,shutil,subprocess,tempfile

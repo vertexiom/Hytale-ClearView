@@ -94,3 +94,11 @@ O repositório não inclui código/shaders de Aurora/Complementary nem arquivos 
 Quer contribuir ou entender o código? Veja o **[guia de desenvolvimento](docs/development/README.md)** e as [orientações para contribuir](CONTRIBUTING.md).
 
 [Histórico de mudanças](CHANGELOG.md)
+
+## Licença e créditos
+
+O código-fonte original do ClearView é licenciado sob a **GNU GPL v3.0 ou posterior** ([GPL-3.0-or-later](LICENSE)). Copyright © 2026 [vertexiom](https://github.com/vertexiom).
+
+Projeto original: [Hytale ClearView](https://github.com/vertexiom/Hytale-ClearView). Se este trabalho inspirar sua implementação, agradecemos o crédito e um link; isso é um pedido, não uma condição adicional da licença.
+
+Componentes de terceiros mantêm suas próprias licenças. Esta licença do código não concede direitos sobre a marca Hytale ou artes de terceiros, incluindo a referência usada no ícone temporário do planeta.

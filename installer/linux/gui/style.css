@@ -1,3 +1,13 @@
+/*
+ * Copyright (C) 2026 vertexiom
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * This file is part of Hytale ClearView.
+ * Hytale ClearView is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. See LICENSE for details.
+ */
 window.clearview { background: #101923; color: #e6edf5; font-family: Inter, sans-serif; font-size: 14px; }
 headerbar { background: #151e2a; color: #e6edf5; box-shadow: none; border: none; }
 .lab { padding: 12px 20px; background: #101923; }

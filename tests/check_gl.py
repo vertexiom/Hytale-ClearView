@@ -1,3 +1,11 @@
+# Copyright (C) 2026 vertexiom
+# SPDX-License-Identifier: GPL-3.0-or-later
+#
+# This file is part of Hytale ClearView.
+# Hytale ClearView is free software: you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by the
+# Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version. See LICENSE for details.
 """Link actual Text/BasicFog shaders and verify their required interfaces survive.
 Usage: python3 tests/check_gl.py /path/to/locally-extracted-game-shaders
 No game shader sources are bundled here. Requires EGL and OpenGL.

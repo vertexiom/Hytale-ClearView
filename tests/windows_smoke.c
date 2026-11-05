@@ -1,3 +1,13 @@
+/*
+ * Copyright (C) 2026 vertexiom
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * This file is part of Hytale ClearView.
+ * Hytale ClearView is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. See LICENSE for details.
+ */
 /* Native Windows smoke test. No game files are modified. Run with DLL path.
  * Validates actual system forwarding, GLSL patching, live uniforms and F9 HUD. */
 #define WIN32_LEAN_AND_MEAN

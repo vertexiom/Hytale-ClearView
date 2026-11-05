@@ -1,3 +1,13 @@
+/*
+ * Copyright (C) 2026 vertexiom
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * This file is part of Hytale ClearView.
+ * Hytale ClearView is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. See LICENSE for details.
+ */
 #define WIN32_LEAN_AND_MEAN
 #ifndef _WIN32_WINNT
 #define _WIN32_WINNT 0x0a00
