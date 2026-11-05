@@ -1,6 +1,9 @@
 # Changelog
 
-## v0.1.2 — em desenvolvimento (staging)
+## v0.1.2 — instalador gráfico Linux por pasta
+
+- Distribuição Linux por pasta com mod pré-compilado: `bash install.sh` abre diretamente a GUI. Dependências ausentes são informadas antes de abrir; CLI disponível com `--cli`.
+- Ícone H aplicado ao instalador; `.deb` preservado como alternativa, deixando de ser o fluxo prioritário.
 
 - Pacote `.deb` local amd64 com GUI, mod compilado, dependências e entrada no menu de aplicativos. O usuário final não precisa compilar o mod.
 - Pacote verificado fora do checkout; instalação/remoção/reinstalação do aplicativo verificadas nesta máquina Ubuntu. Outros sistemas Linux ainda precisam de validação.
@@ -15,7 +18,7 @@
 - Simulações de instalação, atualização, seleção de destino, duas instalações, jogo aberto, falhas com relatório fictício e remoção.
 - Fluxos da prévia verificados no navegador do Pencil; isso não valida instalação real nem compatibilidade Windows.
 - Prévia V1 preservada para comparação; exportações da V2 e contexto de retomada salvos no projeto.
-- **A interface V2 ainda não está integrada ao EXE.** Os metadados de compilação estão em 0.1.2, mas não há nova release pública nesta etapa.
+- **A interface V2 ainda não está integrada ao EXE.** Esta release publica apenas o pacote Linux; o download Windows permanece na v0.1.1.
 - A release pública v0.1.1 permanece disponível e inalterada.
 
 Veja [o contexto para retomar](CONTEXTO-v0.1.2.md) e [a prévia interativa](design/installer/interactive.html).

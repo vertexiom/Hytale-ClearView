@@ -1,22 +1,25 @@
 CLEARVIEW — INSTALADOR LINUX GTK 4 / v0.1.2 em desenvolvimento
 
-PACOTE PARA O USUÁRIO
-Abra clearview-installer_0.1.2-1_amd64.deb com o instalador de aplicativos
-da distribuição e confirme a instalação. Depois procure "Instalador ClearView"
-no menu de aplicativos. Não execute a GUI com sudo.
-Se a distribuição não tiver um instalador gráfico de pacotes locais, use:
-  sudo apt install ./clearview-installer_0.1.2-1_amd64.deb
-Depois abra pelo menu, ou execute: clearview-installer
+DISTRIBUIÇÃO ATUAL: PASTA COM INSTALL.SH
+O usuário escolheu deixar o .deb de lado por enquanto.
+Extraia ClearView-0.1.2-linux-x64.tar.gz, entre na pasta e execute:
+  bash install.sh
+A interface abre diretamente, sem loja e sem compilar o mod.
+O mod vem pré-compilado; Python/GTK/Cairo continuam sendo dependências do sistema.
+O script informa o comando de instalação se estiverem ausentes; não instala
+pacotes automaticamente e não deve ser executado com sudo.
 
-O pacote instala somente o aplicativo. Para aplicar o mod, abra o aplicativo.
-Para remover o mod, use "Remover instalação" dentro dele ANTES de desinstalar
-o pacote pelo sistema. Remover o .deb não modifica arquivos do Hytale.
+Para gerar a pasta e o tar.gz localmente:
+  python3 tools/build/build_linux_folder.py
+A saída fica em dist/ClearView-0.1.2-linux-x64/ e no tar.gz ao lado.
+O .deb e seu build foram preservados como alternativa, mas não são o fluxo
+prioritário. A release v0.1.2 publica somente o tar.gz Linux.
 
 EXECUÇÃO PELO CÓDIGO-FONTE
 Na raiz do projeto, compile o mod uma vez:
   bash tools/build/build_linux.sh
 Depois abra a GUI real:
-  ./installer/linux/gui/run.sh
+  bash install.sh
 
 Feche o Hytale, clique em Continuar, confirme o destino e clique em Instalar.
 Uma instalação existente será atualizada, preservando seus ajustes. Ao concluir,
@@ -73,5 +76,5 @@ uma garantia de recuperação após queda de energia. Jogo fechado é verificado
 antes da gravação; não abrir o launcher/jogo durante a operação. Nenhum teste
 gráfico ou de gameplay é executado automaticamente pela GUI Linux.
 
-Windows terá implementação independente. Trabalho autorizado somente na
-staging; main/release v0.1.1 permanecem inalteradas.
+Windows terá implementação independente; o EXE público permanece na v0.1.1.
+A v0.1.2 publica o instalador Linux por pasta; o .deb permanece secundário.

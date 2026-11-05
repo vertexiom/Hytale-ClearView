@@ -10,9 +10,8 @@ The project is intended for visual customization, not as a cheating tool or a wa
 
 > **Multiplayer disclaimer:** Before using ClearView on any multiplayer server, consult its admin team and confirm that the mod is allowed. If it is not allowed, do not use it on that server.
 
-**Hytale ClearView is in early development — v0.1.1.** Hytale updates may require changes to the mod.
+**Hytale ClearView is in early development — v0.1.2.** Hytale updates may require changes to the mod.
 
-**On staging:** v0.1.2 is in development. The [Linux graphical installer](installer/linux/gui/LEIA-ME.txt) is available from the checkout. The [V2 design](design/installer/interactive.html) is not yet integrated into the Windows executable. The public download remains v0.1.1.
 
 [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) was used as a reference to understand how shaders work and develop ClearView, which has its own independent code.
 
@@ -20,10 +19,8 @@ I'm developing this mod because my friend Lazan is Hytale fog's number one enemy
 
 ## Download
 
-**[Download ClearView v0.1.1](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.1)**
-
-- **Windows:** download `ClearView-0.1.1-Setup.exe`.
-- **Linux:** download `ClearView-0.1.1-linux-source.tar.gz` and follow the instructions below.
+- **Linux v0.1.2:** [ClearView-0.1.2-linux-x64.tar.gz](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.2/ClearView-0.1.2-linux-x64.tar.gz) — extract the folder and run `bash install.sh`.
+- **Windows v0.1.1:** [ClearView-0.1.1-Setup.exe](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.1/ClearView-0.1.1-Setup.exe). The new Windows installer is still in development.
 
 ## What you can adjust
 
@@ -54,23 +51,23 @@ Checks run automatically. You do not need to extract files, use a terminal, inst
 
 ## Install on Linux
 
-Extract the package. Installation builds the mod and requires Python 3, a C compiler, pkg-config, and Cairo. On Ubuntu, install the dependencies:
-
-```bash
-sudo apt install python3 build-essential pkg-config libcairo2-dev
-```
-
-With Hytale closed, open a terminal in the extracted folder:
+Download **ClearView-0.1.2-linux-x64.tar.gz** and extract the entire folder. Close Hytale, open a terminal inside that folder and run:
 
 ```bash
 bash install.sh
 ```
 
-Then open the game through its usual launcher. To uninstall, close the game and run:
+The graphical installer opens directly. Click **Continuar**, confirm the game folder, then click **Instalar**. Wait for completion and open Hytale through its normal launcher. Press **F9** in-game.
+
+The mod is precompiled; no compiler or app store is needed. Run without `sudo`. If the script reports missing interface dependencies, install them on Ubuntu/Debian with:
 
 ```bash
-bash install.sh --uninstall
+sudo apt install python3 python3-gi python3-gi-cairo python3-cairo gir1.2-gtk-4.0
 ```
+
+Then run `bash install.sh` again. To update or remove the mod, close the game and open the same installer. Deleting the installer folder does not remove the mod.
+
+The Linux x64 package requires glibc 2.38 or later and the system GTK/Python dependencies above. The interface currently uses Portuguese labels.
 
 ## Controls
 

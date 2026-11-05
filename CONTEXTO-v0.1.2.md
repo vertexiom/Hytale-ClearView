@@ -4,14 +4,14 @@ Atualizado em 4 de novembro de 2026. Leia este documento antes de continuar.
 
 ## Estado atual e decisão aprovada
 
-O usuário escolheu a **V2 do Claude Opus 5.5** como base visual do novo instalador. Ela tem 17 telas estáticas no Pencil e foi implementada como uma prévia interativa HTML, com chuva ASCII animada. **Essa interface ainda não foi integrada ao EXE.**
+O usuário autorizou publicar o instalador Linux atual como **v0.1.2**, primeiro na `staging`, depois em `main`. A release e a tag v0.1.1 devem permanecer intactas. A v0.1.2 distribui somente `ClearView-0.1.2-linux-x64.tar.gz`, sem `.deb`, checksums separados ou novo EXE. Windows continua com download da v0.1.1; o visual V2 do EXE está pendente.
 
-- Repositório: <https://github.com/vertexiom/Hytale-ClearView>.
-- Branch de trabalho: `staging`; desenvolvimento da **v0.1.2**.
-- Versão pública mantida: **v0.1.1**, em `main` e na release existente.
-- O usuário autorizou publicar este checkpoint **somente na staging**. Não atualizar main, tags, releases ou assets da v0.1.1.
-- Antes de novas publicações, pedir autorização. Esta autorização não é permanente.
-- Não tocar nos projetos/documentos Rota ou fellowbot.
+O usuário escolheu a V2 do Claude como referência visual. Os estudos estão preservados em `design/installer/`. A GUI Linux já está implementada e funciona com o backend real.
+
+- Repositório: https://github.com/vertexiom/Hytale-ClearView
+- Não tocar em Rota ou fellowbot.
+- Novas publicações após esta entrega exigem nova autorização.
+- Issues de prioridades: #1 Linux por Bash; #2 stack/EXE V2; #3 SignPath gratuito; #4 loja Ubuntu secundária.
 
 ## GUI Linux real — Python + GTK 4
 
@@ -25,9 +25,23 @@ Em 04/11/2026, a GUI realizou uma **atualização real** na instalação Flatpak
 
 Nesta máquina foi instalado somente `python3-gi-cairo`, que faltava. Leia `installer/linux/gui/LEIA-ME.txt` para dependências e testes. O build local gera `build/libSDL3.so` e `linux-manifest.json`; a GUI não compila nem baixa durante a instalação. O pacote local `dist/clearview-installer_0.1.2-1_amd64.deb` contém GUI e mod compilado. Build: `python3 tools/build/build_linux_deb.py`. Instala em `/usr/lib/clearview`, com comando `clearview-installer` e atalho no menu. APT instala dependências; a GUI roda como usuário normal. Remover o pacote não remove o mod do jogo: usar a remoção dentro da GUI antes.
 
-O pacote foi instalado, removido e reinstalado nesta máquina; a GUI abre fora do checkout e o payload extraído passou em instalação/atualização/remoção num cliente temporário. Binários permanecem ignorados, sem release pública. Build atual amd64 exige libc6 >= 2.38; não afirmar compatibilidade com todas as distros. Não redistribui SDL original ou shaders do jogo.
+O pacote foi instalado, removido e reinstalado nesta máquina; a GUI abre fora do checkout e o payload extraído passou em instalação/atualização/remoção num cliente temporário. Binários permanecem ignorados no Git; somente o tar.gz Linux é publicado na release. Build atual amd64 exige libc6 >= 2.38; não afirmar compatibilidade com todas as distros. Não redistribui SDL original ou shaders do jogo.
 
-O usuário autorizou este trabalho e publicação somente na staging. Main e release v0.1.1 não devem mudar. Pedir nova autorização para publicações posteriores.
+A autorização atual permite staging, main e release v0.1.2. Preservar a release v0.1.1.
+
+## Mudança de distribuição: pasta Linux
+
+O usuário decidiu deixar o `.deb` de lado por enquanto e distribuir uma pasta
+em que se executa `bash install.sh`. Sem argumentos, a entrada da raiz agora
+abre a GUI; `--cli` e os argumentos antigos de automação mantêm o backend.
+`tools/build/build_linux_folder.py` gera `dist/ClearView-0.1.2-linux-x64/`
+e o `.tar.gz` correspondente, incluindo mod compilado, manifesto, GUI e ícone H.
+As dependências Python/GTK/Cairo são do sistema e verificadas antes de abrir.
+O pacote foi testado fora do checkout, em caminho com espaços, incluindo GUI
+e instalação/remoção em cliente temporário. Como o Hytale estava aberto, o CLI
+bloqueou a operação corretamente; o teste de gravação usou mock da detecção
+de processo somente no cliente temporário, sem alterar o instalador real. Não chamar de pacote universal.
+Na conferência final da release, com o Hytale fechado, o CLI do tar.gz extraído também passou em instalação/remoção sem mocks. O .deb instalado e seu código foram preservados. Estas alterações e a troca de ícone integram a publicação Linux v0.1.2 autorizada.
 
 ## Como ver o trabalho
 

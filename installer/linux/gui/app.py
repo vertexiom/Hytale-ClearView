@@ -34,6 +34,7 @@ def clear(b):
 class Window(Gtk.ApplicationWindow):
     def __init__(self, app):
         super().__init__(application=app, title='ClearView · Instalador Linux — demonstração')
+        self.set_icon_name('io.github.vertexiom.ClearView')
         self.add_css_class('clearview')
         self.set_default_size(1000, 760)
         self.set_size_request(860, 600)
@@ -330,6 +331,9 @@ class App(Gtk.Application):
         self.args=args
 
     def do_activate(self):
+        icons = HERE.parents[2] / 'assets/icons'
+        if icons.is_dir():
+            Gtk.IconTheme.get_for_display(Gdk.Display.get_default()).add_search_path(str(icons))
         css=Gtk.CssProvider();css.load_from_path(str(HERE/'style.css'))
         Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(),css,Gtk.STYLE_PROVIDER_PRIORITY_USER + 1)
         if getattr(self.args, 'demo', True):

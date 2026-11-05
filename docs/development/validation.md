@@ -2,6 +2,12 @@
 
 Hardware, sistema, driver, Hytale e ferramentas estão registrados no [ambiente de testes](test-environment.md).
 
+## Pacote Linux por pasta — release v0.1.2
+
+O tar.gz final foi extraído em uma pasta temporária com espaços, fora do checkout. `bash install.sh` abriu a GUI; o CLI do pacote instalou e removeu o mod em cliente temporário com restauração byte a byte. Versão e hash do payload foram conferidos. O arquivo não inclui `.deb`, EXE, bibliotecas originais do Hytale ou caches Python.
+
+Passaram também os testes do proxy/SDL, integridade e rollback do instalador, modelo da GUI, cenários GTK e fluxo GTK real em subprocesso (instalação, atualização, preservação de ajustes, remoção e relatório de erro). Nenhum desses testes alterou a instalação real do jogo nesta etapa de publicação. O relato manual do mantenedor sobre F9 e reinstalação está abaixo.
+
 ## Linux GTK e pacote Debian — v0.1.2
 
 Em 04/11/2026, o mantenedor relatou sucesso no ciclo instalar, abrir F9 no Hytale, remover (mod ausente no jogo) e reinstalar (mod funcionando novamente), usando a GUI GTK nesta máquina Linux.
