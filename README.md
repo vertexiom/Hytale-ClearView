@@ -22,7 +22,10 @@ I'm developing this mod because my friend Lazan is Hytale fog's number one enemy
 - **Linux v0.1.2:** [ClearView-0.1.2-linux-x64.tar.gz](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.2/ClearView-0.1.2-linux-x64.tar.gz)
 - **Windows v0.1.2:** [ClearView-0.1.2-Setup.exe](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.2/ClearView-0.1.2-Setup.exe).
 
-**Preview release:** [v0.1.3 — Pre-release](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.3). The stable release remains v0.1.2.
+## Pre-Release
+
+- **Linux v0.1.3:** [ClearView-0.1.3-linux-x64.tar.gz](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.3/ClearView-0.1.3-linux-x64.tar.gz)
+- **Windows v0.1.3:** [ClearView-0.1.3-Setup.exe](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.3/ClearView-0.1.3-Setup.exe)
 
 ## What you can adjust
 
