@@ -32,7 +32,7 @@ public partial class MainWindow : Window
     private TextBox? locationBox;
     public MainWindow(bool preview)
     {
-        this.preview = preview; InitializeComponent();
+        this.preview = preview; FocusCue.Initialize(); InitializeComponent();
         if (preview) PlatformLabel.Text += " · Prévia (não altera o jogo)";
         Closing += ClosingWindow;
         Closed += (_, _) => { Rain.Stop(); service.Dispose(); };
