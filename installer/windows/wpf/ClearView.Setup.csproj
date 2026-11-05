@@ -24,7 +24,7 @@
     <Resource Include="../../../assets/fonts/*.otf;../../../assets/fonts/*.ttf" Link="Fonts/%(Filename)%(Extension)" />
     <EmbeddedResource Include="../../../build/windows/wpf-third-party.txt" LogicalName="ClearView.ThirdParty.txt" />
     <EmbeddedResource Include="../../../LICENSE" LogicalName="ClearView.License.txt" />
-    <Resource Include="../../../assets/icons/io.github.vertexiom.ClearView.png" Link="Assets/Icon.png" />
+    <Resource Include="../../../assets/icons/io.github.vertexiom.ClearView.ico" Link="Assets/Icon.ico" />
     <EmbeddedResource Include="../../../build/windows/wpf-payload.zip" LogicalName="ClearView.Payload.zip" />
   </ItemGroup>
 </Project>
