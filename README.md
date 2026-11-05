@@ -40,14 +40,14 @@ ClearView does not replace [Hytale's system requirements](https://hytale.com/new
 
 ## Install on Windows
 
-The installer currently uses Portuguese labels. The instructions below include the exact button names.
+The installer interface is currently in Portuguese; button names in this guide are translated into English.
 
 1. Download and open **ClearView-0.1.1-Setup.exe**.
-2. Close Hytale. The installer finds the game folder automatically; if needed, click **Localizar** (Browse) and select `HytaleClient.exe`.
-3. Click **Instalar / Atualizar** (Install / Update) and wait for confirmation.
+2. Close Hytale. The installer finds the game folder automatically; if needed, click **Browse** and select `HytaleClient.exe`.
+3. Click **Install / Update** and wait for confirmation.
 4. Open the game through its launcher, enter a world, and press **F9**.
 
-Checks run automatically. You do not need to extract files, use a terminal, install Python, or run scripts. To uninstall, open the same installer and click **Remover** (Remove). Updating preserves existing settings.
+Checks run automatically. You do not need to extract files, use a terminal, install Python, or run scripts. To uninstall, open the same installer and click **Remove**. Updating preserves existing settings.
 
 ## Install on Linux
 
@@ -57,7 +57,7 @@ Download **ClearView-0.1.2-linux-x64.tar.gz** and extract the entire folder. Clo
 bash install.sh
 ```
 
-The graphical installer opens directly. Click **Continuar**, confirm the game folder, then click **Instalar**. Wait for completion and open Hytale through its normal launcher. Press **F9** in-game.
+The graphical installer opens directly. Click **Continue**, confirm the game folder, then click **Install**. Wait for completion and open Hytale through its normal launcher. Press **F9** in-game.
 
 The mod is precompiled; no compiler or app store is needed. Run without `sudo`. If the script reports missing interface dependencies, install them on Ubuntu/Debian with:
 
@@ -67,7 +67,7 @@ sudo apt install python3 python3-gi python3-gi-cairo python3-cairo gir1.2-gtk-4.
 
 Then run `bash install.sh` again. To update or remove the mod, close the game and open the same installer. Deleting the installer folder does not remove the mod.
 
-The Linux x64 package requires glibc 2.38 or later and the system GTK/Python dependencies above. The interface currently uses Portuguese labels.
+The Linux x64 package requires glibc 2.38 or later and the system GTK/Python dependencies above. The installer interface is currently in Portuguese; button names above are translated into English.
 
 ## Controls
 
@@ -86,7 +86,7 @@ The panel uses keyboard controls and is separate from the game's graphics settin
 
 - **F9 does not open the panel:** make sure you installed this version with the game closed, then restart Hytale.
 - **Another shader mod is installed:** remove it before installing ClearView; do not install over Aurora or another mod using the same library.
-- **The game fails to start:** uninstall ClearView with the game closed. On Windows, open the installer and click **Remover** (Remove).
+- **The game fails to start:** uninstall ClearView with the game closed. On Windows, open the installer and click **Remove**.
 - **If something does not work, message me on Discord: `tallmannzera`.**
 
 ## About the project
