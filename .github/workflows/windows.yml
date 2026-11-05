@@ -1,0 +1,103 @@
+name: Windows installer checks
+
+on:
+  push:
+    branches: [staging]
+    paths:
+      - '.github/workflows/windows.yml'
+      - 'src/**'
+      - 'installer/windows/**'
+      - 'assets/**'
+      - 'tools/build/**'
+      - 'tests/**'
+      - 'LICENSE'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: windows-checks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows:
+    if: github.ref == 'refs/heads/staging'
+    name: Windows Server 2022 · x64 · PowerShell 5.1
+    runs-on: windows-2022
+    timeout-minutes: 25
+    env:
+      PYTHONUTF8: '1'
+      DOTNET_CLI_TELEMETRY_OPTOUT: '1'
+      DOTNET_NOLOGO: '1'
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4
+        with:
+          dotnet-version: '10.0.403'
+      - name: Install pinned Zig toolchain
+        run: |
+          $archive = Join-Path $env:RUNNER_TEMP 'zig.zip'
+          Invoke-WebRequest 'https://ziglang.org/download/0.15.2/zig-x86_64-windows-0.15.2.zip' -OutFile $archive
+          $expected = '3a0ed1e8799a2f8ce2a6e6290a9ff22e6906f8227865911fb7ddedc3cc14cb0c'
+          if ((Get-FileHash $archive -Algorithm SHA256).Hash.ToLowerInvariant() -ne $expected) { throw 'Zig download checksum mismatch' }
+          Expand-Archive $archive -DestinationPath $env:RUNNER_TEMP
+          Join-Path $env:RUNNER_TEMP 'zig-x86_64-windows-0.15.2' | Out-File $env:GITHUB_PATH -Append -Encoding utf8
+      - name: Record native environment
+        run: |
+          New-Item -ItemType Directory -Force build/ci | Out-Null
+          $engine = Join-Path $env:WINDIR 'System32/WindowsPowerShell/v1.0/powershell.exe'
+          "PS51=$engine" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
+          & $engine -NoProfile -Command '$PSVersionTable | Out-String' | Out-File build/ci/powershell.txt -Encoding utf8
+          Get-CimInstance Win32_OperatingSystem | Select-Object Caption,Version,BuildNumber | ConvertTo-Json | Out-File build/ci/os.json -Encoding utf8
+          @'
+          ## Windows installer checks
+          Environment: Windows Server 2022 x64, Windows PowerShell 5.1.
+          Tests use temporary fixtures, not a Hytale installation.
+          Passing does not certify Windows 10/11 desktop, GPU/OpenGL, or in-game F9.
+          This workflow never publishes a release or pushes source changes.
+          '@ | Out-File $env:GITHUB_STEP_SUMMARY -Append -Encoding utf8
+      - name: Build native Windows payload
+        run: python tools/build/build_windows.py
+      - name: Package WPF installer
+        run: python tools/build/build_windows_wpf.py
+      - name: Check workflow stages and failure propagation
+        run: python tests/check_wpf_runner.py --pwsh "$env:PS51"
+      - name: Check native child-process exit handling
+        run: python tests/check_smoke_runner.py --pwsh "$env:PS51"
+      - name: Test real Windows installer filesystem operations
+        run: python tests/check_windows_native.py --powershell "$env:PS51"
+      - name: Collect matching source and licenses
+        run: |
+          git archive --format=zip --output=build/ci/source.zip HEAD
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Copy-Item LICENSE build/ci/LICENSE
+          Copy-Item build/windows/wpf-third-party.txt build/ci/THIRD-PARTY-NOTICES.txt
+      - name: Upload diagnostic reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: windows-reports-${{ github.run_id }}
+          path: |
+            build/ci/*.json
+            build/ci/*.txt
+          if-no-files-found: warn
+          retention-days: 7
+      - name: Upload tested installer and corresponding source
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: clearview-windows-ci-${{ github.run_id }}
+          path: |
+            dist/ClearView-0.1.2-Setup.exe
+            build/ci/source.zip
+            build/ci/LICENSE
+            build/ci/THIRD-PARTY-NOTICES.txt
+          if-no-files-found: error
+          retention-days: 7

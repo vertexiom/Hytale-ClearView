@@ -13,3 +13,5 @@ Publicações na `staging`, na `main` ou nas Releases exigem confirmação prév
 Protótipos visuais, HTML de prévia, estudos ASCII, capturas de experimentos e notas de sessão devem permanecer locais. Versione apenas código e recursos do produto, ferramentas de build, testes automatizados e documentação de manutenção. Ícones usados pelo aplicativo ficam em `assets/icons/`.
 
 Contribuições ao código original devem ser compatíveis com GPL-3.0-or-later. Preserve avisos de terceiros e identifique a origem e a licença de código ou recursos adicionados. Antes de distribuir binários, inclua LICENSE e os avisos das dependências, e disponibilize o código-fonte correspondente completo conforme a GPL, incluindo scripts de compilação e instalação. Não presuma que imagens de referência permitem redistribuição.
+
+O workflow de GitHub Actions e os testes da integração Windows são exclusivos da `staging`: não publicar esses arquivos nem suas alterações na `main`. Ao promover correções de produto, selecione somente os commits/trechos de produção; não faça merge integral de staging em main.

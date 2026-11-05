@@ -11,17 +11,22 @@ from pathlib import Path
 import argparse,hashlib,json,os,shutil,subprocess,tempfile
 ROOT=Path(__file__).resolve().parents[1]
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--pwsh',required=True);args=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('--pwsh',required=True);ap.add_argument('--zig',default='zig');args=ap.parse_args()
     with tempfile.TemporaryDirectory(prefix="clearview smoke espaço '") as td:
         p=Path(td);(p/'bin').mkdir()
-        shutil.copy2(ROOT/'installer/windows/smoke-test.ps1',p/'smoke-test.ps1')
+        (p/'smoke-test.ps1').write_text((ROOT/'installer/windows/smoke-test.ps1').read_text(encoding='utf-8-sig'),encoding='utf-8-sig')
+        helper=p/'workflow.ps1'
+        helper.write_text((ROOT/'installer/windows/workflow.ps1').read_text(encoding='utf-8-sig'),encoding='utf-8-sig')
         (p/'bin/opengl32.dll').write_bytes(b'fixture')
         exe=p/'bin/clearview-smoke.exe'
-        exe.write_text("#!/usr/bin/python3\nimport os,sys\nprint('OpenGL: fixture')\nif os.environ.get('CV_FAIL'):\n print('FAIL: synthetic failure',file=sys.stderr);sys.exit(7)\nprint('PASS: WGL forwarding, synthetic fixture')\n")
-        exe.chmod(0o755)
+        if os.name == 'nt':
+            subprocess.run([args.zig,'cc','-target','x86_64-windows-gnu',str(ROOT/'tests/fixtures/smoke_process.c'),'-o',str(exe)],check=True)
+        else:
+            exe.write_text("#!/usr/bin/python3\nimport os,sys\nprint('OpenGL: fixture')\nif os.environ.get('CV_FAIL'):\n print('FAIL: synthetic failure',file=sys.stderr);sys.exit(7)\nprint('PASS: WGL forwarding, synthetic fixture')\n")
+            exe.chmod(0o755)
         (p/'manifest.json').write_text(json.dumps({'files':{f.name:hashlib.sha256(f.read_bytes()).hexdigest() for f in (p/'bin').iterdir()}}))
         for failure in ['', 'yes']:
-            r=subprocess.run([args.pwsh,'-NoProfile','-File',str(p/'smoke-test.ps1')],env={**os.environ,'OS':'Windows_NT','CV_FAIL':failure},capture_output=True,text=True,timeout=20)
+            r=subprocess.run([args.pwsh,'-NoProfile','-ExecutionPolicy','Bypass','-File',str(p/'smoke-test.ps1')],env={**os.environ,'OS':'Windows_NT','CV_FAIL':failure},capture_output=True,text=True,errors="replace",timeout=30)
             assert (r.returncode==0)==(not failure),(r.stdout,r.stderr)
             assert ('Teste isolado aprovado.' in r.stdout)==(not failure),(r.stdout,r.stderr)
             assert 'codigo: '+('7' if failure else '0') in r.stdout,r.stdout
@@ -35,7 +40,7 @@ $r=Get-ClearViewFailureReason -Report $report -Stage '3'
 if($r -notmatch 'instalar os arquivos'){throw $r}
 $r=Get-ClearViewFailureReason -Report 'FAIL: OpenGL context unavailable' -Stage '2'
 if($r -notmatch 'teste gráfico não passou'){throw $r}
-''')
-        subprocess.run([args.pwsh,'-NoProfile','-File',str(test),str(ROOT/'installer/windows/workflow.ps1')],check=True)
+''',encoding='utf-8-sig')
+        subprocess.run([args.pwsh,'-NoProfile','-ExecutionPolicy','Bypass','-File',str(test),str(helper)],check=True)
     print('PASS: fast child process success/failure, exit codes, no false OpenGL failure from PASS output')
 if __name__=='__main__':main()

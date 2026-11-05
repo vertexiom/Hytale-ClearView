@@ -127,3 +127,24 @@ O executável `clearview-smoke.exe` é compilado aqui e é executado automaticam
 Uma linha informativa `OpenGL: ...` não indica falha. A classificação usa a etapa interrompida e os resultados explícitos do teste. O runner registra o código de saída de cada etapa e captura erros antes de parar. O teste gráfico usa `System.Diagnostics.Process` com captura assíncrona de stdout/stderr e código de saída explícito, sem depender do objeto retornado por `Start-Process -PassThru`.
 
 `check_smoke_runner.py` cobre sucesso e falha de processos rápidos e a classificação de um relatório com OpenGL e PASS. Executa no Linux com processos substitutos; não comprova a execução no Windows PowerShell 5.1 nem dentro do Hytale.
+
+## GitHub Actions
+
+O workflow `.github/workflows/windows.yml` usa `windows-2022` (Windows Server 2022 x64) e Windows PowerShell 5.1. Executa somente em pushes relevantes para `staging`. O workflow e os testes desta integração devem permanecer apenas na `staging`, nunca na `main`. Para repetir uma execução existente, use **Re-run jobs** na aba Actions.
+
+- Compila a DLL/teste sintético com Zig 0.15.2 e o instalador WPF com .NET SDK 10.0.403.
+- Verifica ordem das etapas, parada em falhas e propagação de códigos de saída.
+- Exercita o backend real em diretórios temporários: validação, instalação, atualização, remoção, preservação de ajustes, integridade, conflitos e recuperação após falha de escrita.
+- Não baixa o Hytale, não usa contas do jogo e não roda testes de GPU/OpenGL.
+- Não publica releases nem faz pushes. EXE, código correspondente e avisos ficam em artifacts de CI por sete dias; relatórios são coletados mesmo quando um teste falha.
+
+Na aba **Actions → Windows installer checks**, abra a execução para consultar as etapas e baixar os artifacts. Os testes do backend não precisam de uma sessão desktop. Resultado verde neste fluxo não certifica a interface WPF, Windows 10/11, desempenho da chuva, drivers ou F9 dentro do jogo. A validação de interface e GPU permanece separada.
+
+Para repetir os testes nativos em uma máquina Windows com payload compilado:
+
+```powershell
+$engine = "$env:WINDIR\System32\WindowsPowerShell\v1.0\powershell.exe"
+python tests/check_wpf_runner.py --pwsh $engine
+python tests/check_smoke_runner.py --pwsh $engine --zig zig
+python tests/check_windows_native.py --powershell $engine
+```
