@@ -40,17 +40,24 @@ public partial class MainWindow : Window
         Render();
     }
     private static Brush Color(string color) => (Brush)new BrushConverter().ConvertFromString(color)!;
-    private TextBlock Text(string text, double size = 15, string color = "#E6EDF5") => new() { Text = text, FontSize = size, FontStyle = FontStyles.Normal, FontWeight = size >= 30 ? FontWeights.SemiBold : FontWeights.Normal, Foreground = Color(color), Margin = new Thickness(0, 0, 0, 18), TextWrapping = TextWrapping.Wrap };
+    private TextBlock Text(string text, double size = 14, string color = "#E6EDF5") => new() { Text = text, FontSize = size, FontStyle = FontStyles.Normal, FontWeight = size >= 30 ? FontWeights.SemiBold : size == 11 ? FontWeights.Bold : FontWeights.Normal, Foreground = Color(color), Margin = new Thickness(0, 0, 0, 18), TextWrapping = TextWrapping.Wrap };
     private Button Button(string title, Action action, bool primary = false)
     {
         var button = new Button { Content = title };
-        if (primary) { button.Background = Color("#8DD2F4"); button.Foreground = Color("#092132"); button.IsDefault = true; }
+        if (primary) { button.Background = Color("#8DD2F4"); button.Foreground = Color("#092132"); button.IsDefault = true; button.Tag = "primary"; }
         button.Click += (_, _) => action(); return button;
     }
-    private void Card(string title, string body)
+    private void Card(string title, string body, bool success = false)
     {
-        var panel = new StackPanel(); panel.Children.Add(Text(title, 24, "#85D8AF")); panel.Children.Add(Text(body));
-        Body.Children.Add(new Border { Background = Color("#17352F"), CornerRadius = new CornerRadius(18), Padding = new Thickness(22), Margin = new Thickness(0, 12, 0, 20), Child = panel });
+        var panel = new StackPanel();
+        var heading = Text(title, title == "F9" ? 40 : 14, success ? "#85D8AF" : "#F0C782");
+        heading.Margin = new Thickness(0, 0, 0, 10);
+        var description = Text(body, 12); description.Margin = new Thickness(0);
+        panel.Children.Add(heading); panel.Children.Add(description);
+        Body.Children.Add(new Border { Background = Color(success ? "#17352F" : "#243647"),
+            BorderBrush = Color(success ? "#285144" : "#243647"), BorderThickness = new Thickness(1),
+            CornerRadius = new CornerRadius(success ? 18 : 16), Padding = new Thickness(success ? 24 : 18),
+            Margin = new Thickness(0, 0, 0, 18), Child = panel });
     }
     private void Navigate(string next) { if (busy) return; screen = next; Render(); }
     private void Render()
@@ -59,20 +66,23 @@ public partial class MainWindow : Window
         Back.Visibility = screen is "location" or "remove" ? Visibility.Visible : Visibility.Collapsed;
         if (screen == "welcome")
         {
-            Body.Children.Add(Text("01 / 04 · BEM-VINDO", 12, "#8DD2F4"));
+            Body.Children.Add(Text("01 / 04 · BEM-VINDO", 11, "#8DD2F4"));
             Body.Children.Add(Text("Seu mundo,\nmais à vista.", 40));
-            Body.Children.Add(Text("Ajuste a neblina do Hytale sem mudar a iluminação original do jogo.", 16, "#A8B9CB"));
+            Body.Children.Add(Text("Ajuste a neblina do Hytale sem mudar a iluminação original do jogo.", 14, "#A8B9CB"));
             Body.Children.Add(Text("Feche o jogo antes de continuar. O Hytale precisa estar instalado."));
             Card(preview ? "Prévia visual" : "Seus ajustes ficam guardados", preview ? "Você pode explorar as etapas sem alterar arquivos do jogo." : "O instalador mantém os arquivos necessários para remover o mod e preserva seus ajustes ao atualizar.");
-            Body.Children.Add(Button("Já usa o ClearView? Remover instalação", () => Navigate("remove")));
+            var removeLink = Button("Já usa o ClearView? Remover instalação", () => Navigate("remove"));
+            removeLink.Tag = "link"; removeLink.Background = Brushes.Transparent; removeLink.Foreground = Color("#8DD2F4");
+            removeLink.Padding = new Thickness(0); removeLink.Margin = new Thickness(0);
+            Body.Children.Add(removeLink);
             Actions.Children.Add(Button("Cancelar", Close)); Actions.Children.Add(Button("Continuar", () => Navigate("location"), true));
         }
         else if (screen is "location" or "remove")
         {
             bool remove = screen == "remove";
-            Body.Children.Add(Text(remove ? "REMOÇÃO" : "02 / 04 · LOCAL DO JOGO", 12, "#8DD2F4"));
+            Body.Children.Add(Text(remove ? "REMOÇÃO" : "02 / 04 · LOCAL DO JOGO", 11, "#8DD2F4"));
             Body.Children.Add(Text(remove ? "Remover o ClearView?" : "Onde está o Hytale?", 32));
-            Body.Children.Add(Text(remove ? "Os arquivos originais serão restaurados. Seus ajustes ficam guardados." : "Confirme a pasta do jogo. Uma instalação existente será atualizada.", 15, "#A8B9CB"));
+            Body.Children.Add(Text(remove ? "Os arquivos originais serão restaurados. Seus ajustes ficam guardados." : "Confirme a pasta do jogo. Uma instalação existente será atualizada.", 14, "#A8B9CB"));
             var found = preview ? new[] { @"C:\Jogos\Hytale\Client (demonstração)" } : InstallerService.Discover();
             if (client.Length == 0 && found.Length == 1) client = found[0];
             foreach (var path in found.Length > 1 ? found : Array.Empty<string>())
@@ -80,36 +90,48 @@ public partial class MainWindow : Window
                 var choice = new RadioButton { Content = path, IsChecked = path == client, Foreground = Color("#E6EDF5"), Margin = new Thickness(0, 5, 0, 8) };
                 choice.Checked += (_, _) => { client = path; if (locationBox != null) locationBox.Text = client; if (startButton != null) startButton.IsEnabled = true; }; Body.Children.Add(choice);
             }
-            Body.Children.Add(Text("PASTA DO HYTALE", 12, "#A8B9CB"));
-            locationBox = new TextBox { Text = client, IsReadOnly = true, TextWrapping = TextWrapping.Wrap, Background = Color("#121D2A"), Foreground = Color("#E6EDF5"), Padding = new Thickness(12), Margin = new Thickness(0, 0, 0, 12) };
+            Body.Children.Add(Text("PASTA DO HYTALE", 11, "#8DD2F4"));
+            var row = new Grid { Margin = new Thickness(0, 0, 0, 18) };
+            row.ColumnDefinitions.Add(new ColumnDefinition());
+            row.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            locationBox = new TextBox { Text = client, ToolTip = client, IsReadOnly = true,
+                Style = (Style)FindResource("LocationField"), VerticalAlignment = VerticalAlignment.Stretch };
             AutomationProperties.SetName(locationBox, "Pasta do Hytale");
-            Body.Children.Add(locationBox);
-            Body.Children.Add(Button("Procurar…", Browse));
-            Body.Children.Add(Text("Selecione HytaleClient.exe na pasta do jogo.", 13, "#A8B9CB"));
+            row.Children.Add(locationBox);
+            var browse = Button("Procurar…", Browse); browse.Margin = new Thickness(10, 0, 0, 0);
+            Grid.SetColumn(browse, 1); row.Children.Add(browse); Body.Children.Add(row);
+            Body.Children.Add(Text("Selecione HytaleClient.exe na pasta do jogo.", 12, "#A8B9CB"));
+            Body.Children.Add(Text("Os arquivos serão verificados antes de qualquer alteração.", 12, "#A8B9CB"));
             Actions.Children.Add(Button("Cancelar", Close));
-            startButton = Button(remove ? "Remover" : "Instalar", () => Begin(remove ? "remove" : "install"), true); startButton.IsEnabled = client.Length > 0; Actions.Children.Add(startButton);
+            startButton = Button(remove ? "Remover" : "Instalar", () => Begin(remove ? "remove" : "install"), true); if (remove) { startButton.Tag = "warning"; startButton.Background = Color("#F0C782"); startButton.Foreground = Color("#30220C"); } startButton.IsEnabled = client.Length > 0; Actions.Children.Add(startButton);
         }
         else if (screen == "progress")
         {
-            Body.Children.Add(Text("03 / 04 · EM ANDAMENTO", 12, "#8DD2F4")); Body.Children.Add(Text(operation == "remove" ? "Removendo…" : "Instalando…", 32));
-            Body.Children.Add(Text("Mantenha o Hytale fechado e aguarde a conclusão.", 15, "#A8B9CB"));
-            progress = new ProgressBar { Maximum = 3, Height = 8, Margin = new Thickness(0, 20, 0, 24), Foreground = Color("#8DD2F4"), Background = Color("#2B3D4F") }; Body.Children.Add(progress);
-            status = Text("Preparando a operação…");
+            Body.Children.Add(Text("03 / 04 · EM ANDAMENTO", 11, "#8DD2F4")); Body.Children.Add(Text(operation == "remove" ? "Removendo…" : "Instalando…", 32));
+            Body.Children.Add(Text("Mantenha o Hytale fechado e aguarde a conclusão.", 14, "#A8B9CB"));
+            progress = new ProgressBar { Maximum = 3, Height = 8, Margin = new Thickness(0, 0, 0, 18), Foreground = Color("#8DD2F4"), Background = Color("#2B3D4F") }; Body.Children.Add(progress);
+            status = Text("Preparando a operação…", 14, "#85D8AF");
             AutomationProperties.SetLiveSetting(status, AutomationLiveSetting.Polite);
             AutomationProperties.SetName(progress, "Etapas da instalação");
             Body.Children.Add(status);
+            Body.Children.Add(Text("O progresso acompanha as etapas reais de verificação e gravação.", 12, "#A8B9CB"));
         }
         else if (screen == "error")
         {
-            Body.Children.Add(Text("OPERAÇÃO INTERROMPIDA", 12, "#F0C782")); Body.Children.Add(Text("Não foi possível concluir.", 32)); Body.Children.Add(Text(message));
-            Body.Children.Add(Text("Para ajuda, envie uma mensagem no Discord: tallmannzera. O relatório fica apenas nesta máquina.", 14, "#A8B9CB"));
+            Body.Children.Add(Text("OPERAÇÃO INTERROMPIDA", 11, "#F0C782")); Body.Children.Add(Text("Não foi possível concluir.", 32, "#F0C782")); Body.Children.Add(Text(message, 14, "#A8B9CB"));
+            Body.Children.Add(Text("Para ajuda, envie uma mensagem no Discord: tallmannzera. O relatório fica apenas nesta máquina.", 12, "#A8B9CB"));
             AddReport(); Actions.Children.Add(Button("Voltar", () => Navigate(operation == "remove" ? "remove" : "location"), true));
         }
         else
         {
-            Body.Children.Add(Text("04 / 04 · CONCLUÍDO", 12, "#8DD2F4")); Body.Children.Add(Text(preview ? "Prévia concluída." : operation == "remove" ? "ClearView removido." : "Tudo pronto!", 32));
-            if (preview) Card("Nenhum arquivo foi alterado", "Esta execução demonstrou somente as etapas da interface.");
-            else if (operation == "install") Card("F9", "Abra o Hytale pelo launcher normal. Dentro do jogo, F9 abre o painel de neblina.");
+            Body.Children.Add(Text("04 / 04 · CONCLUÍDO", 11, "#8DD2F4")); Body.Children.Add(Text(preview ? "Prévia concluída." : operation == "remove" ? "ClearView removido." : "Tudo pronto!", 32));
+            if (preview) Card("Nenhum arquivo foi alterado", "Esta execução demonstrou somente as etapas da interface.", true);
+            else if (operation == "install")
+            {
+                Body.Children.Add(Text("Os arquivos foram instalados e verificados. Abra o Hytale pelo launcher normal.", 14, "#A8B9CB"));
+                Card("F9", "Dentro do jogo, abra o painel para ajustar a neblina.", true);
+                Body.Children.Add(Text("Você pode remover o mod por este instalador.", 12, "#A8B9CB"));
+            }
             else Body.Children.Add(Text("Os arquivos originais foram restaurados. Seus ajustes foram preservados."));
             AddReport(); Actions.Children.Add(Button("Concluir", Close, true));
         }

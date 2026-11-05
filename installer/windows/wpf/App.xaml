@@ -5,18 +5,50 @@
   <SolidColorBrush x:Key="Foreground" Color="#E6EDF5"/>
   <SolidColorBrush x:Key="Muted" Color="#A8B9CB"/>
   <SolidColorBrush x:Key="Accent" Color="#8DD2F4"/>
-  <Style TargetType="TextBlock"><Setter Property="FontFamily" Value="./Fonts/#Inter"/><Setter Property="FontStyle" Value="Normal"/><Setter Property="Foreground" Value="{StaticResource Foreground}"/><Setter Property="TextWrapping" Value="Wrap"/><Setter Property="FontSize" Value="15"/></Style>
-  <Style TargetType="Button"><Setter Property="FontFamily" Value="./Fonts/#Inter"/><Setter Property="FontStyle" Value="Normal"/>
+  <!-- Text inside controls inherits their foreground, size and weight. -->
+  <Style TargetType="TextBlock"><Setter Property="TextWrapping" Value="Wrap"/></Style>
+  <Style TargetType="Button">
+   <Setter Property="FontFamily" Value="./Fonts/#Inter"/><Setter Property="FontStyle" Value="Normal"/>
    <Setter Property="Background" Value="#2A3B4E"/><Setter Property="Foreground" Value="{StaticResource Foreground}"/>
-   <Setter Property="Padding" Value="20,12"/><Setter Property="Margin" Value="6,0,0,0"/><Setter Property="FontSize" Value="14"/>
-   <Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Cursor" Value="Hand"/>
+   <Setter Property="Padding" Value="18,10"/><Setter Property="Margin" Value="6,0,0,0"/><Setter Property="MinHeight" Value="44"/>
+   <Setter Property="FontSize" Value="14"/><Setter Property="FontWeight" Value="SemiBold"/><Setter Property="Cursor" Value="Hand"/>
+   <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
    <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="Button">
-    <Border x:Name="Frame" Background="{TemplateBinding Background}" CornerRadius="14" BorderThickness="2" BorderBrush="Transparent" Padding="{TemplateBinding Padding}"><ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/></Border>
+    <Grid>
+     <Border x:Name="FocusRing" CornerRadius="18" Margin="-4" BorderThickness="2" BorderBrush="Transparent" IsHitTestVisible="False"/>
+     <Border x:Name="Frame" Background="{TemplateBinding Background}" CornerRadius="14" BorderThickness="1" BorderBrush="Transparent" Padding="{TemplateBinding Padding}">
+      <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" RecognizesAccessKey="True"/>
+     </Border>
+    </Grid>
     <ControlTemplate.Triggers>
-     <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Frame" Property="Opacity" Value="0.85"/></Trigger>
-     <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="Frame" Property="BorderBrush" Value="{StaticResource Accent}"/></Trigger>
-     <Trigger Property="IsEnabled" Value="False"><Setter TargetName="Frame" Property="Opacity" Value="0.4"/></Trigger>
+     <Trigger Property="IsMouseOver" Value="True"><Setter TargetName="Frame" Property="Background" Value="#36516A"/></Trigger>
+     <MultiTrigger><MultiTrigger.Conditions><Condition Property="IsMouseOver" Value="True"/><Condition Property="Tag" Value="primary"/></MultiTrigger.Conditions><Setter TargetName="Frame" Property="Background" Value="#B4E5FF"/></MultiTrigger>
+     <MultiTrigger><MultiTrigger.Conditions><Condition Property="IsMouseOver" Value="True"/><Condition Property="Tag" Value="warning"/></MultiTrigger.Conditions><Setter TargetName="Frame" Property="Background" Value="#FFDBA1"/></MultiTrigger>
+     <MultiTrigger><MultiTrigger.Conditions><Condition Property="IsMouseOver" Value="True"/><Condition Property="Tag" Value="link"/></MultiTrigger.Conditions><Setter TargetName="Frame" Property="Background" Value="#243647"/></MultiTrigger>
+     <Trigger Property="IsPressed" Value="True"><Setter TargetName="Frame" Property="Opacity" Value="0.8"/></Trigger>
+     <Trigger Property="IsKeyboardFocused" Value="True"><Setter TargetName="FocusRing" Property="BorderBrush" Value="{StaticResource Accent}"/></Trigger>
+     <Trigger Property="IsEnabled" Value="False"><Setter Property="Opacity" Value="0.4"/></Trigger>
     </ControlTemplate.Triggers>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <Style x:Key="LocationField" TargetType="TextBox">
+   <Setter Property="Background" Value="#121D2A"/><Setter Property="Foreground" Value="{StaticResource Foreground}"/>
+   <Setter Property="BorderBrush" Value="#3A5064"/><Setter Property="BorderThickness" Value="1"/>
+   <Setter Property="Padding" Value="10"/><Setter Property="FontSize" Value="13"/><Setter Property="MinHeight" Value="44"/>
+   <Setter Property="VerticalContentAlignment" Value="Center"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="TextBox">
+    <Border x:Name="Frame" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="12" Padding="{TemplateBinding Padding}">
+     <ScrollViewer x:Name="PART_ContentHost"/>
+    </Border>
+    <ControlTemplate.Triggers><Trigger Property="IsKeyboardFocusWithin" Value="True"><Setter TargetName="Frame" Property="BorderBrush" Value="{StaticResource Accent}"/></Trigger></ControlTemplate.Triggers>
+   </ControlTemplate></Setter.Value></Setter>
+  </Style>
+  <Style TargetType="ProgressBar">
+   <Setter Property="Foreground" Value="{StaticResource Accent}"/><Setter Property="Background" Value="#2B3D4F"/>
+   <Setter Property="Template"><Setter.Value><ControlTemplate TargetType="ProgressBar">
+    <Grid><Border x:Name="PART_Track" Background="{TemplateBinding Background}" CornerRadius="4"/>
+     <Border x:Name="PART_Indicator" Background="{TemplateBinding Foreground}" CornerRadius="4" HorizontalAlignment="Left"/>
+    </Grid>
    </ControlTemplate></Setter.Value></Setter>
   </Style>
  </Application.Resources>
