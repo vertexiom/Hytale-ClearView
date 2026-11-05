@@ -1,7 +1,5 @@
 <h1 align="center">Hytale ClearView</h1>
 
-**Versão de avaliação:** [v0.1.3 — Pré-release](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.3). Os downloads estáveis abaixo permanecem na v0.1.2.
-
 <p align="center">
   <a href="README.md">English</a> | <a href="README.pt-BR.md">Português (Brasil)</a>
 </p>
@@ -23,6 +21,8 @@ Estou desenvolvendo esse mod porque meu amigo Lazan é o inimigo número 1 das n
 
 - **Linux v0.1.2:** [ClearView-0.1.2-linux-x64.tar.gz](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.2/ClearView-0.1.2-linux-x64.tar.gz)
 - **Windows v0.1.2:** [ClearView-0.1.2-Setup.exe](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.2/ClearView-0.1.2-Setup.exe).
+
+**Versão de avaliação:** [v0.1.3 — Pré-release](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.3). A versão estável continua sendo a v0.1.2.
 
 ## O que você pode ajustar
 
