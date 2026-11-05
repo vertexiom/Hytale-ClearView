@@ -14,63 +14,47 @@
 #include "windows/panel_win.h"
 #else
 #include <cairo/cairo.h>
+#include <cairo/cairo-ft.h>
+#include <ft2build.h>
+#include FT_FREETYPE_H
+#include "hud_fonts.h"
 #include <math.h>
 #include <stdio.h>
-#define CV_PANEL_W 460
-#define CV_PANEL_H 414
-
-static void cv_text(cairo_t *cr, double x, double y, double size,
-                    double r, double g, double b, const char *text)
-{
-    cairo_set_source_rgb(cr,r,g,b);
-    cairo_set_font_size(cr,size);
-    cairo_move_to(cr,x,y);
-    cairo_show_text(cr,text);
-}
-
-/* Also used by the preview test; UI text never contains implementation details. */
-static cairo_surface_t *cv_panel(const float fog[3], int selected, int saved)
-{
-    cairo_surface_t *surface=cairo_image_surface_create(CAIRO_FORMAT_ARGB32,CV_PANEL_W,CV_PANEL_H);
-    cairo_t *cr=cairo_create(surface);
-    cairo_set_source_rgba(cr,0.035,0.052,0.075,0.97);
-    cairo_paint(cr);
-    cairo_set_source_rgb(cr,0.32,0.85,0.72);
-    cairo_rectangle(cr,0,0,CV_PANEL_W,3); cairo_fill(cr);
-    cairo_select_font_face(cr,"DejaVu Sans",CAIRO_FONT_SLANT_NORMAL,CAIRO_FONT_WEIGHT_BOLD);
-    cv_text(cr,24,37,21,0.94,0.97,1,"ClearView");
-    cairo_select_font_face(cr,"DejaVu Sans",CAIRO_FONT_SLANT_NORMAL,CAIRO_FONT_WEIGHT_NORMAL);
-    cv_text(cr,24,61,12,0.60,0.69,0.78,"Controle de neblina");
-    cv_text(cr,339,36,11,0.60,0.69,0.78,"F9  fechar");
-    const char *labels[]={"Distância", "Atmosfera", "Profundidade"};
-    const char *hints[]={"Horizonte e terrenos distantes", "Névoa de clima e ambiente", "Visão em profundidade, incluindo água"};
-    for (int i=0;i<3;++i) {
-        double y=94+i*83;
-        if (i==selected) {
-            cairo_set_source_rgb(cr,0.075,0.13,0.16);
-            cairo_rectangle(cr,14,y-18,432,76); cairo_fill(cr);
-        }
-        cv_text(cr,25,y,15,0.90,0.94,0.98,labels[i]);
-        char percent[24]; snprintf(percent,sizeof percent,"%.0f%%",fog[i]*100);
-        cv_text(cr,388,y,15,0.40,0.91,0.78,percent);
-        cairo_set_source_rgb(cr,0.17,0.23,0.28);
-        cairo_rectangle(cr,25,y+13,410,5); cairo_fill(cr);
-        cairo_set_source_rgb(cr,0.32,0.85,0.72);
-        cairo_rectangle(cr,25,y+13,410*fog[i],5); cairo_fill(cr);
-        cairo_arc(cr,25+410*fog[i],y+15.5,5,0,6.2831853); cairo_fill(cr);
-        cv_text(cr,25,y+40,11,0.59,0.68,0.76,hints[i]);
-    }
-    cv_text(cr,24,337,11,0.69,0.76,0.83,"0% sem neblina  ·  100% original do jogo");
-    cv_text(cr,24,361,11,0.85,0.90,0.95,"↑ ↓ selecionar     ← → ajustar em 5%");
-    cv_text(cr,24,384,11,0.66,0.75,0.81,"V  visão limpa     R  restaurar original     Esc  fechar");
-    cv_text(cr,24,404,10,saved?0.38:1.0,saved?0.72:0.50,saved?0.62:0.45,
-            saved?"Ajustes salvos automaticamente":"Não foi possível salvar; ajustes valem nesta sessão");
-    cairo_destroy(cr); cairo_surface_flush(surface);
-    return surface;
-}
 typedef cairo_surface_t cv_panel_surface;
-static int cv_panel_ok(cv_panel_surface *p) {return cairo_surface_status(p)==CAIRO_STATUS_SUCCESS;}
-static unsigned char *cv_panel_data(cv_panel_surface *p) {return cairo_image_surface_get_data(p);}
-static void cv_panel_free(cv_panel_surface *p) {cairo_surface_destroy(p);}
-#endif /* platform */
+static cairo_font_face_t *cv_fonts[2];
+static int cv_fonts_init(void)
+{
+    static FT_Library library;
+    static FT_Face faces[2];
+    static int attempted;
+    if(attempted)return cv_fonts[0] && cv_fonts[1];
+    attempted=1;
+    if(FT_Init_FreeType(&library))return 0;
+    if(FT_New_Memory_Face(library,cv_font_regular,sizeof cv_font_regular,0,&faces[0]) ||
+       FT_New_Memory_Face(library,cv_font_semibold,sizeof cv_font_semibold,0,&faces[1]))return 0;
+    for(int i=0;i<2;++i)cv_fonts[i]=cairo_ft_font_face_create_for_ft_face(faces[i],0);
+    return cairo_font_face_status(cv_fonts[0])==CAIRO_STATUS_SUCCESS && cairo_font_face_status(cv_fonts[1])==CAIRO_STATUS_SUCCESS;
+}
+static void cv_text_draw(cv_panel_surface *p,double x,double y,int size,int bold,const char *text,int right)
+{
+    cairo_t *cr=cairo_create(p);
+    if(cv_fonts_init())cairo_set_font_face(cr,cv_fonts[bold!=0]);
+    else cairo_select_font_face(cr,"sans-serif",CAIRO_FONT_SLANT_NORMAL,bold?CAIRO_FONT_WEIGHT_BOLD:CAIRO_FONT_WEIGHT_NORMAL);
+    cairo_set_font_size(cr,size);
+    cairo_set_source_rgb(cr,1,1,1);
+    if(right){cairo_text_extents_t ext;cairo_text_extents(cr,text,&ext);x-=ext.x_advance;}
+    cairo_move_to(cr,x,y);cairo_show_text(cr,text);cairo_destroy(cr);
+}
+static void cv_text(cv_panel_surface *p,double x,double y,int size,int bold,const char *s){cv_text_draw(p,x,y,size,bold,s,0);}
+static void cv_text_right(cv_panel_surface *p,double x,double y,int size,int bold,const char *s){cv_text_draw(p,x,y,size,bold,s,1);}
+#include "panel_layout.h"
+static cv_panel_surface *cv_panel(const float fog[3],int selected,int saved)
+{
+    cv_panel_surface *p=cairo_image_surface_create(CAIRO_FORMAT_ARGB32,CV_PANEL_W,CV_PANEL_H);
+    cv_panel_text(p,fog,selected,saved);cairo_surface_flush(p);return p;
+}
+static int cv_panel_ok(cv_panel_surface *p){return p && cairo_surface_status(p)==CAIRO_STATUS_SUCCESS;}
+static unsigned char *cv_panel_data(cv_panel_surface *p){return cairo_image_surface_get_data(p);}
+static void cv_panel_free(cv_panel_surface *p){if(p)cairo_surface_destroy(p);}
+#endif
 #endif

@@ -61,6 +61,7 @@ before=state()
 with tempfile.TemporaryDirectory() as temp:
     temp=Path(temp)
     (temp/'bridge.c').write_text('''
+#define _POSIX_C_SOURCE 200809L
 #include <dlfcn.h>
 #include <stdio.h>
 typedef void (*Proc)(void);
@@ -75,8 +76,9 @@ int draw(void){
  return overlay_failed || !overlay_program;
 }
 ''')
-    flags=subprocess.check_output(['pkg-config','--cflags','--libs','cairo'],text=True).split()
-    subprocess.run(['cc','-std=c11','-shared','-fPIC','-Wall','-Wextra','-Werror','-I'+str(ROOT/'src'),str(temp/'bridge.c'),'-o',str(temp/'bridge.so'),'-ldl','-lm',*flags],check=True)
+    subprocess.run(['python3',str(ROOT/'tools/build/gen_hud_fonts.py'),str(temp/'hud_fonts.h')],check=True)
+    flags=subprocess.check_output(['pkg-config','--cflags','--libs','cairo','freetype2'],text=True).split()
+    subprocess.run(['cc','-std=c11','-shared','-fPIC','-Wall','-Wextra','-Werror','-I'+str(ROOT/'src'),'-I'+str(temp),str(temp/'bridge.c'),'-o',str(temp/'bridge.so'),'-ldl','-lm',*flags],check=True)
     bridge=C.CDLL(str(temp/'bridge.so'));bridge.draw.restype=I
     assert bridge.draw()==0,'Overlay failed to build'
     assert state()==before, (before,state())

@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.1.3 — em desenvolvimento / unreleased
+
+- HUD redesenhado com cartões arredondados, paleta azul, fonte Inter embutida, teclas de atalho e barras sem marcadores de mouse.
+- Transições de seleção e barras de 120 ms, limitadas a 30 Hz, com textos em cache e opção de movimento reduzido.
+- Código da v0.1.3 promovido para `main`; os pacotes da release pública permanecem na v0.1.2.
+- A v0.1.2 permanece como versão estável.
+
 ## v0.1.2 — estável / stable
 
 Declarada estável pelo mantenedor em 2026-11-05, após confirmação de uso no Linux e Windows. Próximo ciclo de desenvolvimento: v0.1.3, na branch `staging`.

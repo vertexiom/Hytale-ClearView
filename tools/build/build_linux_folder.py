@@ -14,7 +14,7 @@ import subprocess
 import tarfile
 import tempfile
 ROOT=Path(__file__).resolve().parents[2]
-NAME='ClearView-0.1.2-linux-x64'
+NAME='ClearView-0.1.3-linux-x64'
 
 def main():
     subprocess.run(['bash',str(ROOT/'tools/build/build_linux.sh')],check=True)
@@ -25,6 +25,7 @@ def main():
             target=folder/dst;target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copy2(ROOT/src,target)
         copy('LICENSE','LICENSE')
+        copy('assets/fonts/LICENSES.txt','FONT-LICENSES.txt')
         copy('install.sh','install.sh')
         copy('installer/linux/install.py','installer/linux/install.py')
         for name in ('desktop.py','app.py','real.py','model.py','rain.py','style.css','run.sh'):

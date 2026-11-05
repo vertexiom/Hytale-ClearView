@@ -114,6 +114,6 @@ public sealed class RainView : FrameworkElement
         for(double x=12;x<ActualWidth-12;x+=Math.Max(1,Math.Round(cw))) Write(dc,"_",x,floor,cw*1.65,"#527D94");
         foreach(var p in splashes) { dc.PushOpacity(Math.Max(0,p.Life/.45)); Write(dc,p.Life>.3 ? "'" : ".",p.X,p.Y,cw*1.65,"#A8D9F0"); dc.Pop(); }
         Write(dc,"CLEARVIEW / VERTEXIOM",25,25,11,"#8CA6B8");
-        Write(dc,"v0.1.2 · em desenvolvimento",25,ActualHeight-35,11,"#8CA6B8");
+        Write(dc,"v0.1.3 · em desenvolvimento",25,ActualHeight-35,11,"#8CA6B8");
     }
 }

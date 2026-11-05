@@ -1,6 +1,6 @@
 # Instalador Windows WPF
 
-Implementação inicial em C# + WPF (.NET 10), com tema V2, chuva ASCII, navegação por etapas e integração ao backend PowerShell existente. Publicado na v0.1.2; validação nativa Windows ainda pendente.
+Implementação inicial em C# + WPF (.NET 10), com tema V2, chuva ASCII, navegação por etapas e integração ao backend PowerShell existente. Publicado na v0.1.2 estável; esta branch prepara a v0.1.3.
 
 ## Compilar
 
@@ -12,7 +12,7 @@ python3 tools/build/build_windows_wpf.py --dotnet /caminho/do/dotnet
 
 Requer .NET SDK 10 e o payload com hashes válidos em `build/windows/`. O projeto habilita compilação com destino Windows a partir do Linux; isso não permite executar a GUI WPF no Linux.
 
-Saída para distribuição: `dist/ClearView-0.1.2-Setup.exe` (cópia do build em `dist/windows-wpf/ClearView-WPF-Setup.exe`). O EXE contém runtime .NET, GUI e payload. Componentes nativos podem ser extraídos pelo runtime ao iniciar. Não usa navegador nem baixa o mod durante a instalação. Recompilar com atualizações de segurança do runtime ao distribuir novas versões.
+Saída para distribuição: `dist/ClearView-0.1.3-Setup.exe` (cópia do build em `dist/windows-wpf/ClearView-WPF-Setup.exe`). O EXE contém runtime .NET, GUI e payload. Componentes nativos podem ser extraídos pelo runtime ao iniciar. Não usa navegador nem baixa o mod durante a instalação. Recompilar com atualizações de segurança do runtime ao distribuir novas versões.
 
 ## Executar no Windows
 
@@ -49,6 +49,6 @@ Logs: `%LOCALAPPDATA%\ClearView\Logs`. A pasta temporária do payload é exclusi
 python3 tests/check_wpf_runner.py --pwsh /caminho/do/pwsh
 ```
 
-Esse teste usa processos simulados e caminhos com espaços/apóstrofos; verifica interrupção por falha em cada etapa e conclusão. PowerShell no Linux não substitui teste com Windows PowerShell 5.1.
+Esse teste usa processos simulados e caminhos com espaços/apóstrofos; verifica interrupção por falha em cada etapa e conclusão. O mesmo teste é portátil entre PowerShell no Linux e Windows PowerShell 5.1. Para o fluxo nativo automatizado, veja [GitHub Actions](../../../docs/development/windows.md#github-actions). A aprovação no Linux não substitui a execução Windows.
 
 Pendências nativas: abertura offline sem runtime .NET previamente instalado, Win10 primeiro/Win11 depois, DPI 100–200%, teclado/leitor de tela, múltiplos monitores, renderização por software/GPU antiga, custo da chuva, instância única, instalação/atualização/remoção reais e recuperação. A compatibilidade 1809 anunciada pelo backend precisa ser revalidada com este runtime. Assinatura Authenticode permanece separada na P2.

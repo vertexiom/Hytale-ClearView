@@ -1,4 +1,4 @@
-CLEARVIEW 0.1.2 — LINUX x64
+CLEARVIEW 0.1.3 — DEVELOPMENT BUILD — LINUX x64
 
 1. Extract the entire folder. Do not move install.sh on its own.
 2. Close Hytale.

@@ -16,7 +16,7 @@ import subprocess
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
-VERSION = '0.1.2'
+VERSION = '0.1.3'
 
 def run(*args, **kwargs):
     return subprocess.run(args, check=True, **kwargs)

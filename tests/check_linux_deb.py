@@ -15,7 +15,7 @@ import sys
 import tempfile
 
 root=Path(__file__).resolve().parents[1]
-deb=Path(sys.argv[1]) if len(sys.argv)>1 else root/'dist/clearview-installer_0.1.2-1_amd64.deb'
+deb=Path(sys.argv[1]) if len(sys.argv)>1 else root/'dist/clearview-installer_0.1.3-1_amd64.deb'
 with tempfile.TemporaryDirectory(prefix='clearview-package-test-') as tmp:
     base=Path(tmp);tree=base/'extracted'
     subprocess.run(['dpkg-deb','-R',str(deb),str(tree)],check=True)

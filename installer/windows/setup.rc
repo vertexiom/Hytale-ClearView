@@ -1,8 +1,8 @@
 1 ICON "../../assets/icons/io.github.vertexiom.ClearView.ico"
 1 24 "setup.manifest"
 1 VERSIONINFO
-FILEVERSION 0,1,2,0
-PRODUCTVERSION 0,1,2,0
+FILEVERSION 0,1,3,0
+PRODUCTVERSION 0,1,3,0
 FILEOS 0x40004L
 FILETYPE 1L
 BEGIN
@@ -11,9 +11,9 @@ BEGIN
   BLOCK "040904B0"
   BEGIN
    VALUE "FileDescription", "Hytale ClearView Installer\0"
-   VALUE "FileVersion", "0.1.2\0"
+   VALUE "FileVersion", "0.1.3\0"
    VALUE "ProductName", "Hytale ClearView\0"
-   VALUE "ProductVersion", "0.1.2\0"
+   VALUE "ProductVersion", "0.1.3\0"
   END
  END
  BLOCK "VarFileInfo"

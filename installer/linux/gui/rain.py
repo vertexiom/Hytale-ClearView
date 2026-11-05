@@ -167,4 +167,4 @@ class Rain(Gtk.DrawingArea):
         cr.move_to(25, 35)
         cr.show_text('C L E A R V I E W  /  V E R T E X I O M')
         cr.move_to(25, h-25)
-        cr.show_text('v0.1.2 · em desenvolvimento')
+        cr.show_text('v0.1.3 · em desenvolvimento')

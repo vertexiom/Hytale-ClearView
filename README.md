@@ -1,5 +1,7 @@
 <h1 align="center">Hytale ClearView</h1>
 
+**Source version:** v0.1.3. Packaged downloads below remain on the stable v0.1.2 release.
+
 <p align="center">
   <a href="README.md">English</a> | <a href="README.pt-BR.md">Português (Brasil)</a>
 </p>
