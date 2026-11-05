@@ -1,5 +1,5 @@
 <Window x:Class="ClearView.Setup.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="clr-namespace:ClearView.Setup"
- Title="Hytale ClearView" Width="1000" Height="760" MinWidth="860" MinHeight="620" WindowStartupLocation="CenterScreen" Background="{StaticResource Surface}" Foreground="{StaticResource Foreground}" FontFamily="./Fonts/#Inter" FontStyle="Normal" FontWeight="Normal" FontSize="14" UseLayoutRounding="True" Icon="Assets/Icon.png">
+ Title="Hytale ClearView" Width="1000" Height="760" MinWidth="860" MinHeight="620" WindowStartupLocation="CenterScreen" Background="{StaticResource Surface}" Foreground="{StaticResource Foreground}" FontFamily="./Fonts/#Inter" FontStyle="Normal" FontWeight="Normal" FontSize="14" UseLayoutRounding="True" Icon="Assets/Icon.ico">
  <Grid>
   <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
   <Border Background="#101923" Padding="20,12"><DockPanel>
