@@ -11,7 +11,7 @@ import sys
 import traceback
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'installer/linux/gui'))
-from app import Gtk, Gdk, GLib, Window, HERE
+from app import Gtk, Gdk, GLib, Window, HERE, install_styles
 from model import SCENARIOS, FLATPAK
 
 app=Gtk.Application(application_id='io.github.vertexiom.ClearView.Test')
@@ -28,8 +28,7 @@ def guard(fn):
 
 def activate(_):
     global window
-    provider=Gtk.CssProvider();provider.load_from_path(str(HERE/'style.css'))
-    Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(),provider,Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+    install_styles(Gdk.Display.get_default())
     window=Window(app);window.present()
     GLib.timeout_add(200,guard(check_widgets))
 
