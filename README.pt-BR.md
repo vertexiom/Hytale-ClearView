@@ -19,8 +19,8 @@ Estou desenvolvendo esse mod porque meu amigo Lazan é o inimigo número 1 das n
 
 ## Download
 
-- **Linux v0.1.2:** [ClearView-0.1.2-linux-x64.tar.gz](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.2/ClearView-0.1.2-linux-x64.tar.gz) — extraia a pasta e execute `bash install.sh`.
-- **Windows v0.1.1:** [ClearView-0.1.1-Setup.exe](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.1/ClearView-0.1.1-Setup.exe). O novo instalador Windows continua em desenvolvimento.
+- **Linux v0.1.2:** [ClearView-0.1.2-linux-x64.tar.gz](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.2/ClearView-0.1.2-linux-x64.tar.gz)
+- **Windows v0.1.1:** [ClearView-0.1.1-Setup.exe](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.1/ClearView-0.1.1-Setup.exe).
 
 ## O que você pode ajustar
 
