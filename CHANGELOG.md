@@ -2,6 +2,9 @@
 
 ## Próximas alterações
 
+- Chuva ASCII distribuída por toda a área do painel, com entrada pelo topo e pela lateral, maior densidade e mistura de gotas que atravessam ou colidem com o texto.
+- Identificação do instalador ajustada para `Linux · v0.1.2`.
+
 - Ícone temporário do instalador substituído pelo planeta ASCII, com transparência externa e paleta adaptada ao launcher.
 
 ## v0.1.2 — instalador gráfico Linux por pasta

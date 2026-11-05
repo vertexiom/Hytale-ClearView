@@ -29,7 +29,7 @@ class RealWindow(Window):
         self.set_title('ClearView · Instalador Linux')
         lab = self.scenarios.get_parent()
         self.scenarios.set_visible(False)
-        lab.get_first_child().set_label('LINUX · v0.1.2')
+        lab.get_first_child().set_label('Linux · v0.1.2')
         self.scenarios.get_next_sibling().set_visible(False)
         self.lab_note.set_visible(False)
 
