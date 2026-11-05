@@ -28,3 +28,7 @@ smoke-*/
 /tools/preview/
 /assets/concepts/
 /CONTEXTO-*.md
+
+# .NET local build intermediates
+/installer/windows/wpf/bin/
+/installer/windows/wpf/obj/

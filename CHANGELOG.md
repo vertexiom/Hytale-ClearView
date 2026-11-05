@@ -1,16 +1,23 @@
 # Changelog
 
-## Próximas alterações
+## v0.1.2 — instaladores Linux e Windows
+
+- Novo instalador Windows em C# + WPF: visual V2, etapas, seleção do destino, progresso real, falhas com relatório local e conclusão. Atualização e remoção usam o backend existente.
+- EXE x64 único com runtime .NET incluído; ícone de planeta, fontes Inter/JetBrains Mono, chuva com cache dos caracteres e opção de pausa. Licença e avisos de terceiros acessíveis sem internet.
+- Modo `--preview` opcional demonstra as telas sem alterar o jogo; execução normal permite instalação real.
+- Compilação, integridade do pacote e testes automatizados da ponte PowerShell aprovados. A validação nativa desta interface no Windows 10 e Windows 11 ainda está pendente; prévia no Wine não substitui essa validação.
+- Instalador Windows v0.1.1 permanece disponível e inalterado.
+- Linux: decoração da janela sem CSS global, registro do nome/ícone no desktop e pacote público atualizado.
 
 - Chuva ASCII distribuída por toda a área do painel, com entrada pelo topo e pela lateral, maior densidade e mistura de gotas que atravessam ou colidem com o texto.
 - Identificação do instalador ajustada para `Linux · v0.1.2`.
 
 - Ícone temporário do instalador substituído pelo planeta ASCII, com transparência externa e paleta adaptada ao launcher.
 
-## v0.1.2 — instalador gráfico Linux por pasta
+### Instalador Linux por pasta
 
 - Distribuição Linux por pasta com mod pré-compilado: `bash install.sh` abre diretamente a GUI. Dependências ausentes são informadas antes de abrir; CLI disponível com `--cli`.
-- Ícone H aplicado ao instalador; `.deb` preservado como alternativa, deixando de ser o fluxo prioritário.
+- Ícone de planeta aplicado ao instalador; `.deb` preservado como alternativa, deixando de ser o fluxo prioritário.
 
 - Pacote `.deb` local amd64 com GUI, mod compilado, dependências e entrada no menu de aplicativos. O usuário final não precisa compilar o mod.
 - Pacote verificado fora do checkout; instalação/remoção/reinstalação do aplicativo verificadas nesta máquina Ubuntu. Outros sistemas Linux ainda precisam de validação.
@@ -25,7 +32,6 @@
 - Simulações de instalação, atualização, seleção de destino, duas instalações, jogo aberto, falhas com relatório fictício e remoção.
 - Fluxos da prévia verificados no navegador do Pencil; isso não valida instalação real nem compatibilidade Windows.
 - Prévia V1, exportações da V2 e contexto de retomada preservados localmente para desenvolvimento.
-- **A interface V2 ainda não está integrada ao EXE.** Esta release publica apenas o pacote Linux; o download Windows permanece na v0.1.1.
 - A release pública v0.1.1 permanece disponível e inalterada.
 
 Os protótipos e estudos de design são mantidos localmente; não são necessários para executar o instalador.

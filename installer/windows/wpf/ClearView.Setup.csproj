@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>ClearView-WPF-Setup</AssemblyName>
+    <Version>0.1.2</Version>
+    <RuntimeFrameworkVersion>10.0.14</RuntimeFrameworkVersion>
+    <Copyright>Copyright (C) 2026 vertexiom</Copyright>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <DebugType>none</DebugType>
+    <ApplicationIcon>../../../assets/icons/io.github.vertexiom.ClearView.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Resource Include="../../../assets/fonts/*.otf;../../../assets/fonts/*.ttf" Link="Fonts/%(Filename)%(Extension)" />
+    <EmbeddedResource Include="../../../build/windows/wpf-third-party.txt" LogicalName="ClearView.ThirdParty.txt" />
+    <EmbeddedResource Include="../../../LICENSE" LogicalName="ClearView.License.txt" />
+    <Resource Include="../../../assets/icons/io.github.vertexiom.ClearView.png" Link="Assets/Icon.png" />
+    <EmbeddedResource Include="../../../build/windows/wpf-payload.zip" LogicalName="ClearView.Payload.zip" />
+  </ItemGroup>
+</Project>

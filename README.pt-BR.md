@@ -20,7 +20,7 @@ Estou desenvolvendo esse mod porque meu amigo Lazan é o inimigo número 1 das n
 ## Download
 
 - **Linux v0.1.2:** [ClearView-0.1.2-linux-x64.tar.gz](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.2/ClearView-0.1.2-linux-x64.tar.gz)
-- **Windows v0.1.1:** [ClearView-0.1.1-Setup.exe](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.1/ClearView-0.1.1-Setup.exe).
+- **Windows v0.1.2:** [ClearView-0.1.2-Setup.exe](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.2/ClearView-0.1.2-Setup.exe).
 
 ## O que você pode ajustar
 
@@ -40,12 +40,12 @@ O ClearView não substitui os [requisitos do Hytale](https://hytale.com/news/202
 
 ## Instalar no Windows
 
-1. Baixe e abra **ClearView-0.1.1-Setup.exe**.
-2. Feche o Hytale. O instalador procura a pasta do jogo automaticamente; se necessário, clique em **Localizar** e selecione `HytaleClient.exe`.
-3. Clique em **Instalar / Atualizar** e aguarde a confirmação.
+1. Baixe e abra **ClearView-0.1.2-Setup.exe**.
+2. Feche o Hytale e clique em **Continuar**. Confira a pasta do jogo; se necessário, clique em **Procurar…** e selecione `HytaleClient.exe`.
+3. Clique em **Instalar**, aguarde a conclusão e clique em **Concluir**. Uma instalação existente será atualizada automaticamente.
 4. Abra o jogo pelo launcher, entre num mundo e pressione **F9**.
 
-As verificações são automáticas. Não precisa extrair arquivos, usar terminal, instalar Python ou executar scripts. Para remover, abra o mesmo instalador e clique em **Remover**. Os ajustes existentes são preservados ao atualizar.
+As verificações são automáticas. Não precisa extrair arquivos, usar terminal, instalar Python ou executar scripts. Para remover, abra o mesmo instalador, escolha **Já usa o ClearView? Remover instalação**, confirme a pasta e clique em **Remover**. Os ajustes existentes são preservados ao atualizar.
 
 ## Instalar no Linux
 

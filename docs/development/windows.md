@@ -1,6 +1,6 @@
 # Windows: P0 e P1
 
-> **Interface Windows V2 pendente:** o design foi aprovado em protótipos locais, mas ainda não foi integrado ao EXE. Os metadados de build usam 0.1.2; o download público Windows permanece na v0.1.1. As seções abaixo descrevem o instalador existente. Acompanhe a integração na [issue P1](https://github.com/vertexiom/Hytale-ClearView/issues/2).
+> **Windows v0.1.2:** instalador C# + WPF publicado com backend PowerShell existente. Veja [compilação e integração WPF](../../installer/windows/wpf/README.md). A validação nativa da nova interface permanece pendente na [issue P1](https://github.com/vertexiom/Hytale-ClearView/issues/2).
 
 
 ## Prioridades e estado
@@ -11,21 +11,21 @@
 | Windows 11 x64 | **P1** | Teste relatado pelo mantenedor na v0.1.1; roteiro completo ainda em andamento. |
 | Linux x86_64 | Regressão | Testes existentes passam após compartilhar o núcleo GLSL. |
 
-O projeto está em sua versão inicial, **v0.1.1**, com validação em andamento. Compilar uma DLL para Windows a partir do Linux não comprova funcionamento no Hytale/Windows.
+O projeto está em sua versão inicial, **v0.1.2**, com validação em andamento. Compilar uma DLL para Windows a partir do Linux não comprova funcionamento no Hytale/Windows.
 
 ## Para quem vai testar
 
-1. Abra `ClearView-0.1.1-Setup.exe` com o Hytale fechado.
-2. Confirme a pasta detectada ou use **Localizar** para selecionar `HytaleClient.exe`.
-3. Clique em **Instalar / Atualizar**. Acompanhe a barra por etapas: validação do destino, teste gráfico isolado e instalação. O teste gráfico tem limite de 60 segundos e ocorre antes de alterar o jogo.
+1. Abra `ClearView-0.1.2-Setup.exe` com o Hytale fechado.
+2. Confirme a pasta detectada ou use **Procurar…** para selecionar `HytaleClient.exe`.
+3. Clique em **Continuar** e depois em **Instalar**. Acompanhe a barra por etapas: validação do destino, teste gráfico isolado e instalação. O teste gráfico tem limite de 60 segundos e ocorre antes de alterar o jogo.
 4. Aguarde **Instalação concluída**, clique em **Concluir** e abra o jogo pelo launcher normal. Entre num mundo e pressione **F9**.
 5. Para remover, abra o mesmo executável e clique em **Remover**.
 
-Requisitos: Windows 10 x64 1809+ e OpenGL 4.1. O usuário não instala compiladores ou runtimes adicionais. O instalador usa Windows PowerShell 5.1 e Windows Forms presentes no sistema. A execução não muda a política global de scripts nem exige administrador automaticamente.
+Requisitos: Windows 10 x64 1809+ e OpenGL 4.1. O usuário não instala compiladores ou runtimes adicionais. O instalador inclui o runtime .NET e usa Windows PowerShell 5.1 presente no sistema. A execução não muda a política global de scripts nem exige administrador automaticamente.
 
 Sem o Hytale instalado, a instalação fica desabilitada e a interface orienta a instalar o jogo pelo launcher. **Verificar novamente** repete a detecção. O ClearView não baixa o jogo. Abrir novamente o executável tenta restaurar a janela existente. A conclusão exige sucesso do processo e uma marca final gravada após todas as etapas; a barra representa etapas, não porcentagem de bytes copiados.
 
-## Implementação do instalador
+## Implementação anterior (Windows Forms, v0.1.1)
 
 `installer/windows/bootstrap.c` é um executável GUI x64 com manifesto `asInvoker`. Extrai a interface e um payload próprio para uma pasta temporária exclusiva, executa o PowerShell do diretório do sistema sem console e limpa os arquivos ao sair normalmente.
 

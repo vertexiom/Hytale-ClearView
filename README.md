@@ -20,7 +20,7 @@ I'm developing this mod because my friend Lazan is Hytale fog's number one enemy
 ## Download
 
 - **Linux v0.1.2:** [ClearView-0.1.2-linux-x64.tar.gz](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.2/ClearView-0.1.2-linux-x64.tar.gz)
-- **Windows v0.1.1:** [ClearView-0.1.1-Setup.exe](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.1/ClearView-0.1.1-Setup.exe).
+- **Windows v0.1.2:** [ClearView-0.1.2-Setup.exe](https://github.com/vertexiom/Hytale-ClearView/releases/download/v0.1.2/ClearView-0.1.2-Setup.exe).
 
 ## What you can adjust
 
@@ -42,12 +42,12 @@ ClearView does not replace [Hytale's system requirements](https://hytale.com/new
 
 The installer interface is currently in Portuguese; button names in this guide are translated into English.
 
-1. Download and open **ClearView-0.1.1-Setup.exe**.
-2. Close Hytale. The installer finds the game folder automatically; if needed, click **Browse** and select `HytaleClient.exe`.
-3. Click **Install / Update** and wait for confirmation.
+1. Download and open **ClearView-0.1.2-Setup.exe**.
+2. Close Hytale and click **Continue**. Confirm the game folder; if needed, click **Browse** and select `HytaleClient.exe`.
+3. Click **Install**, wait for completion, then click **Finish**. An existing installation is updated automatically.
 4. Open the game through its launcher, enter a world, and press **F9**.
 
-Checks run automatically. You do not need to extract files, use a terminal, install Python, or run scripts. To uninstall, open the same installer and click **Remove**. Updating preserves existing settings.
+Checks run automatically. You do not need to extract files, use a terminal, install Python, or run scripts. To uninstall, open the same installer, choose **Already using ClearView? Remove installation**, confirm the folder and click **Remove**. Updating preserves existing settings.
 
 ## Install on Linux
 
