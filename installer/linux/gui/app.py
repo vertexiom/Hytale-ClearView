@@ -51,10 +51,8 @@ class Window(Gtk.ApplicationWindow):
         self.dialog = None
         self.primary = None
         self.connect('close-request', self.request_close)
-        header = Gtk.HeaderBar()
-        header.set_title_widget(Gtk.Label(label='ClearView · Instalador Linux'))
-        self.set_titlebar(header)
-        root = box(spacing=0)
+        # Let GTK/the window manager provide themed window decorations.
+        root = box(spacing=0, css='clearview-ui')
         self.set_child(root)
         lab = box(False, 12, 'lab')
         badge=Gtk.Label(label='DEMO · V2'); badge.add_css_class('attention'); lab.append(badge)
@@ -290,7 +288,7 @@ class Window(Gtk.ApplicationWindow):
         dlg=Gtk.Window(title=title,transient_for=self,modal=True,default_width=580)
         dlg.add_css_class('clearview')
         dlg.connect('close-request',lambda *_:(self.close_dialog(),True)[1])
-        body=box(css='dialog-body');dlg.set_child(body)
+        body=box(css='dialog-body');body.add_css_class('clearview-ui');dlg.set_child(body)
         self.dialog=dlg
         return dlg,body
 
@@ -343,7 +341,7 @@ class App(Gtk.Application):
         if icons.is_dir():
             Gtk.IconTheme.get_for_display(Gdk.Display.get_default()).add_search_path(str(icons))
         css=Gtk.CssProvider();css.load_from_path(str(HERE/'style.css'))
-        Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(),css,Gtk.STYLE_PROVIDER_PRIORITY_USER + 1)
+        Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(),css,Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
         if getattr(self.args, 'demo', True):
             self.window=Window(self)
         else:

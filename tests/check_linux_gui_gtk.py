@@ -29,12 +29,14 @@ def guard(fn):
 def activate(_):
     global window
     provider=Gtk.CssProvider();provider.load_from_path(str(HERE/'style.css'))
-    Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(),provider,Gtk.STYLE_PROVIDER_PRIORITY_USER+1)
+    Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(),provider,Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
     window=Window(app);window.present()
     GLib.timeout_add(200,guard(check_widgets))
 
 def check_widgets():
     w=window
+    assert w.get_titlebar() is None, "Window decoration must remain managed by GTK/the desktop"
+    assert w.get_child().has_css_class("clearview-ui")
     for scenario in SCENARIOS:
         w.scenarios.set_selected(list(SCENARIOS).index(scenario));w.show('location')
         assert w.state.scenario==scenario
