@@ -1,5 +1,9 @@
 # Changelog
 
+## Próximas alterações
+
+- Ícone temporário do instalador substituído pela imagem de planeta ASCII escolhida pelo mantenedor.
+
 ## v0.1.2 — instalador gráfico Linux por pasta
 
 - Distribuição Linux por pasta com mod pré-compilado: `bash install.sh` abre diretamente a GUI. Dependências ausentes são informadas antes de abrir; CLI disponível com `--cli`.
