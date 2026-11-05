@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Name=ClearView Installer
+Name[pt_BR]=Instalador ClearView
+Comment=Install, update or remove the ClearView fog mod
+Comment[pt_BR]=Instale, atualize ou remova o mod de neblina ClearView
+Exec=clearview-installer
+TryExec=clearview-installer
+Icon=applications-games
+Terminal=false
+Categories=Game;
+Keywords=Hytale;ClearView;fog;neblina;
+StartupNotify=true

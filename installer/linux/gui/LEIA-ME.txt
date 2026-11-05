@@ -1,6 +1,19 @@
 CLEARVIEW — INSTALADOR LINUX GTK 4 / v0.1.2 em desenvolvimento
 
-Na raiz do projeto, compile o pacote uma vez:
+PACOTE PARA O USUÁRIO
+Abra clearview-installer_0.1.2-1_amd64.deb com o instalador de aplicativos
+da distribuição e confirme a instalação. Depois procure "Instalador ClearView"
+no menu de aplicativos. Não execute a GUI com sudo.
+Se a distribuição não tiver um instalador gráfico de pacotes locais, use:
+  sudo apt install ./clearview-installer_0.1.2-1_amd64.deb
+Depois abra pelo menu, ou execute: clearview-installer
+
+O pacote instala somente o aplicativo. Para aplicar o mod, abra o aplicativo.
+Para remover o mod, use "Remover instalação" dentro dele ANTES de desinstalar
+o pacote pelo sistema. Remover o .deb não modifica arquivos do Hytale.
+
+EXECUÇÃO PELO CÓDIGO-FONTE
+Na raiz do projeto, compile o mod uma vez:
   bash tools/build/build_linux.sh
 Depois abra a GUI real:
   ./installer/linux/gui/run.sh
@@ -21,7 +34,13 @@ Dependências Ubuntu/Debian:
 Compilação: compilador C, pkg-config, desenvolvimento Cairo (libcairo2-dev).
 Fonte recomendada: JetBrains Mono; fallback monospace disponível.
 Não instalar pacotes pip no Python do sistema. Usa /usr/bin/python3.
-Ainda não existe pacote .deb: esta execução é pelo checkout de desenvolvimento.
+Gerar o .deb (máquina de desenvolvimento amd64):
+  python3 tools/build/build_linux_deb.py
+Requer também dpkg-dev, binutils e desktop-file-utils. A saída fica em dist/.
+O jogador não precisa de compilador, código-fonte ou pacotes pip.
+O pacote local foi preparado para Ubuntu 26.04 amd64. Outros sistemas ainda
+precisam de validação; o build atual exige libc6 >= 2.38. Não é um pacote
+universal para todas as distribuições Linux.
 
 Para explorar apenas o design, sem alterar o jogo:
   ./installer/linux/gui/run.sh --demo
@@ -38,6 +57,7 @@ Arquivos:
 Verificações, somente em clientes temporários:
   /usr/bin/python3 tests/check.py
   /usr/bin/python3 tests/check_linux_install.py
+  /usr/bin/python3 tests/check_linux_deb.py
   /usr/bin/python3 tests/check_linux_gui.py
   G_DEBUG=fatal-criticals /usr/bin/python3 tests/check_linux_gui_gtk.py
   G_DEBUG=fatal-criticals /usr/bin/python3 tests/check_linux_gui_real.py
@@ -46,7 +66,7 @@ Os dois últimos requerem sessão gráfica. Compilar o pacote antes dos testes.
 Captura visual (não inicia instalação):
   ./installer/linux/gui/run.sh --snapshot /tmp/clearview-linux.png
 
-Limitações: ainda falta empacotamento para jogadores, validação em outras
+Limitações: falta validação em outras
 bases Linux/DPI e janelas menores que 860 px. O manifesto confere integridade,
 não assinatura/autenticidade. Há recuperação de falhas de operação, mas não
 uma garantia de recuperação após queda de energia. Jogo fechado é verificado

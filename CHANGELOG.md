@@ -2,10 +2,13 @@
 
 ## v0.1.2 — em desenvolvimento (staging)
 
+- Pacote `.deb` local amd64 com GUI, mod compilado, dependências e entrada no menu de aplicativos. O usuário final não precisa compilar o mod.
+- Pacote verificado fora do checkout; instalação/remoção/reinstalação do aplicativo verificadas nesta máquina Ubuntu. Outros sistemas Linux ainda precisam de validação.
+
 - GUI Linux real em Python + GTK 4: visual V2, chuva ASCII/Cairo, seleção nativa/Flatpak, instalação, atualização, remoção, progresso por etapas e relatório local. Modo `--demo` separado.
 - Backend Linux com verificação do pacote, bloqueio por destino, gravações atômicas, recuperação de falhas e preservação dos ajustes nas atualizações.
 - Fluxo real da GUI verificado em pastas temporárias, incluindo atualização, remoção e erros. Falha de gravação simulada com recuperação dos arquivos anteriores.
-- Atualização real realizada na instalação Linux Flatpak do mantenedor; pacote, backup e ajustes conferidos. Dependências verificadas no runtime GNOME 49. Validação manual do F9 no jogo ainda pendente.
+- Atualização real realizada na instalação Linux Flatpak do mantenedor; pacote, backup e ajustes conferidos. Dependências verificadas no runtime GNOME 49. O mantenedor confirmou F9 no jogo e o ciclo completo de instalação, remoção e reinstalação.
 
 - V2 do instalador aprovada como referência visual: 17 telas estáticas no Pencil, com tema escuro, cantos arredondados e assinatura ClearView / Vertexiom.
 - Prévia interativa offline com chuva ASCII animada, pausa e respeito à preferência de movimento reduzido.

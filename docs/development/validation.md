@@ -2,6 +2,16 @@
 
 Hardware, sistema, driver, Hytale e ferramentas estão registrados no [ambiente de testes](test-environment.md).
 
+## Linux GTK e pacote Debian — v0.1.2
+
+Em 04/11/2026, o mantenedor relatou sucesso no ciclo instalar, abrir F9 no Hytale, remover (mod ausente no jogo) e reinstalar (mod funcionando novamente), usando a GUI GTK nesta máquina Linux.
+
+O pacote local `.deb` foi instalado, removido e reinstalado no Ubuntu 26.04 amd64. A GUI instalada abre a partir de `/tmp`, sem depender do checkout. O teste `tests/check_linux_deb.py` extrai o pacote e executa instalação, atualização preservando ajustes e remoção exata num cliente temporário. Não inclui bibliotecas originais do jogo nem scripts de instalação que modifiquem o Hytale como root.
+
+As dependências do binário são calculadas com `dpkg-shlibdeps`; o build atual exige glibc 2.38. Isso não valida outras distribuições ou runtimes Flatpak. O pacote remove somente o aplicativo; a remoção do mod é feita dentro da GUI.
+
+Referências de empacotamento: [Debian Policy](https://www.debian.org/doc/debian-policy/ch-binary) e [Desktop Entry Specification](https://specifications.freedesktop.org/desktop-entry/latest-single/).
+
 ## Prévia do instalador V2 — v0.1.2
 
 O Claude Opus 5.5 verificou a prévia HTML no navegador integrado do Pencil: instalação, atualização, seleção de destino, duas instalações, jogo aberto, falhas/relatório/recuperação, remoção e cancelamento dos temporizadores ao reiniciar. Também conferiu layout em 390 px, desktop, movimento reduzido, foco ao fechar diálogos e ausência de recursos externos. Parte das interações foi acionada por script; Esc foi verificado com eventos sintéticos.

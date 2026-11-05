@@ -326,7 +326,7 @@ class Window(Gtk.ApplicationWindow):
 
 class App(Gtk.Application):
     def __init__(self,args):
-        super().__init__(application_id='io.github.vertexiom.ClearView.Demo',flags=Gio.ApplicationFlags.NON_UNIQUE)
+        super().__init__(application_id='io.github.vertexiom.ClearView.Demo' if getattr(args, 'demo', True) else 'io.github.vertexiom.ClearView',flags=Gio.ApplicationFlags.NON_UNIQUE)
         self.args=args
 
     def do_activate(self):
