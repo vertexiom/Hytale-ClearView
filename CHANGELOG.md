@@ -1,11 +1,15 @@
 # Changelog
 
-## v0.1.2 — instaladores Linux e Windows
+## v0.1.2 — estável / stable
+
+Declarada estável pelo mantenedor em 2026-11-05, após confirmação de uso no Linux e Windows. Próximo ciclo de desenvolvimento: v0.1.3, na branch `staging`.
+
+### Instaladores Linux e Windows
 
 - Novo instalador Windows em C# + WPF: visual V2, etapas, seleção do destino, progresso real, falhas com relatório local e conclusão. Atualização e remoção usam o backend existente.
 - EXE x64 único com runtime .NET incluído; ícone de planeta, fontes Inter/JetBrains Mono, chuva com cache dos caracteres e opção de pausa. Licença e avisos de terceiros acessíveis sem internet.
 - Modo `--preview` opcional demonstra as telas sem alterar o jogo; execução normal permite instalação real.
-- Compilação, integridade do pacote e testes automatizados da ponte PowerShell aprovados. A validação nativa desta interface no Windows 10 e Windows 11 ainda está pendente; prévia no Wine não substitui essa validação.
+- Compilação, integridade do pacote e testes automatizados da ponte PowerShell aprovados. O mantenedor posteriormente confirmou o funcionamento no Windows real. Isso não constitui certificação de todas as versões do Windows ou combinações de hardware.
 - Instalador Windows v0.1.1 permanece disponível e inalterado.
 - Linux: decoração da janela sem CSS global, registro do nome/ícone no desktop e pacote público atualizado.
 
