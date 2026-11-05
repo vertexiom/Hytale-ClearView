@@ -10,7 +10,7 @@ The project is intended for visual customization, not as a cheating tool or a wa
 
 > **Multiplayer disclaimer:** Before using ClearView on any multiplayer server, consult its admin team and confirm that the mod is allowed. If it is not allowed, do not use it on that server.
 
-**Hytale ClearView is in early development — v0.1.2.** Hytale updates may require changes to the mod.
+**Hytale ClearView v0.1.2 is the current stable release.** Hytale updates may require changes to the mod.
 
 
 [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) was used as a reference to understand how shaders work and develop ClearView, which has its own independent code.
