@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>ClearView-WPF-Setup</AssemblyName>
-    <Version>0.1.2</Version>
+    <Version>0.1.3</Version>
     <RuntimeFrameworkVersion>10.0.14</RuntimeFrameworkVersion>
     <Copyright>Copyright (C) 2026 vertexiom</Copyright>
     <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>

@@ -25,7 +25,7 @@ def main():
     parser.add_argument('--payload-only',action='store_true')
     args=parser.parse_args()
     build=ROOT/'build/windows'; manifest=json.loads((build/'manifest.json').read_text(encoding="utf-8"))
-    if manifest['version']!='0.1.2':raise SystemExit('Build the Windows v0.1.2 payload first.')
+    if manifest['version']!='0.1.3':raise SystemExit('Build the Windows v0.1.3 payload first.')
     expected={'opengl32.dll','clearview-smoke.exe'}
     if set(manifest['files'])!=expected:raise SystemExit('Unexpected payload manifest')
     for name in expected:
@@ -55,7 +55,7 @@ def main():
     (build/'wpf-third-party.txt').write_text('\n\n'.join(notices),encoding='utf-8')
     output=ROOT/'dist/windows-wpf'
     subprocess.run([dotnet,'publish',str(ROOT/'installer/windows/wpf/ClearView.Setup.csproj'),'-c','Release','-r','win-x64','--self-contained','true','-o',str(output)],check=True,env=env)
-    release=ROOT/'dist/ClearView-0.1.2-Setup.exe'
+    release=ROOT/'dist/ClearView-0.1.3-Setup.exe'
     shutil.copy2(output/'ClearView-WPF-Setup.exe',release)
     print('Release installer:',release)
     print('Preview without game writes: ClearView-WPF-Setup.exe --preview')

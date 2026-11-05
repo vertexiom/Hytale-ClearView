@@ -27,7 +27,7 @@ import hashlib, json, os
 p=Path('build/libSDL3.so')
 target=p.with_name('linux-manifest.json')
 tmp=target.with_suffix('.tmp')
-tmp.write_text(json.dumps({'product':'Hytale ClearView','version':'0.1.2','architecture':'x86_64','sha256':hashlib.sha256(p.read_bytes()).hexdigest()},indent=2)+'\n')
+tmp.write_text(json.dumps({'product':'Hytale ClearView','version':'0.1.3','architecture':'x86_64','sha256':hashlib.sha256(p.read_bytes()).hexdigest()},indent=2)+'\n')
 os.replace(tmp,target)
 MANIFEST
 echo 'Built build/libSDL3.so and build/linux-manifest.json'

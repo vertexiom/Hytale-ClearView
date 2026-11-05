@@ -1,6 +1,6 @@
 # Instalador Windows WPF
 
-Implementação inicial em C# + WPF (.NET 10), com tema V2, chuva ASCII, navegação por etapas e integração ao backend PowerShell existente. Publicado na v0.1.2; validação nativa Windows ainda pendente.
+Implementação inicial em C# + WPF (.NET 10), com tema V2, chuva ASCII, navegação por etapas e integração ao backend PowerShell existente. Publicado na v0.1.2 estável; esta branch prepara a v0.1.3.
 
 ## Compilar
 
@@ -12,7 +12,7 @@ python3 tools/build/build_windows_wpf.py --dotnet /caminho/do/dotnet
 
 Requer .NET SDK 10 e o payload com hashes válidos em `build/windows/`. O projeto habilita compilação com destino Windows a partir do Linux; isso não permite executar a GUI WPF no Linux.
 
-Saída para distribuição: `dist/ClearView-0.1.2-Setup.exe` (cópia do build em `dist/windows-wpf/ClearView-WPF-Setup.exe`). O EXE contém runtime .NET, GUI e payload. Componentes nativos podem ser extraídos pelo runtime ao iniciar. Não usa navegador nem baixa o mod durante a instalação. Recompilar com atualizações de segurança do runtime ao distribuir novas versões.
+Saída para distribuição: `dist/ClearView-0.1.3-Setup.exe` (cópia do build em `dist/windows-wpf/ClearView-WPF-Setup.exe`). O EXE contém runtime .NET, GUI e payload. Componentes nativos podem ser extraídos pelo runtime ao iniciar. Não usa navegador nem baixa o mod durante a instalação. Recompilar com atualizações de segurança do runtime ao distribuir novas versões.
 
 ## Executar no Windows
 

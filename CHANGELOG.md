@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.3 — em desenvolvimento / unreleased
+
+- Próximo ciclo na branch `staging`; ainda sem release pública.
+- A v0.1.2 permanece como versão estável.
+
 ## v0.1.2 — estável / stable
 
 Declarada estável pelo mantenedor em 2026-11-05, após confirmação de uso no Linux e Windows. Próximo ciclo de desenvolvimento: v0.1.3, na branch `staging`.

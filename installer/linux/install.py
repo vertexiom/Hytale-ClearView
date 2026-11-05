@@ -20,7 +20,7 @@ import tempfile
 from contextlib import contextmanager
 
 ROOT = Path(__file__).resolve().parents[2]
-VERSION = '0.1.2'
+VERSION = '0.1.3'
 MARKER = b'HYTALE_CLEARVIEW_PROXY_V1'
 PRESETS = {'off': '1 1 1', 'distance': '0 1 1', 'atmosphere': '0 0 1', 'all': '0 0 0'}
 

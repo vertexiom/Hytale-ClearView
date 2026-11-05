@@ -99,7 +99,7 @@ jobs:
         with:
           name: clearview-windows-ci-${{ github.run_id }}
           path: |
-            dist/ClearView-0.1.2-Setup.exe
+            dist/ClearView-0.1.3-Setup.exe
             build/ci/source.zip
             build/ci/LICENSE
             build/ci/THIRD-PARTY-NOTICES.txt

@@ -1,8 +1,8 @@
-CLEARVIEW — INSTALADOR LINUX GTK 4 / v0.1.2 em desenvolvimento
+CLEARVIEW — INSTALADOR LINUX GTK 4 / v0.1.3 em desenvolvimento
 
 DISTRIBUIÇÃO ATUAL: PASTA COM INSTALL.SH
 O usuário escolheu deixar o .deb de lado por enquanto.
-Extraia ClearView-0.1.2-linux-x64.tar.gz, entre na pasta e execute:
+Extraia ClearView-0.1.3-linux-x64.tar.gz, entre na pasta e execute:
   bash install.sh
 A interface abre diretamente, sem loja e sem compilar o mod.
 O mod vem pré-compilado; Python/GTK/Cairo continuam sendo dependências do sistema.
@@ -11,7 +11,7 @@ pacotes automaticamente e não deve ser executado com sudo.
 
 Para gerar a pasta e o tar.gz localmente:
   python3 tools/build/build_linux_folder.py
-A saída fica em dist/ClearView-0.1.2-linux-x64/ e no tar.gz ao lado.
+A saída fica em dist/ClearView-0.1.3-linux-x64/ e no tar.gz ao lado.
 O .deb e seu build foram preservados como alternativa, mas não são o fluxo
 prioritário. A release v0.1.2 publica somente o tar.gz Linux.
 

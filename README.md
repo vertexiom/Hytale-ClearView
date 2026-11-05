@@ -1,5 +1,7 @@
 <h1 align="center">Hytale ClearView</h1>
 
+**Development branch:** staging targets v0.1.3. The downloads below are the stable v0.1.2 release.
+
 <p align="center">
   <a href="README.md">English</a> | <a href="README.pt-BR.md">Português (Brasil)</a>
 </p>
