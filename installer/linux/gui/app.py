@@ -20,6 +20,20 @@ from rain import Rain
 
 HERE = Path(__file__).resolve().parent
 
+def install_styles(display):
+    """Keep the approved content tokens even with a user-installed GTK theme.
+
+    All selectors are scoped to .clearview-ui, so native window decorations and
+    file choosers still follow the desktop. The product deliberately opts out of
+    user theme overrides inside its branded content only.
+    """
+    css = Gtk.CssProvider()
+    css.load_from_path(str(HERE / 'style.css'))
+    Gtk.StyleContext.add_provider_for_display(
+        display, css, Gtk.STYLE_PROVIDER_PRIORITY_USER + 1)
+    return css
+
+
 def box(vertical=True, spacing=16, css=None):
     b = Gtk.Box(orientation=Gtk.Orientation.VERTICAL if vertical else Gtk.Orientation.HORIZONTAL, spacing=spacing)
     if css:
@@ -340,8 +354,7 @@ class App(Gtk.Application):
         icons = HERE.parents[2] / 'assets/icons'
         if icons.is_dir():
             Gtk.IconTheme.get_for_display(Gdk.Display.get_default()).add_search_path(str(icons))
-        css=Gtk.CssProvider();css.load_from_path(str(HERE/'style.css'))
-        Gtk.StyleContext.add_provider_for_display(Gdk.Display.get_default(),css,Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        self.css = install_styles(Gdk.Display.get_default())
         if getattr(self.args, 'demo', True):
             self.window=Window(self)
         else:
