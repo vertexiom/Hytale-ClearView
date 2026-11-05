@@ -13,6 +13,20 @@ O usuário escolheu a **V2 do Claude Opus 5.5** como base visual do novo instala
 - Antes de novas publicações, pedir autorização. Esta autorização não é permanente.
 - Não tocar nos projetos/documentos Rota ou fellowbot.
 
+## GUI Linux real — Python + GTK 4
+
+O usuário escolheu Python + GTK 4 no Linux. Windows terá implementação independente; Tauri não foi adotado e não há migração para Rust.
+
+`./installer/linux/gui/run.sh` agora abre o instalador **real**. Detecta instalação nativa/Flatpak e permite escolher HytaleClient. Instala, atualiza e remove via subprocesso de `installer/linux/install.py`, com progresso por etapas reais, relatório local e conclusão condicionada ao resultado do processo. A chuva ASCII/Cairo permanece animada. `--demo` mantém os cenários fictícios separados.
+
+O backend verifica jogo fechado, pacote/manifesto x64, backup e conflitos; usa bloqueio por destino, gravações atômicas e recuperação de erros. Atualizações preservam ajustes; remoção restaura o original. Não garante recuperação de queda de energia nem executa teste gráfico do Hytale.
+
+Em 04/11/2026, a GUI realizou uma **atualização real** na instalação Flatpak desta máquina. Hash do mod conferido contra o pacote; backup original e bytes dos ajustes preservados. Dependências conferidas dentro de org.gnome.Platform 49. Cópia de recuperação e captura estão em `build/linux-gui/` (ignoradas). Logs em `$XDG_STATE_HOME/clearview/logs` ou `~/.local/state/clearview/logs`. **Ainda falta o usuário abrir o jogo e validar F9 nesta sessão.** Não confundir instalação concluída com gameplay validado.
+
+Nesta máquina foi instalado somente `python3-gi-cairo`, que faltava. Leia `installer/linux/gui/LEIA-ME.txt` para dependências e testes. O build local gera `build/libSDL3.so` e `linux-manifest.json`; a GUI não compila nem baixa durante a instalação. Empacotamento para jogadores ainda pendente.
+
+O usuário autorizou este trabalho e publicação somente na staging. Main e release v0.1.1 não devem mudar. Pedir nova autorização para publicações posteriores.
+
 ## Como ver o trabalho
 
 1. Abra [design/installer/interactive.html](design/installer/interactive.html) no navegador. Funciona com `file://`, offline, sem servidor e sem dependências novas.
@@ -40,7 +54,7 @@ ClearView controla a neblina de distância, atmosfera e profundidade do Hytale, 
 
 O instalador é para jogadores sem conhecimentos de desenvolvimento: um EXE gráfico, com indicação do destino, progresso real, conclusão clara e recuperação compreensível. **Windows 10 é P0, Windows 11 é P1.** O usuário validou a v0.1.1 no Windows 11; Lazan, membro do MUP, no Windows 10. Não publicar specs dessas máquinas. Esses relatos não validam automaticamente a v0.1.2.
 
-Suporte: Discord **tallmannzera**. O projeto inteiro está em desenvolvimento inicial; não apresentar só o Windows como uma “prévia”. READMEs em inglês e português. A documentação técnica fica separada da apresentação para jogadores.
+Suporte: Discord **tallmannzera**. O projeto inteiro está em desenvolvimento inicial; não apresentar só o Windows como uma “prévia”. READMEs em inglês e português. A documentação técnica fica separada da apresentação para jogadores. Regra explícita do usuário: nunca incluir relatos de testes, participantes, máquinas ou status de validação nos READMEs principais (inglês e português). Manter esses registros no changelog/documentação técnica; a introdução pode informar que o projeto está em desenvolvimento inicial.
 
 ## Direção visual aprovada
 
@@ -90,7 +104,7 @@ A referência de 626 px exige teste em telas pequenas/escala 125% no Windows 10.
 
 1. Ler este contexto e conferir `git status`/branch antes de editar.
 2. Abrir a prévia V2 e conferir se há novos ajustes do usuário.
-3. Planejar a integração do visual V2 no instalador existente, preservando o backend. Nesta sessão só design/prévia foram implementados.
+3. Planejar a integração do visual V2 no instalador existente, preservando o backend. A GUI Linux já instala de verdade; o Windows ainda precisa da integração visual.
 4. Implementar e testar progressivamente a UI nativa, incluindo caminhos Unicode/espaços, erro/recuperação, logs, seleção de destino e segurança da remoção.
 5. Validar no Windows 10 primeiro, depois 11: teclado, DPI, responsividade, consumo da chuva e instalação real com Hytale fechado.
 6. Pedir autorização antes de nova publicação. Não promover para main nem criar release apenas porque o protótipo passou.

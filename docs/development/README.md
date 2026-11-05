@@ -2,6 +2,7 @@
 
 Documentação para quem deseja estudar ou contribuir com o ClearView.
 
+- [GUI Linux GTK 4: execução e dependências](../../installer/linux/gui/LEIA-ME.txt)
 - [Contexto da v0.1.2 e próxima sessão](../../CONTEXTO-v0.1.2.md)
 - [Prévia interativa do instalador V2](../../design/installer/interactive.html)
 - [Arquitetura e diagnóstico](architecture.md)

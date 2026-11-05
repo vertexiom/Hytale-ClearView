@@ -1,0 +1,57 @@
+CLEARVIEW — INSTALADOR LINUX GTK 4 / v0.1.2 em desenvolvimento
+
+Na raiz do projeto, compile o pacote uma vez:
+  bash tools/build/build_linux.sh
+Depois abra a GUI real:
+  ./installer/linux/gui/run.sh
+
+Feche o Hytale, clique em Continuar, confirme o destino e clique em Instalar.
+Uma instalação existente será atualizada, preservando seus ajustes. Ao concluir,
+abra pelo launcher normal; F9 abre o painel. Para remover, use a opção na tela
+inicial. A remoção restaura o arquivo original e mantém as configurações.
+
+A GUI usa um processo separado e só confirma sucesso após sua conclusão.
+O progresso indica etapas reais; não mede porcentagem de download. O pacote
+é local: a GUI não baixa nem compila arquivos. O botão Ver relatório exibe
+um log local; nada é enviado. Logs em $XDG_STATE_HOME/clearview/logs ou
+~/.local/state/clearview/logs. Suporte Discord: tallmannzera.
+
+Dependências Ubuntu/Debian:
+  python3 python3-gi python3-gi-cairo python3-cairo gir1.2-gtk-4.0
+Compilação: compilador C, pkg-config, desenvolvimento Cairo (libcairo2-dev).
+Fonte recomendada: JetBrains Mono; fallback monospace disponível.
+Não instalar pacotes pip no Python do sistema. Usa /usr/bin/python3.
+Ainda não existe pacote .deb: esta execução é pelo checkout de desenvolvimento.
+
+Para explorar apenas o design, sem alterar o jogo:
+  ./installer/linux/gui/run.sh --demo
+  ./installer/linux/gui/run.sh --demo --scenario copy --screen error
+Os destinos, relatórios e tempos da demonstração são fictícios.
+
+Arquivos:
+  app.py/model.py   componentes GTK e demonstração
+  real.py          fluxo real, seleção, subprocesso e relatório
+  rain.py          chuva ASCII/Cairo, com pausa e movimento reduzido
+  style.css        aparência V2
+  ../install.py    validação, instalação, atualização e restauração
+
+Verificações, somente em clientes temporários:
+  /usr/bin/python3 tests/check.py
+  /usr/bin/python3 tests/check_linux_install.py
+  /usr/bin/python3 tests/check_linux_gui.py
+  G_DEBUG=fatal-criticals /usr/bin/python3 tests/check_linux_gui_gtk.py
+  G_DEBUG=fatal-criticals /usr/bin/python3 tests/check_linux_gui_real.py
+Os dois últimos requerem sessão gráfica. Compilar o pacote antes dos testes.
+
+Captura visual (não inicia instalação):
+  ./installer/linux/gui/run.sh --snapshot /tmp/clearview-linux.png
+
+Limitações: ainda falta empacotamento para jogadores, validação em outras
+bases Linux/DPI e janelas menores que 860 px. O manifesto confere integridade,
+não assinatura/autenticidade. Há recuperação de falhas de operação, mas não
+uma garantia de recuperação após queda de energia. Jogo fechado é verificado
+antes da gravação; não abrir o launcher/jogo durante a operação. Nenhum teste
+gráfico ou de gameplay é executado automaticamente pela GUI Linux.
+
+Windows terá implementação independente. Trabalho autorizado somente na
+staging; main/release v0.1.1 permanecem inalteradas.

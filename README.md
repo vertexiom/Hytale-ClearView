@@ -4,13 +4,17 @@
   <a href="README.md">English</a> | <a href="README.pt-BR.md">Português (Brasil)</a>
 </p>
 
-**Hytale ClearView is in early development — v0.1.1.** Testing and compatibility validation are ongoing, and Hytale updates may require changes to the mod.
+**ClearView is a mod for controlling Hytale's fog while keeping the game's original lighting.** Open the panel with **F9** and adjust the fog intensity to your liking.
 
-**On staging:** v0.1.2 is in development. The new installer is currently an [interactive prototype](design/installer/interactive.html), not yet integrated into the Windows executable. The public download remains v0.1.1.
+The project is intended for visual customization, not as a cheating tool or a way to bypass game or server rules.
+
+> **Multiplayer disclaimer:** Before using ClearView on any multiplayer server, consult its admin team and confirm that the mod is allowed. If it is not allowed, do not use it on that server.
+
+**Hytale ClearView is in early development — v0.1.1.** Hytale updates may require changes to the mod.
+
+**On staging:** v0.1.2 is in development. The [Linux graphical installer](installer/linux/gui/LEIA-ME.txt) is available from the checkout. The [V2 design](design/installer/interactive.html) is not yet integrated into the Windows executable. The public download remains v0.1.1.
 
 [Aurora Shaders](https://github.com/Kristijan1001/Hytale-Aurora-Shaders) was used as a reference to understand how shaders work and develop ClearView, which has its own independent code.
-
-The goal is to control Hytale's fog while keeping the game's original lighting. Open the panel with **F9** and adjust visibility to your liking.
 
 I'm developing this mod because my friend Lazan is Hytale fog's number one enemy.
 
