@@ -2,6 +2,8 @@
 
 ## v0.1.3 — em desenvolvimento / unreleased
 
+- HUD redesenhado com cartões arredondados, paleta azul, fonte Inter embutida, teclas de atalho e barras sem marcadores de mouse.
+- Transições de seleção e barras de 120 ms, limitadas a 30 Hz, com textos em cache e opção de movimento reduzido.
 - Próximo ciclo na branch `staging`; ainda sem release pública.
 - A v0.1.2 permanece como versão estável.
 

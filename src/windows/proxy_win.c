@@ -178,16 +178,16 @@ static void win_delete(unsigned program){check_context();delete_program(program)
 
 static LRESULT CALLBACK panel_proc(HWND window,UINT message,WPARAM key,LPARAM info)
 {
-    if(message==WM_KILLFOCUS){EnterCriticalSection(&state_lock);panel_open=0;memset(captured_keys,0,sizeof captured_keys);LeaveCriticalSection(&state_lock);}
+    if(message==WM_KILLFOCUS){EnterCriticalSection(&state_lock);panel_open=0;overlay_close();memset(captured_keys,0,sizeof captured_keys);LeaveCriticalSection(&state_lock);}
     if((message==WM_KEYDOWN || message==WM_KEYUP) && key<256){
         int consumed=0,changed=0;
         EnterCriticalSection(&state_lock);
         if(message==WM_KEYUP){consumed=captured_keys[key];captured_keys[key]=false;}
-        else if(key==VK_F9){if(!(info&(1LL<<30)))panel_open=!panel_open;consumed=1;overlay_dirty=1;}
+        else if(key==VK_F9){if(!(info&(1LL<<30))){panel_open=!panel_open;overlay_close();}consumed=1;overlay_dirty=1;}
         else if(panel_open){
             consumed=1;
             switch(key){
-            case VK_ESCAPE:panel_open=0;break;
+            case VK_ESCAPE:panel_open=0;overlay_close();break;
             case VK_UP:selected_fog=(selected_fog+2)%3;break;
             case VK_DOWN:selected_fog=(selected_fog+1)%3;break;
             case VK_LEFT:fog_amount[selected_fog]=fmaxf(0,fog_amount[selected_fog]-.05f);changed=1;break;
@@ -209,7 +209,7 @@ static LRESULT CALLBACK panel_proc(HWND window,UINT message,WPARAM key,LPARAM in
     }
     WNDPROC next=previous_proc;
     if(message==WM_NCDESTROY && window==game_window){
-        SetWindowLongPtrW(window,GWLP_WNDPROC,(LONG_PTR)next);game_window=NULL;previous_proc=NULL;panel_open=0;
+        SetWindowLongPtrW(window,GWLP_WNDPROC,(LONG_PTR)next);game_window=NULL;previous_proc=NULL;panel_open=0;overlay_close();
     }
     return next?CallWindowProcW(next,window,message,key,info):DefWindowProcW(window,message,key,info);
 }

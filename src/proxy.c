@@ -137,13 +137,13 @@ static int filter_event(const void *event)
         int captured=captured_keys[scan];captured_keys[scan]=false;return captured;
     }
     if(scan==66) { /* F9 (SDL_SCANCODE_F9) */
-        if(!key.repeat) { panel_open=!panel_open;overlay_dirty=1; }
+        if(!key.repeat) { panel_open=!panel_open;overlay_close();overlay_dirty=1; }
         captured_keys[scan]=true;return 1;
     }
     if(!panel_open) return 0;
     int changed=0;
     switch(scan) {
-    case 41: panel_open=0;break; /* Escape */
+    case 41: panel_open=0;overlay_close();break; /* Escape */
     case 82: selected_fog=(selected_fog+2)%3;break;
     case 81: selected_fog=(selected_fog+1)%3;break;
     case 80: fog_amount[selected_fog]=fmaxf(0,fog_amount[selected_fog]-.05f);changed=1;break;
@@ -208,7 +208,7 @@ __attribute__((visibility("default"))) bool SDL_GL_SwapWindow(void *window)
     pthread_once(&init_once,initialize);
     if(!real_swap) return false;
     refresh_keyboard();
-    if(real_keyboard_focus && real_keyboard_focus()!=window) panel_open=0;
+    if(real_keyboard_focus && real_keyboard_focus()!=window) {panel_open=0;overlay_close();}
     if(panel_open && real_window_size) {
         int w=0,h=0;
         if(real_window_size(window,&w,&h)) overlay_draw(w,h,fog_amount,selected_fog,settings_saved);

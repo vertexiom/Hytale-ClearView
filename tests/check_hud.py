@@ -11,6 +11,7 @@ import ctypes as C
 from pathlib import Path
 import subprocess
 import tempfile
+import time
 from PIL import Image
 ROOT=Path(__file__).resolve().parents[1]
 P,I,U=C.c_void_p,C.c_int,C.c_uint
@@ -61,6 +62,7 @@ before=state()
 with tempfile.TemporaryDirectory() as temp:
     temp=Path(temp)
     (temp/'bridge.c').write_text('''
+#define _POSIX_C_SOURCE 200809L
 #include <dlfcn.h>
 #include <stdio.h>
 typedef void (*Proc)(void);
@@ -68,21 +70,43 @@ typedef Proc (*GetProc)(const char*);
 static GetProc original_getproc;
 static void record(const char *s,int i){fprintf(stderr,"%s: %d\\n",s,i);}
 #include "overlay.h"
+static float test_fog[3]={0,.2,1};
+static int test_selected=1,test_saved=1,uploads;
+static void (*real_upload)(unsigned,int,int,int,int,int,unsigned,unsigned,const void*);
+static void count_upload(unsigned t,int l,int f,int w,int h,int b,unsigned format,unsigned type,const void *data){
+ ++uploads;real_upload(t,l,f,w,h,b,format,type,data);
+}
+int upload_count(void){return uploads;}
+int moving(void){return overlay_motion.active;}
+void change(void){test_fog[1]=.8f;test_selected=2;overlay_dirty=1;}
+void close_panel(void){overlay_close();}
+void failure(void){test_saved=0;overlay_dirty=1;}
 int draw(void){
  void *gl=dlopen("libGL.so.1",RTLD_NOW|RTLD_LOCAL);
  original_getproc=(GetProc)dlsym(gl,"glXGetProcAddressARB");
- float fog[3]={0,.2,1};overlay_draw(800,600,fog,1,1);
+ overlay_draw(800,600,test_fog,test_selected,test_saved);
+ if(!real_upload){real_upload=cvglTexImage2D;cvglTexImage2D=count_upload;}
  return overlay_failed || !overlay_program;
 }
 ''')
-    flags=subprocess.check_output(['pkg-config','--cflags','--libs','cairo'],text=True).split()
-    subprocess.run(['cc','-std=c11','-shared','-fPIC','-Wall','-Wextra','-Werror','-I'+str(ROOT/'src'),str(temp/'bridge.c'),'-o',str(temp/'bridge.so'),'-ldl','-lm',*flags],check=True)
+    subprocess.run(['python3',str(ROOT/'tools/build/gen_hud_fonts.py'),str(temp/'hud_fonts.h')],check=True)
+    flags=subprocess.check_output(['pkg-config','--cflags','--libs','cairo','freetype2'],text=True).split()
+    subprocess.run(['cc','-std=c11','-shared','-fPIC','-Wall','-Wextra','-Werror','-I'+str(ROOT/'src'),'-I'+str(temp),str(temp/'bridge.c'),'-o',str(temp/'bridge.so'),'-ldl','-lm',*flags],check=True)
     bridge=C.CDLL(str(temp/'bridge.so'));bridge.draw.restype=I
     assert bridge.draw()==0,'Overlay failed to build'
     assert state()==before, (before,state())
     # Draw cached panel too: both initialization and reuse must preserve state.
     assert bridge.draw()==0 and state()==before
-    error=fn(gl,'glGetError',U,[])()
+    assert bridge.upload_count()==0, 'Idle HUD uploaded its texture again'
+    bridge.change();bridge.draw()
+    assert bridge.upload_count()==1 and bridge.moving()
+    for _ in range(5):
+        time.sleep(.04)
+        assert bridge.draw()==0 and state()==before
+    assert bridge.upload_count()==1, 'Animation rasterized/uploaded text'
+    assert not bridge.moving(), 'Motion did not settle'
+    bridge.close_panel();bridge.draw();assert not bridge.moving()
+    error=fn(gl,'glGetError' ,U,[])()
     assert error==0,hex(error)
     data=(C.c_ubyte*(800*600*4))()
     fn(gl,'glReadPixels',None,[I,I,I,I,U,U,P])(0,0,800,600,0x1908,0x1401,data)
@@ -90,5 +114,11 @@ int draw(void){
     assert image.getpixel((30,30))!=image.getpixel((700,500)), 'HUD pixels not rendered'
     (ROOT/'build').mkdir(exist_ok=True)
     image.save(ROOT/'build/hud-preview.png')
+    # Transparent rounded corner, selected border and full track are visible.
+    assert image.getpixel((16,16))==image.getpixel((700,500))
+    blue=image.getpixel((35,290));assert blue[2]>blue[0]
+    bridge.failure();bridge.draw();assert state()==before
+    fn(gl,'glReadPixels',None,[I,I,I,I,U,U,P])(0,0,800,600,0x1908,0x1401,data)
+    Image.frombytes('RGBA',(800,600),bytes(data)).transpose(Image.Transpose.FLIP_TOP_BOTTOM).save(ROOT/'build/hud-save-failure.png')
     print('PASS: real OpenGL HUD rendering, cached redraw, GL state restoration, no GL errors.')
     print(ROOT/'build/hud-preview.png')

@@ -1,0 +1,65 @@
+/*
+ * Copyright (C) 2026 vertexiom
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ *
+ * This file is part of Hytale ClearView.
+ * Hytale ClearView is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version. See LICENSE for details.
+ */
+static const char cv_hud_fragment[]=
+"#version 410 core\n"
+"uniform sampler2D panel;\n"
+"uniform vec3 bars,highlights;\n"
+"uniform int saved;\n"
+"in vec2 uv;\n"
+"layout(location=0) out vec4 color;\n"
+"float box(vec2 p,vec2 origin,vec2 size,float radius){\n"
+" vec2 q=abs(p-origin-size*.5)-(size*.5-radius);\n"
+" return length(max(q,0.))+min(max(q.x,q.y),0.)-radius;\n"
+"}\n"
+"float coverage(float d){return 1.-smoothstep(-.65,.65,d);}\n"
+"void paint(inout vec4 base,vec3 rgb,float a){base=vec4(rgb*a,a)+base*(1.-a);}\n"
+"void key(inout vec4 base,vec2 p,vec2 pos,float width){\n"
+" float d=box(p,pos,vec2(width,20),5.);\n"
+" paint(base,vec3(58,80,100)/255.,coverage(d));\n"
+" paint(base,vec3(36,54,71)/255.,coverage(d+1.));\n"
+"}\n"
+"void main(){\n"
+" vec2 p=uv*vec2(460,474);\n"
+" vec3 white=vec3(230,237,245)/255.,muted=vec3(168,185,203)/255.;\n"
+" vec3 blue=vec3(141,210,244)/255.;\n"
+" float outer=coverage(box(p,vec2(0),vec2(460,474),22.));\n"
+" vec4 base=vec4(vec3(16,25,35)/255.*.95,.95);\n"
+" float edge=outer-coverage(box(p,vec2(1),vec2(458,472),21.));\n"
+" paint(base,vec3(48,64,82)/255.,edge);\n"
+" vec3 textColor=muted;\n"
+" if(p.y<44.)textColor=p.x<330.?white:muted;\n"
+" for(int i=0;i<3;i++){\n"
+"  float y=74.+float(i)*86.,h=highlights[i];\n"
+"  float d=box(p,vec2(18,y),vec2(424,82),14.);\n"
+"  paint(base,blue,coverage(d)*h);\n"
+"  paint(base,vec3(36,54,71)/255.,coverage(d+1.5)*h);\n"
+"  paint(base,blue,coverage(box(p,vec2(22.5,y+14.5),vec2(3,50),1.5))*h);\n"
+"  float track=coverage(box(p,vec2(34,y+39),vec2(392,6),3.));\n"
+"  paint(base,vec3(43,61,79)/255.,track);\n"
+"  float fill=bars[i]<=0.?0.:coverage(box(p,vec2(34,y+39),vec2(max(0.001,392.*bars[i]),6),min(3.,196.*bars[i])));\n"
+"  paint(base,mix(vec3(110,159,186)/255.,blue,h),fill*track);\n"
+"  if(p.y>=y && p.y<y+35.)textColor=mix(white,blue,h);\n"
+" }\n"
+" key(base,p,vec2(344,23),28.);\n"
+" key(base,p,vec2(34,380),20.);key(base,p,vec2(57,380),20.);\n"
+" key(base,p,vec2(172,380),23.);key(base,p,vec2(198,380),23.);\n"
+" key(base,p,vec2(34,409),22.);key(base,p,vec2(151,409),22.);key(base,p,vec2(312,409),32.);\n"
+" paint(base,vec3(42,58,76)/255.,coverage(box(p,vec2(34,367),vec2(392,1),0.)));\n"
+" if(p.y>=380. && p.y<430.)textColor=vec3(201,213,226)/255.;\n"
+" if(p.y>=441.){\n"
+"   textColor=saved!=0?vec3(133,216,175)/255.:vec3(255,153,137)/255.;\n"
+"   paint(base,textColor,coverage(length(p-vec2(37,450))-3.));\n"
+" }\n"
+" float ink=texture(panel,uv).a;\n"
+" paint(base,textColor,ink);\n"
+" color=base*outer;\n"
+"}\n"
+;

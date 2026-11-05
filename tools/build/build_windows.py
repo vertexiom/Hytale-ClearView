@@ -15,6 +15,7 @@ import os
 import shutil
 import subprocess
 from gen_windows_exports import generate
+from gen_hud_fonts import generate as generate_fonts
 ROOT=Path(__file__).resolve().parents[2]
 VERSION='0.1.3'
 
@@ -24,6 +25,7 @@ def main():
     if not zig: raise SystemExit('Zig is required. Pass --zig /path/to/zig (tested with 0.15.2).')
     out=ROOT/'build/windows';out.mkdir(parents=True,exist_ok=True)
     generate(out)
+    generate_fonts(out/"hud_fonts.h")
     command=[zig,'cc','-target','x86_64-windows-gnu','-std=c11','-O2','-Wall','-Wextra','-Werror','-Wno-cast-function-type-mismatch',
              '-shared','-I'+str(out),
              str(ROOT/'src/windows/proxy_win.c'),str(out/'exports.S'),str(out/'opengl32.def'),

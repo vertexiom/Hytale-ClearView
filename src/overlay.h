@@ -11,6 +11,12 @@
 #ifndef CLEARVIEW_OVERLAY_H
 #define CLEARVIEW_OVERLAY_H
 #include "panel.h"
+#include "hud_motion.h"
+#include "hud_shader.h"
+#include <stdlib.h>
+#ifndef _WIN32
+#include <time.h>
+#endif
 
 #define CV_GL_FUNCTIONS(X) \
  X(void,GetIntegerv,(unsigned,int*)) \
@@ -34,13 +40,27 @@
  X(void,AttachShader,(unsigned,unsigned)) X(void,LinkProgram,(unsigned)) \
  X(void,GetProgramiv,(unsigned,unsigned,int*)) X(void,DeleteProgram,(unsigned)) \
  X(void,UseProgram,(unsigned)) X(int,GetUniformLocation,(unsigned,const char*)) \
- X(void,Uniform1i,(int,int)) X(void,Uniform1f,(int,float)) \
+ X(void,Uniform1i,(int,int)) X(void,Uniform1f,(int,float)) X(void,Uniform3f,(int,float,float,float)) \
  X(void,DrawArrays,(unsigned,int,int))
 #define DECLARE_GL(ret,name,args) static ret (*cvgl##name)args;
 CV_GL_FUNCTIONS(DECLARE_GL)
 #undef DECLARE_GL
 static int overlay_ready, overlay_failed, overlay_dirty=1;
 static unsigned overlay_program,overlay_vao,overlay_texture;
+static int overlay_panel_loc,overlay_bars_loc,overlay_highlights_loc,overlay_saved_loc;
+static cv_motion overlay_motion;
+static int overlay_reduced=-1;
+static void overlay_close(void){overlay_motion.initialized=overlay_motion.active=0;}
+static double overlay_now(void)
+{
+#ifdef _WIN32
+    return GetTickCount64()/1000.0;
+#else
+    struct timespec t;clock_gettime(CLOCK_MONOTONIC,&t);
+    return t.tv_sec+t.tv_nsec/1e9;
+#endif
+}
+
 
 static int overlay_load(void)
 {
@@ -65,13 +85,18 @@ static unsigned overlay_shader(unsigned kind,const char *source)
 static int overlay_create(void)
 {
     const char *vs="#version 410 core\nout vec2 uv;\nvoid main(){vec2 p[6]=vec2[6](vec2(-1,-1),vec2(1,-1),vec2(1,1),vec2(-1,-1),vec2(1,1),vec2(-1,1));vec2 v=p[gl_VertexID];gl_Position=vec4(v,0,1);uv=vec2(v.x*.5+.5,.5-v.y*.5);}";
-    const char *fs="#version 410 core\nuniform sampler2D panel;in vec2 uv;layout(location=0)out vec4 color;void main(){color=texture(panel,uv);}";
+    const char *fs=cv_hud_fragment;
     unsigned v=overlay_shader(0x8B31,vs), f=overlay_shader(0x8B30,fs);
     if (!v || !f) { if(v)cvglDeleteShader(v); if(f)cvglDeleteShader(f); return 0; }
     overlay_program=cvglCreateProgram(); cvglAttachShader(overlay_program,v); cvglAttachShader(overlay_program,f);
     cvglLinkProgram(overlay_program); cvglDeleteShader(v); cvglDeleteShader(f);
     int ok=0; cvglGetProgramiv(overlay_program,0x8B82,&ok);
     if(!ok) {cvglDeleteProgram(overlay_program);overlay_program=0;return 0;}
+    overlay_panel_loc=cvglGetUniformLocation(overlay_program,"panel");
+    overlay_bars_loc=cvglGetUniformLocation(overlay_program,"bars");
+    overlay_highlights_loc=cvglGetUniformLocation(overlay_program,"highlights");
+    overlay_saved_loc=cvglGetUniformLocation(overlay_program,"saved");
+    overlay_dirty=1;overlay_close();
     cvglGenVertexArrays(1,&overlay_vao); cvglGenTextures(1,&overlay_texture);
     return 1;
 }
@@ -113,12 +138,29 @@ static void overlay_draw(int width,int height,const float fog[3],int selected,in
         }
         cv_panel_free(surface);
     }
+    if(overlay_reduced<0){
+        const char *preference=getenv("CLEARVIEW_REDUCED_MOTION");
+        overlay_reduced=preference && preference[0]=='1';
+#ifdef _WIN32
+        BOOL animate=TRUE;
+        if(SystemParametersInfoW(SPI_GETCLIENTAREAANIMATION,0,&animate,0) && !animate)overlay_reduced=1;
+#endif
+    }
+    double now=overlay_motion.active || overlay_dirty || !overlay_motion.initialized?overlay_now():0;
+    /* Inputs may have changed even when the cached text was already uploaded. */
+    int changed=!overlay_motion.initialized;
+    for(int i=0;i<3;++i)if(overlay_motion.c[i].target!=fog[i] || overlay_motion.c[i+3].target!=(float)(selected==i))changed=1;
+    if(changed && now==0)now=overlay_now();
+    if(changed || overlay_motion.active)cv_motion_step(&overlay_motion,fog,selected,now,overlay_reduced);
     float scale=fminf(1.5f,fmaxf(1.0f,height/1080.0f));
     scale=fminf(scale,fminf((width-32.0f)/CV_PANEL_W,(height-32.0f)/CV_PANEL_H));
     int w=(int)(CV_PANEL_W*scale),h=(int)(CV_PANEL_H*scale);
     cvglViewport(16,height-16-h,w,h);cvglColorMask(1,1,1,1);cvglPolygonMode(0x0408,0x1B02);
     cvglEnable(0x0BE2);cvglBlendEquationSeparate(0x8006,0x8006);cvglBlendFuncSeparate(1,0x0303,1,0x0303);
-    cvglUseProgram(overlay_program);cvglUniform1i(cvglGetUniformLocation(overlay_program,"panel"),0);
+    cvglUseProgram(overlay_program);cvglUniform1i(overlay_panel_loc,0);
+    cvglUniform3f(overlay_bars_loc,overlay_motion.c[0].value,overlay_motion.c[1].value,overlay_motion.c[2].value);
+    cvglUniform3f(overlay_highlights_loc,overlay_motion.c[3].value,overlay_motion.c[4].value,overlay_motion.c[5].value);
+    cvglUniform1i(overlay_saved_loc,saved);
     cvglBindVertexArray(overlay_vao);cvglDrawArrays(0x0004,0,6);
 restore:
     cvglBindFramebuffer(0x8CA9,(unsigned)fbo);
