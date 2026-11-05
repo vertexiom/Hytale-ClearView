@@ -31,7 +31,7 @@ jobs:
       DOTNET_NOLOGO: '1'
     defaults:
       run:
-        shell: pwsh
+        shell: powershell
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -53,6 +53,8 @@ jobs:
       - name: Record native environment
         run: |
           New-Item -ItemType Directory -Force build/ci | Out-Null
+          Get-Command Get-FileHash -ErrorAction Stop | Out-String | Out-File build/ci/hash-command.txt -Encoding utf8
+          $env:PSModulePath | Out-File build/ci/module-path.txt -Encoding utf8
           $engine = Join-Path $env:WINDIR 'System32/WindowsPowerShell/v1.0/powershell.exe'
           "PS51=$engine" | Out-File $env:GITHUB_ENV -Append -Encoding utf8
           & $engine -NoProfile -Command '$PSVersionTable | Out-String' | Out-File build/ci/powershell.txt -Encoding utf8
