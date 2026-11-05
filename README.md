@@ -1,6 +1,6 @@
 <h1 align="center">Hytale ClearView</h1>
 
-**Development branch:** staging targets v0.1.3. The downloads below are the stable v0.1.2 release.
+**Preview release:** [v0.1.3 — Pre-release](https://github.com/vertexiom/Hytale-ClearView/releases/tag/v0.1.3). The stable downloads below remain on v0.1.2.
 
 <p align="center">
   <a href="README.md">English</a> | <a href="README.pt-BR.md">Português (Brasil)</a>
