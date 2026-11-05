@@ -9,18 +9,23 @@
  * (at your option) any later version. See LICENSE for details.
  */
 .clearview-ui { background: #101923; color: #e6edf5; font-family: Inter, sans-serif; font-size: 14px; }
+/* Explicit inheritance stops user-theme rules on child labels from winning
+   over a parent token. Keep every rule inside the installer content. */
+.clearview-ui label { color: inherit; font-family: inherit; text-shadow: none; }
+.clearview-ui button label { color: inherit; font-size: inherit; font-weight: inherit; text-decoration: none; }
 .clearview-ui .lab { padding: 12px 20px; background: #101923; }
 .clearview-ui .lab-note { padding: 8px 20px; background: #17212c; color: #a8b9cb; font-size: 12px; }
 .clearview-ui .content { padding: 34px 38px 24px; background: #1b2838; }
 .clearview-ui .footer { padding: 14px 24px; background: #151e2a; border-top: 1px solid #293748; min-height: 44px; }
-.clearview-ui button { background: #2a3b4e; color: #e6edf5; border: 1px solid transparent; border-radius: 14px; padding: 10px 18px; box-shadow: none; font-weight: 600; }
+.clearview-ui button { background: #2a3b4e; color: #e6edf5; border: 1px solid transparent; border-radius: 14px; padding: 10px 20px; box-shadow: none; font-weight: 600; }
 .clearview-ui button:hover { background: #36516a; }
 .clearview-ui button:focus-visible { outline: 2px solid #8dd2f4; outline-offset: 2px; }
 .clearview-ui button.primary { background: #8dd2f4; color: #092132; }
 .clearview-ui button.primary:hover { background: #b4e5ff; }
 .clearview-ui button.warning { background: #f0c782; color: #30220c; }
 .clearview-ui button:disabled { opacity: .4; }
-.clearview-ui button.link { background: transparent; color: #8dd2f4; padding: 0; }
+.clearview-ui button.link { background: transparent; color: #8dd2f4; padding: 0; font-size: 13px; text-decoration: none; }
+.clearview-ui button.link:hover { color: #b4e5ff; }
 .clearview-ui .title { font-size: 32px; font-weight: 600; }
 .clearview-ui .hero { font-size: 40px; }
 .clearview-ui .eyebrow { color: #8dd2f4; font-size: 11px; font-weight: 700; letter-spacing: 1px; }
