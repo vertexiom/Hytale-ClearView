@@ -32,7 +32,7 @@ def main():
         for name in ('libSDL3.so','linux-manifest.json'):
             copy('build/'+name,'build/'+name)
         copy('assets/icons/io.github.vertexiom.ClearView.png','assets/icons/io.github.vertexiom.ClearView.png')
-        copy('installer/linux/package/FOLDER-README.txt','LEIA-ME.txt')
+        copy('installer/linux/package/FOLDER-README.txt','README.txt')
         archive=dist/(NAME+'.tar.gz')
         with tarfile.open(archive,'w:gz') as out:out.add(folder,arcname=NAME)
         # Replace only this generated package directory, never the repository.
