@@ -2,7 +2,7 @@
 
 ## Próximas alterações
 
-- Ícone temporário do instalador substituído pela imagem de planeta ASCII escolhida pelo mantenedor.
+- Ícone temporário do instalador substituído pelo planeta ASCII, com transparência externa e paleta adaptada ao launcher.
 
 ## v0.1.2 — instalador gráfico Linux por pasta
 
