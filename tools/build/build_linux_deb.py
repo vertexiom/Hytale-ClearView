@@ -32,7 +32,7 @@ def main():
         def copy(source, target):
             target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copy2(source,target)
-        for name in ('app.py','model.py','rain.py','real.py','style.css','run.sh'):
+        for name in ('desktop.py','app.py','model.py','rain.py','real.py','style.css','run.sh'):
             copy(ROOT/'installer/linux/gui'/name,app/'installer/linux/gui'/name)
         copy(ROOT/'installer/linux/install.py',app/'installer/linux/install.py')
         for name in ('libSDL3.so','linux-manifest.json'):

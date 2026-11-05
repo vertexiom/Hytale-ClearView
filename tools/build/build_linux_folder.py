@@ -27,7 +27,7 @@ def main():
         copy('LICENSE','LICENSE')
         copy('install.sh','install.sh')
         copy('installer/linux/install.py','installer/linux/install.py')
-        for name in ('app.py','real.py','model.py','rain.py','style.css','run.sh'):
+        for name in ('desktop.py','app.py','real.py','model.py','rain.py','style.css','run.sh'):
             copy('installer/linux/gui/'+name,'installer/linux/gui/'+name)
         for name in ('libSDL3.so','linux-manifest.json'):
             copy('build/'+name,'build/'+name)

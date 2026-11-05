@@ -11,3 +11,4 @@ Terminal=false
 Categories=Game;
 Keywords=Hytale;ClearView;fog;neblina;
 StartupNotify=true
+StartupWMClass=io.github.vertexiom.ClearView

@@ -30,3 +30,5 @@ Suporte Discord: tallmannzera
 Projeto: https://github.com/vertexiom/Hytale-ClearView
 
 Uso avançado sem interface: bash install.sh --cli --help
+
+Ao abrir, o instalador registra seu nome e ícone em ~/.local/share/applications e ~/.local/share/icons (ou XDG_DATA_HOME), sem sudo. Se mover a pasta, execute bash install.sh novamente para atualizar o atalho.

@@ -377,4 +377,12 @@ if __name__=='__main__':
         parser.error('--scenario and --screen require --demo')
     if args.screen=='error' and args.scenario not in ('graphics','conflict','copy'):
         parser.error('--screen error requires an error scenario')
+    from desktop import APP_ID, register
+    GLib.set_prgname(APP_ID)
+    GLib.set_application_name('ClearView Installer')
+    if not args.demo:
+        try:
+            register(HERE.parents[2])
+        except (OSError, ValueError) as error:
+            print('Não foi possível registrar o ícone do ClearView:', error, file=sys.stderr)
     sys.exit(App(args).run([sys.argv[0]]))
